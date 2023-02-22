@@ -1,0 +1,100 @@
+import logoDark from '../assets/icons/logoDark.svg';
+import dummyImg2 from'../assets/images/dummyImg2.png';
+import {NavLink} from 'react-router-dom';
+import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '4px solid #EF233C',
+    borderRadius: '10px',
+    boxShadow: 24,
+    p: 4,
+  };
+
+const Header = () =>{
+
+    const data ={
+        name: 'Anna Marie',
+        type: 'Seller',
+        img: dummyImg2,
+    }
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return(
+        <header className='bg-gradient-to-r h-24 from-Primary_Red to-Primary_Grey'>
+            <div className='flex flex-row h-[90px] justify-between items-center bg-Base mb-3 p-8'>
+                <div>
+                    <img src={logoDark} alt='logo' className='h-12' />
+                </div>
+                <div className='flex flex-row gap-x-10'>
+                    <NavLink to='/home' className='headerItems'>
+                        <h1>Home</h1>
+                    </NavLink>
+                    <NavLink to='/track-orders' className='headerItems'>
+                        <h1>Track Orders</h1>
+                    </NavLink>
+                    <NavLink to='/about-us' className='headerItems'>
+                        <h1>About us</h1>
+                    </NavLink>
+                </div>
+                <div className='flex flex-row'>
+                    <div>
+                        <img
+                            src={data.img}
+                            alt='logo'
+                            className='h-12 w-12 rounded-full border-4 border-Primary_Red '
+                        />
+                    </div>
+                    <button
+                        type='buton'
+                        onClick={handleOpen}
+                        className='flex flex-col justify-center pl-3 cursor-default'>
+
+                        <h1 className='font-oswald font-bold'>
+                            {data.name}
+                        </h1>
+                        <p className='font-maven font-medium'>
+                            {data.type}
+                        </p>
+                    </button>
+ 
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2" >
+                                <div className='text-bold font-oswald text-xl'>
+                                  Logout
+                                </div>
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
+                                <div className='text-bold font-oswald text-lg'>
+                                    {data.name}, you want to Logout ?
+                                    <button className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14'>
+                                      Yes
+                                    </button>
+                                </div>
+                            </Typography>
+                        </Box>
+                    </Modal>
+                </div>
+            </div>
+        </header>
+    );
+}
+
+export default Header;

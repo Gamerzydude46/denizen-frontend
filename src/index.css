@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&family=Oswald:wght@400;500;700&family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Outfit&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-Base;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.active{
+  @apply text-Primary_Red;
+}
+
+.headerItems{
+  @apply hover:-translate-y-1  text-xl font-oswald font-bold duration-75;
+}
+
+.buttonWelcome{
+  @apply py-1.5 px-4 rounded-lg text-Base font-bold w-[180px] h-10 hover:-translate-y-1 duration-75;
+}
