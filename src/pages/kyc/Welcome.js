@@ -1,5 +1,7 @@
 import React from "react";
 import manonphone from '../../assets/images/manonphone.png'
+
+
 const Welcome = (data) =>{
     return(
         <main className="h-full flex flex-row justify-between p-10 ">

@@ -1,5 +1,4 @@
 import logoDark from '../assets/icons/logoDark.svg';
-import dummyImg2 from'../assets/images/dummyImg2.png';
 import {NavLink} from 'react-router-dom';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -19,13 +18,7 @@ const style = {
     p: 4,
   };
 
-const Header = () =>{
-
-    const data ={
-        name: 'Anna Marie',
-        type: 'Seller',
-        img: dummyImg2,
-    }
+const Header = (data) =>{
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -62,7 +55,7 @@ const Header = () =>{
                         className='flex flex-col justify-center pl-3 cursor-default'>
 
                         <h1 className='font-oswald font-bold'>
-                            {data.name}
+                            {data.user}
                         </h1>
                         <p className='font-maven font-medium'>
                             {data.type}

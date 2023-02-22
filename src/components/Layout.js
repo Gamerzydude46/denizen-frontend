@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "./Header";
 
-const Layout = ({children}) => {
+const Layout = (props) => {
     return(
         <div className="h-screen">
             <div>
-                <Header/>
+                <Header {...props}/>
             </div>
             <div className="h-[calc(100vh-96px)]">
-                {children}
+                {props.children}
             </div>
         </div>
     );

@@ -1,20 +1,29 @@
 import React from "react";
 import Welcome from './kyc/Welcome';
+import Layout from "../components/Layout";
+import dummyImg2 from'../assets/images/dummyImg2.png';
 
 const data ={
     user: 'Anna Marie',
     type: 'Seller',
     verified: false,
+    img: dummyImg2,
 }
 
 function Home(){
     
     if(data.verified === false){
-        return(<Welcome {...data}/> );
+        return(
+        <Layout {...data}>
+           <Welcome {...data}/>
+        </Layout>
+     );
     }
     else{
         return(
-            <div>Home page</div>
+            <Layout>
+                 <div>Home page</div>
+            </Layout>
         );
     }
 }
