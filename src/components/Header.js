@@ -84,7 +84,7 @@ const Header = () =>{
                             <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
                                 <div className='text-bold font-oswald text-lg'>
                                     {data.name}, you want to Logout ?
-                                    <button className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14'>
+                                    <button className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14 hover:bg-Primary_Grey'>
                                       Yes
                                     </button>
                                 </div>
