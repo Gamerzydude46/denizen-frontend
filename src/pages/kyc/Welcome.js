@@ -7,7 +7,7 @@ const Welcome = (data) =>{
         <main className="h-full flex flex-row justify-between p-10 ">
             <div className="z-30">
             <h1 className="font-maven font-semibold text-[30px] mt-14">
-                    Hii, {data.user}
+                    Hii,{data.user}
                 </h1>
                 <h1 className="font-oswald font-bold text-[70px] mt-1">
                     Welcome
@@ -22,9 +22,9 @@ const Welcome = (data) =>{
             </div>
             <div className="fixed  z-10 bottom-0 right-0">
                 
-                <div className="bg-White rounded-t-full h-[400px] w-[900px] ">
+                <div className="bg-White rounded-t-full h-[430px] w-[900px] ">
                     <div>
-                       <img src={manonphone} alt="man on the bike" className="h-[550px] w-[350px] bottom-[190px] left-[320px] relative"/>
+                       <img src={manonphone} alt="man on the bike" className="h-[560px] w-[350px] bottom-[15 0px] left-[320px] relative"/>
                     </div>
                 </div>
             </div>
