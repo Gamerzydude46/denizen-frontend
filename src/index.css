@@ -30,3 +30,7 @@ code {
 .buttonWelcome{
   @apply py-1.5 px-4 rounded-lg text-Base font-bold w-[180px] h-10 hover:-translate-y-1 duration-75;
 }
+
+.accessButton{
+  @apply mt-8  text-White text-xl font-semibold bg-Primary_Red rounded-md  h-12 hover:bg-Primary_Grey;
+}

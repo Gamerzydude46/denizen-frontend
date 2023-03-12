@@ -1,15 +1,22 @@
 import Logo from '../components/login/Logo';
 import SignUp from '../components/login/SignUp';
+import Login from '../components/login/Login';
+import ResetPassword from '../components/login/ResetPassword';
+import Otp from '../components/login/Otp';
+import SetPassword from '../components/login/SetPassword';
 
 function Access(){
     return(
         <>
-            <div className="flex flex-row w-screen h-screen justify-between">
-                <div className="bg-Base w-1/2 flex justify-center items-center">
-                    <Logo/>
+            <div className="flex flex-row w-screen h-screen justify-between bg-Base">
+                <div className='bg-White w-1/2 flex justify-center items-center'>
+                    <div className="w-full h-full flex justify-center items-center bg-Base rounded-br-[300px]">
+                        <Logo />
+                    </div>
                 </div>
-                <div className="bg-White w-[1238px] h-screen rounded-l-full flex justify-center items-center">
-                    <SignUp/>
+                
+                <div className="bg-White w-1/2 h-screen rounded-tl-[300px] flex justify-center items-center">
+                    <SetPassword/>
                 </div>
             </div>
         </>
