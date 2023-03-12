@@ -25,10 +25,9 @@ const CustomFontTheme = createTheme({
 });
 
 
-const SignUp = () => {
+const SignUp = (nav,setNav,outlet) => {
     
     const [showPassword, setShowPassword] = React.useState(false);
-  
     const handleClickShowPassword = () => setShowPassword((show) => !show);
   
     const handleMouseDownPassword = (event) => {
@@ -38,7 +37,7 @@ const SignUp = () => {
 
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
-                <NavLink to='/home' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
+                <NavLink to='/' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' onClick={()=> nav.setNav(true)} >
                     <img src={backArrow} alt='navigate back' className='' />
                 </NavLink>
                 <h1 className='ml-3 text-5xl font-oswald font-bold'>Create Account</h1>
