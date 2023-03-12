@@ -2,7 +2,9 @@ import React from "react";
 import Layout from "../../components/Layout";
 import officepaper from '../../assets/images/officepaper.png';
 import backArrow from '../../assets/icons/backArrow.svg';
-import dummyImg2 from '../../assets/images/dummyImg2.png'
+import dummyImg2 from '../../assets/images/dummyImg2.png';
+import { Outlet } from "react-router-dom";
+import Identity from "../../components/kyc/Identity";
 
 
 const data ={
@@ -16,10 +18,8 @@ const data ={
 
 
 function SellerKyc(){
-   
-  
-    
     return(
+      
             <Layout {...data}>
             <main className="h-full flex flex-row justify-between padding-right-10 padding-top-5">
             <div className="z-10">
@@ -33,7 +33,7 @@ function SellerKyc(){
                     KYC APPLICATION
                     </h1>
                 </div>
-
+                <Identity/>
 
                 </div>
                 
@@ -53,8 +53,10 @@ function SellerKyc(){
                     </div>
                 </div>
             </div>
+            <Outlet/>
             </main>
             </Layout>
+            
  
     );
 }
