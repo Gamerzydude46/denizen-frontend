@@ -24,7 +24,7 @@ const Welcome = (data) =>{
                 
                 <div className="bg-White rounded-t-full h-[430px] w-[900px] ">
                     <div>
-                       <img src={manonphone} alt="man on the bike" className="h-[560px] w-[350px] bottom-[15 0px] left-[320px] relative"/>
+                       <img src={manonphone} alt="man on the bike" className="h-[560px] w-[350px] bottom-[150px] left-[320px] relative"/>
                     </div>
                 </div>
             </div>

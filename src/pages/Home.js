@@ -14,7 +14,7 @@ function Home(){
     
     if(data.verified === false){
         return(
-        <Layout {...data}>
+        <Layout>
            <Welcome {...data}/>
         </Layout>
      );
