@@ -88,7 +88,11 @@ const Login = () => {
                             <label for="userAgreement" className='ml-3 font-bold text-oswald text-Primary_Grey'>Remember Me</label>
                         </div>
                         <div className='flex items-center mt-1'>
-                            <p for="privacyPolicy"  className='ml-3font-bold text-oswald text-Primary_Red'>Forgot Password?</p>
+                            <NavLink
+                                to='/reset-password'
+                                className='ml-3 font-bold text-oswald text-Primary_Red  hover:text-Primary_Grey hover:-translate-y-1 hover:duration-100'>
+                                Forgot Password?
+                            </NavLink>
                         </div>
                     </div>
                     <button type='button'

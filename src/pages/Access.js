@@ -1,17 +1,14 @@
 import * as React from 'react';
 import Logo from '../components/login/Logo';
 import { Outlet } from "react-router-dom";
-import SignUp from '../components/login/SignUp';
-import Login from '../components/login/Login';
-import ResetPassword from '../components/login/ResetPassword';
-import Otp from '../components/login/Otp';
-import SetPassword from '../components/login/SetPassword';
 
 function Access() {
     
     const outletContext = React.createContext();
     const outlet = React.useContext(outletContext);
     const [nav, setNav] = React.useState(true);
+      
+    
     return (
         <>
             <div className="flex flex-row w-screen h-screen justify-between bg-Base">
@@ -25,6 +22,7 @@ function Access() {
                     <outletContext.Provider nav={nav} setNav={setNav} outlet={outlet}>
                         <Outlet />
                     </outletContext.Provider>
+                    
                 </div>
             </div>
         </>

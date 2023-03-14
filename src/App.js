@@ -5,8 +5,9 @@ import Access from './pages/Access'
 import SellerKyc from './pages/kyc/SellerKyc';
 import Login from './components/login/Login';
 import SignUp from './components/login/SignUp';
-
-
+import ResetPassword from './components/login/ResetPassword';
+import Otp from './components/login/Otp';
+import SetPassword from './components/login/SetPassword';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         <Route path='/' element={<Access />} >
           <Route path="/" element={<Login />}/>
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/set-password" element={<SetPassword />} />
         </Route>
         <Route path='/home' element={<Home />} />
         <Route path='/track-orders' />

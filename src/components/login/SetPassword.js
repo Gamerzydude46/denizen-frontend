@@ -1,5 +1,8 @@
 import * as React from 'react';
 import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import IconButton from '@mui/material/IconButton';
@@ -13,6 +16,19 @@ import { NavLink } from 'react-router-dom';
 import backArrow from '../../assets/icons/backArrow.svg'
 
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '3px solid #EF233C',
+    borderRadius: '5px',
+    boxShadow: 24,
+    p: 4,
+  };
+  
 const CustomFontTheme = createTheme({
     typography: {
 
@@ -24,18 +40,23 @@ const CustomFontTheme = createTheme({
 const SetPassword = () => {
     
     const [showPassword, setShowPassword] = React.useState(false);
-  
+    //modal
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-  
+
     const handleMouseDownPassword = (event) => {
-      event.preventDefault();
+        event.preventDefault();
     }
+
 
     return (
 
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
-                <NavLink to='/home' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
+                <NavLink to='/otp' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
                     <img src={backArrow} alt='navigate back' className='' />
                 </NavLink>
                 <h1 className='ml-4 text-5xl font-oswald font-bold'>Set New Password</h1>
@@ -88,10 +109,27 @@ const SetPassword = () => {
                             </FormControl>
                         </div>
                     </div>
-                    <button type='button'
+                    <button 
+                        type='button'
+                        onClick={handleOpen}
                         className='w-[401px] accessButton text-oswald ml-1'>
                         Set New Password
                     </button>
+                    <Modal
+                        open={open}
+                        
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Text in a modal
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                <button onClick={handleClose} className='bg-Primary_Red'>close</button>
+                            </Typography>
+                        </Box>
+                    </Modal>
                 </ThemeProvider>
             </form>
 

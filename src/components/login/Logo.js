@@ -1,16 +1,19 @@
 import logoDark from '../../assets/icons/logoDark.svg';
 import { NavLink } from 'react-router-dom';
+import * as React from 'react';
 
-const Logo = (nav,setNav) => {
+
+const Logo = (nav,setNav,loc) => {
+    
+   const url = window.location.href;
     return (
         <section className="flex flex-col w-[450px]">
             <div className='border-b-4 pb-4 px-3'>
                 <img src={logoDark} alt='logo' className='h-[197px] w-[387px]' />
-                {console.log(nav.nav)}
             </div>
             {nav.nav ? 
                 <div className='font-maven font-medium leading-[18px] p-2 text-center text-xl'>
-                    Fill up personal information and start your journey with us. 
+                    {loc !== url? 'Fill up personal information and start your journey with us.':'I hate when i forget my Password, It’s like i don’t even know me.'} 
                     <NavLink 
                         to='sign-up' 
                         className='text-Primary_Red font-bold ml-2'>

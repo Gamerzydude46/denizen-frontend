@@ -6,7 +6,8 @@ import { createTheme } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import lock from '../../assets/icons/lock.svg'
 import { NavLink } from 'react-router-dom';
-import backArrow from '../../assets/icons/backArrow.svg'
+import backArrow from '../../assets/icons/backArrow.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 const CustomFontTheme = createTheme({
@@ -18,12 +19,15 @@ const CustomFontTheme = createTheme({
 
 
 const Otp = () => {
-
+    
+    const navigate = useNavigate();
+    const handleClick = () =>{
+        navigate('/set-password');
+    }
     return (
-
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
-                <NavLink to='/home' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
+                <NavLink to='/reset-password' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
                     <img src={backArrow} alt='navigate back' className='' />
                 </NavLink>
                 <h1 className='ml-4 text-5xl font-oswald font-bold'>Check Your Email</h1>
@@ -47,11 +51,13 @@ const Otp = () => {
                     </div>
                     <div className='flex flex-row justify-between mt-4 ml-1'>
                         <h1 className='font-maven font-medium  '>Didn’t  receive email? </h1>
-                        <button className='font-bold text-Primary_Red'>Click to Resend</button>
+                        <button type='button' className='font-bold text-Primary_Red hover:text-Primary_Grey hover:-translate-y-1 hover:duration-100'>Click to Resend</button>
                     </div>
-                    <button type='button'
+                    <button 
+                        type='button'
+                        onClick={handleClick}
                         className='w-[392px] accessButton text-oswald ml-1'>
-                        Send One Time Password
+                        Proceed
                     </button>
                 </ThemeProvider>
             </form>

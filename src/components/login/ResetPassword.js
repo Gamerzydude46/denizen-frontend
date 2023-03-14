@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import mail from '../../assets/icons/mail.svg'
 import { NavLink } from 'react-router-dom';
 import backArrow from '../../assets/icons/backArrow.svg'
-
+import { useNavigate } from 'react-router-dom';
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -18,12 +18,15 @@ const CustomFontTheme = createTheme({
 
 
 const ResetPassword = () => {
-
+    
+    const navigate = useNavigate();
+    const handleSubmit =() =>{
+        navigate('/otp')
+    }
     return (
-
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
-                <NavLink to='/home' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
+                <NavLink to='/' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' >
                     <img src={backArrow} alt='navigate back' className='' />
                 </NavLink>
                 <h1 className='ml-4 text-5xl font-oswald font-bold'>Reset Password</h1>
@@ -43,7 +46,9 @@ const ResetPassword = () => {
                             />
                         </Box>
                     </div>
-                    <button type='button'
+                    <button 
+                        type='button'
+                        onClick={handleSubmit}
                         className='w-[369px] accessButton text-oswald'>
                         Send One Time Password
                     </button>
