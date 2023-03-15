@@ -259,7 +259,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     } />
                             </div>
                             <FormControl sx={{ width: '24.5ch', alignItems:'flex-start' }} variant="standard">
-                                <InputLabel htmlFor="confirmpassword" sx={{ fontSize: 18, color: '#8D99AE' }}>Confirm  password</InputLabel>
+                                <InputLabel htmlFor="confirmpassword" sx={{ fontSize: 18, color: '#8D99AE' }}>Confirm password</InputLabel>
                                 <Input
                                     id="confirmpassword"
                                     type={showPassword ? 'text' : 'password'}
