@@ -7,8 +7,7 @@ function Access() {
     const outletContext = React.createContext();
     const outlet = React.useContext(outletContext);
     const [nav, setNav] = React.useState(true);
-      
-    
+
     return (
         <>
             <div className="flex flex-row w-screen h-screen justify-between bg-Base">

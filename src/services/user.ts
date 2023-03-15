@@ -35,7 +35,6 @@ export const createUser = async (fname,lname,email,password,type)=>{
     }
 }
 
-
 //axios(config)
 //.then(function (response) {
 //  console.log(JSON.stringify(response.data));

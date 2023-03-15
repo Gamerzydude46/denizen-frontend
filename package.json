@@ -13,12 +13,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
     "axios": "^1.3.4",
     "formik": "^2.2.9",
-=======
-    "dayjs": "^1.11.7",
->>>>>>> 4d54fc495977151a42d39c632607d35aac6962a9
     "postcss": "^8.4.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,13 +22,8 @@
     "react-router-dom": "^6.8.1",
     "react-router-outlet": "^0.2.4",
     "react-scripts": "^5.0.1",
-<<<<<<< HEAD
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
-=======
-    "styled-components": "^5.3.9",
-    "web-vitals": "^2.1.4"
->>>>>>> 4d54fc495977151a42d39c632607d35aac6962a9
   },
   "scripts": {
     "start": "react-scripts start",
