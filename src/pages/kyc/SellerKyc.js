@@ -5,6 +5,10 @@ import backArrow from '../../assets/icons/backArrow.svg';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 import Identity from "../../components/kyc/Identity";
+import Address from "../../components/kyc/Address";
+import Business from "../../components/kyc/Business"
+import Declaration from "../../components/kyc/Declaration"
+
 
 
 const data ={
@@ -24,7 +28,7 @@ function SellerKyc(){
             <main className="h-full flex flex-row justify-between padding-right-10 padding-top-5">
             <div className="z-10">
           
-                <div className="flex items-center gap-4 m-10  ">
+                <div className="flex items-center gap-4 m-6  ">
                     <button className="bg-Primary_Red rounded-full h-[35px] w-[35px] top-100 left-100 p-2">
                         <img src={backArrow} alt="back button" className="" />
                     </button>
@@ -33,7 +37,7 @@ function SellerKyc(){
                     KYC APPLICATION
                     </h1>
                 </div>
-                <Identity/>
+                <Declaration/>
 
                 </div>
                 

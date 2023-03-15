@@ -1,20 +1,18 @@
 import React from "react";
 import Box from '@mui/material/Box';
-import Select  from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import mail from '../../assets/icons/mail.svg';
-import user from '../../assets/icons/user.svg';
-import gender from '../../assets/icons/gender.svg';
-import cal from '../../assets/icons/calendar.svg';
-import pan from '../../assets/icons/panCard.svg';
-import adhar from '../../assets/icons/adharCard.svg';
+import building from '../../assets/icons/building.svg';
+import city from '../../assets/icons/city.svg';
+import state from '../../assets/icons/state.svg';
+import district from '../../assets/icons/district.svg';
+import whatsapp from '../../assets/icons/whatsapp.svg';
+import pin from '../../assets/icons/pin.svg';
 import nextNav from '../../assets/icons/nextNav.svg';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-//import { DatePicker } from "@mui/x-date-pickers";
 
 
     const CustomFontTheme = createTheme({
@@ -24,12 +22,7 @@ import { createTheme } from "@mui/material/styles";
         }
     });
 
-    function Identity(){
-       
-        const [gen, setGen] = React.useState('');
-        const handleChange = (event) => {
-            setGen(event.target.value);
-        };
+    function Address(){
 
     return(
         
@@ -41,12 +34,28 @@ import { createTheme } from "@mui/material/styles";
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={user} alt='navigate back' className='mr-2' />
+                            <img src={building} alt='navigate back' className='mr-2' />
                             <TextField
-                                id="fname"
-                                label="First Name"
+                                id="rAdd"
+                                label="Residence Address"
                                 variant="standard"
-                                sx={{width: '200px'}}
+                                sx={{width: '600px'}}
+                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
+                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                            />
+                        </Box>
+                    </div>
+                    
+                    </div>
+                    <div className="flex flex-row gap-10">
+                    <div className='mt-4'>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <img src={state} alt='navigate back' className='mr-2' />
+                            <TextField
+                                id="state"
+                                label="State"
+                                variant="standard"
+                                sx={{width: '180px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -54,12 +63,12 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={user} alt='navigate back' className='mr-2' />
+                            <img src={district} alt='navigate back' className='mr-2' />
                             <TextField
-                                id="mname"
-                                label="Middle Name"
+                                id="dist"
+                                label="District"
                                 variant="standard"
-                                sx={{width: '200px'}}
+                                sx={{width: '180px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -67,12 +76,12 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={user} alt='navigate back' className='mr-2' />
+                            <img src={city} alt='navigate back' className='mr-2' />
                             <TextField
-                                id="lname"
-                                label="Last Name"
+                                id="ctv"
+                                label="City"
                                 variant="standard"
-                                sx={{width: '200 px'}}
+                                sx={{width: '180px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -81,77 +90,32 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end'  }}>
-                            <img src={gender} alt='navigate back' className='mr-2' />
-                            <InputLabel id="gend" sx={{mt:12.5,ml:15,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}>Gender</InputLabel>
-                            <Select
-                            labelId="gend"
-                            id="genid"
-                            value={gen}
-                            onChange={handleChange}
-                            label="Gender"
-                            sx={{width: '180px'}}
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <img src={whatsapp} alt='navigate back' className='mr-2' />
+                            <TextField
+                                id="Cnum"
+                                label="Contact Number"
+                                variant="standard"
+                                sx={{width: '180px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                            >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={'m'}>Male</MenuItem>
-                            <MenuItem value={'f'}>Female</MenuItem>
-                            <MenuItem value={'o'}>Other</MenuItem>
-                            </Select>
-                           
+                            />
+                        </Box>
+                    </div>
+                    <div className='mt-4'>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <img src={pin} alt='navigate back' className='mr-2' />
+                            <TextField
+                                id="pCode"
+                                label="Pin Code"
+                                variant="standard"
+                                sx={{width: '180px'}}
+                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
+                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                            />
                         </Box>
                     </div>
                     
-                    <div className='mt-4 display-flex justify-content' >
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={cal} alt='navigate back' className='mr-2  mt-2' />
-                            
-                            </Box>
-                    </div>
-                    </div>
-                    <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end'  }}>
-                            <img src={mail} alt='navigate back' className='mr-2' />
-                            <TextField
-                                id="email"
-                                label="Email"
-                                variant="standard"
-                                sx={{width: '200px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                            />
-                        </Box>
-                    </div>
-                    <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={pan} alt='navigate back' className='mr-2' />
-                            <TextField
-                                id="pan"
-                                label="Pan Card Number"
-                                variant="standard"
-                                sx={{width: '200px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                            />
-                        </Box>
-                    </div>
-                    <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={adhar} alt='navigate back' className='mr-2' />
-                            <TextField
-                                id="adhar"
-                                label="Aadhar card Number"
-                                variant="standard"
-                                sx={{width: '200px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                            />
-                        </Box>
                     </div>
                     
                     
@@ -172,4 +136,4 @@ import { createTheme } from "@mui/material/styles";
     );
 }
 
-export default Identity;
+export default Address;
