@@ -14,8 +14,6 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-//import { DatePicker } from "@mui/x-date-pickers";
-
 
     const CustomFontTheme = createTheme({
         typography: {
@@ -30,6 +28,12 @@ import { createTheme } from "@mui/material/styles";
         const handleChange = (event) => {
             setGen(event.target.value);
         };
+
+        const [dob, setdob] = React.useState('');
+        const handleChanges = (event) => {
+            setdob(event.target.value);
+        };
+
 
     return(
         
@@ -96,9 +100,7 @@ import { createTheme } from "@mui/material/styles";
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
+                            
                             <MenuItem value={'m'}>Male</MenuItem>
                             <MenuItem value={'f'}>Female</MenuItem>
                             <MenuItem value={'o'}>Other</MenuItem>
@@ -110,7 +112,12 @@ import { createTheme } from "@mui/material/styles";
                     <div className='mt-4 display-flex justify-content' >
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <img src={cal} alt='navigate back' className='mr-2  mt-2' />
-                            
+                            <InputLabel id="DOB" sx={{mt:12.5,ml:47.5,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
+                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
+                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}>Date of Birth</InputLabel>
+                            <input type="date" placeholder=" " value={dob}
+                            onChange={handleChanges} labelid="DOB"
+                            className="bg-Base  border-b border-Primary_Grey-500 focus:outline-none focus:border-"></input>
                             </Box>
                     </div>
                     </div>
