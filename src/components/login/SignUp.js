@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as yup from "yup";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,21 +15,44 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import backArrow from '../../assets/icons/backArrow.svg'
 import user from '../../assets/icons/user.svg'
 import mail from '../../assets/icons/mail.svg'
+import building from '../../assets/icons/building.svg'
 import key from '../../assets/icons/key.svg'
 import { NavLink } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-
-const CustomFontTheme = createTheme({
-    typography: {
-
-        fontFamily: ["Maven Pro"].join(",")
-    }
-});
+import { createUser } from '../../services/user';
 
 
 const SignUp = (nav,setNav,outlet) => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(schema)});
+    const onSubmit = (data) => {
+
+        createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        })
+        console.log(data)
+    };
+
+    const CustomFontTheme = createTheme({
+        typography: {
+            fontFamily: ["Maven Pro"].join(",")
+        }
+    });    
+
+    const account = [
+        {
+            value: 'seller',
+            label: 'Seller',
+        },
+        {
+            value: 'delivery',
+            label: 'Delivery',
+        },
+
+    ];
     
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -43,12 +67,9 @@ const SignUp = (nav,setNav,outlet) => {
         email: yup.string().email("*Enter a valid email").max(255).required("*required"),
         password: yup
             .string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "*Enter a valid password"),
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[/!@#$%^&*])(?=.{8,})/, "*Enter a valid password"),
         confirmpassword: yup.string().label('Confirmpassword').required("*required").oneOf([yup.ref('password'), null], 'Password must be same'),
     }).required();
-
-    const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(schema)});
-    const onSubmit = data => console.log(data);
 
     return (
 
@@ -74,6 +95,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     label="Firstname"
                                     variant="standard"
                                     className='w-full'
+                                    
                                     inputProps={{ style: { fontSize: 18} }}
                                     InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
                                     {...register("fname")}
@@ -92,7 +114,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     label="Lastname"
                                     variant="standard"
                                     className='w-full'
-                                    sx={{width:'246px'}}
+                                    
                                     inputProps={{ style: { fontSize: 18} }}
                                     InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
                                     {...register("lname")}
@@ -101,18 +123,49 @@ const SignUp = (nav,setNav,outlet) => {
                             </div>
                         </Box>
                     </div>
-                    <section className='mt-4'>
+                    <section className='mt-4 flex flex-row gap-9'>
+                        <div>
+                            <div className='flex flex-row w-full'>
+                                <div className='flex  items-end'>
+                                    <img src={building} alt='building' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                </div>
+                                <TextField
+                                    id="type"
+                                    name="type"
+                                    select
+                                    className='w-full'
+                                    sx={{width: '24.5ch'}}
+                                    label="Account Type"
+                                    inputProps={{ style: { fontSize: 18 } }}
+                                    InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
+                                    SelectProps={{
+                                        native: true,
+                                    }}
+                                    {...register("type")}
+                                    error={errors?.type ? true : false}
+                                    helperText={errors.type?.message}
+                                    variant="standard"
+                                >
+                                    {account.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </TextField>
+                            </div>
+                        </div>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end',flexDirection: 'column' }}>
                             <div className='flex flex-row w-full'>
                                 <div className='flex  items-end'>
-                                    <img src={mail} alt='mail' className={errors?.email? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]' } />
+                                    <img src={mail} alt='mail' className={errors?.email? 'mb-6 mr-2 ml-1 h-[24px]' : 'ml-1 mr-2 h-[24px]' } />
                                 </div>
                                 <TextField
                                     id="email"
                                     error={errors?.email? true : false}
                                     label="Email Address"
                                     variant="standard"
-                                    sx={{ width:'532px' }}
+                                    className='w-full'
+                                    sx={{width: '24.5ch'}}
                                     InputProps={{ style: { fontSize: 18 }}}
                                     InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                     {...register("email")}
@@ -132,8 +185,8 @@ const SignUp = (nav,setNav,outlet) => {
                                             errors?.confirmpassword ? 'ml-1 mb-5 mr-2 h-[27px]' : 'ml-1 mr-2 h-[28px]'
                                     } />
                             </div>
-                            <FormControl sx={{ width: '27ch', alignItems: 'flex-start' }} variant="standard">
-                                <InputLabel htmlFor="password" sx={{ fontSize: 18, color: '#8D99AE' }}>Enter your password</InputLabel>
+                            <FormControl sx={{ width: '24.5ch', alignItems: 'flex-start' }} variant="standard">
+                                <InputLabel htmlFor="password" sx={{ fontSize: 18, color: '#8D99AE' }}>Enter  password</InputLabel>
                                 <Input
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
@@ -165,8 +218,8 @@ const SignUp = (nav,setNav,outlet) => {
                                             errors?.password ? 'ml-1 mb-5 mr-2 h-[27px]' : 'ml-1 mr-2 h-[28px]'
                                     } />
                             </div>
-                            <FormControl sx={{ width: '27ch', alignItems:'flex-start' }} variant="standard">
-                                <InputLabel htmlFor="confirmpassword" sx={{ fontSize: 18, color: '#8D99AE' }}>Confirm your password</InputLabel>
+                            <FormControl sx={{ width: '24.5ch', alignItems:'flex-start' }} variant="standard">
+                                <InputLabel htmlFor="confirmpassword" sx={{ fontSize: 18, color: '#8D99AE' }}>Confirm  password</InputLabel>
                                 <Input
                                     id="confirmpassword"
                                     type={showPassword ? 'text' : 'password'}
@@ -213,7 +266,6 @@ const SignUp = (nav,setNav,outlet) => {
                         className='accessButton text-oswald w-[585px] '>
                         Sign Up
                     </button>
-        
                 </ThemeProvider>
             </form>
 
