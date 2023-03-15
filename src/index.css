@@ -14,6 +14,7 @@ body {
   @apply bg-Base;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -33,4 +34,8 @@ code {
 
 .accessButton{
   @apply mt-8  text-White text-xl font-semibold bg-Primary_Red rounded-md  h-12 hover:bg-Primary_Grey;
+}
+
+.formError{
+  @apply text-Primary_Red text-[11px] font-maven;
 }
