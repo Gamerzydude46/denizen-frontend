@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as yup from "yup";
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import { ThemeProvider } from "@mui/material/styles";
@@ -17,31 +18,76 @@ import user from '../../assets/icons/user.svg'
 import mail from '../../assets/icons/mail.svg'
 import building from '../../assets/icons/building.svg'
 import key from '../../assets/icons/key.svg'
+import logoDark from '../../assets/icons/logoDark.svg'
 import { NavLink } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUser } from '../../services/user';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 450,
+    bgcolor: '#FFFFFF',
+    border: '3px solid #EF233C',
+    borderRadius: '6px',
+    boxShadow: 24,
+    p: 4,
+};
+
+const CustomFontTheme = createTheme({
+    typography: {
+        fontFamily: ["Maven Pro"].join(",")
+    }
+});
 
 const SignUp = (nav,setNav,outlet) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(schema)});
+    //validationschema
+    const schema = yup.object({
+        fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        email: yup.string().email("*Enter a valid email").max(255).required("*required"),
+        password: yup
+            .string()
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[/!@#$%^&*])(?=.{8,})/, "*Enter a valid password"),
+        confirmpassword: yup.string().label('Confirmpassword').required("*required").oneOf([yup.ref('password'), null], 'Password must be same'),
+    }).required();
+
+    //form validation + POST(createUser) data
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const [msg,setMsg] = React.useState(true);
+    const navigate = useNavigate();
+    function sleep(ms) {
+        nav.setNav(true)
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    const handleLogin = async() =>{
+        await sleep(200)
+        navigate(-1);
+    }
     const onSubmit = (data) => {
 
         createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
             console.log(response);
+            if (response.data.flag === false) {
+                handleOpen();
+                setMsg(false);
+            }
+            else{
+                handleOpen();
+                setMsg(true);
+            }
         }).catch(error => {
             console.log(error);
         })
         console.log(data)
     };
-
-    const CustomFontTheme = createTheme({
-        typography: {
-            fontFamily: ["Maven Pro"].join(",")
-        }
-    });    
-
     const account = [
         {
             value: 'seller',
@@ -54,25 +100,19 @@ const SignUp = (nav,setNav,outlet) => {
 
     ];
     
+    //mui visibility
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
 
-    const schema = yup.object({
-        fname: yup.string().matches(/^[A-Za-z]+$/i,"*Numbers not allowed").required("*required"),
-        lname: yup.string().matches(/^[A-Za-z]+$/i,"*Numbers not allowed").required("*required"),
-        email: yup.string().email("*Enter a valid email").max(255).required("*required"),
-        password: yup
-            .string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[/!@#$%^&*])(?=.{8,})/, "*Enter a valid password"),
-        confirmpassword: yup.string().label('Confirmpassword').required("*required").oneOf([yup.ref('password'), null], 'Password must be same'),
-    }).required();
+    //mui modal
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(true);
 
     return (
-
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
                 <NavLink to='/' className='bg-Primary_Red rounded-full w-12 h-12 flex justify-center items-center' onClick={()=> nav.setNav(true)} >
@@ -250,7 +290,7 @@ const SignUp = (nav,setNav,outlet) => {
                                 name="conditions"
                                 className= 'w-5 h-5'
                             />
-                            <label for="userAgreement" className='ml-3'>I agree to the terms and conditions as set out by the <span className='text-Primary_Red'>User agreement</span>.</label>
+                            <label for="userAgreement" className='ml-3'>I agree to the terms & conditions as set out by the <span className='text-Primary_Red'>User agreement</span>.</label>
                         </div>
                         <div className='flex items-center mt-1'>
                             <input
@@ -263,12 +303,14 @@ const SignUp = (nav,setNav,outlet) => {
                         </div>
                     </section>
                     <button type='submit'
-                        className='accessButton text-oswald w-[585px] '>
+                        className='accessButton text-oswald w-[535px] '>
                         Sign Up
                     </button>
                 </ThemeProvider>
-            </form>
-
+                <div className={!msg ? ' font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                    {msg ? 'Account created Succefully !' : 'User alredy exist go back & Login !'}
+                </div>
+            </form>  
         </FormControl>
     );
 }

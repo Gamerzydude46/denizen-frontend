@@ -27,7 +27,7 @@ export const createUser = async (fname,lname,email,password,type)=>{
     };
 
     try{
-        const response = await axios.post(config.url,config.data)
+        const response = await axios.post(config.url,config.data,{credentials: true})
         return (response);
     }
     catch(error){
