@@ -1,23 +1,9 @@
 import React from "react";
 import Box from '@mui/material/Box';
-import Select  from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import mail from '../../assets/icons/mail.svg';
-import user from '../../assets/icons/user.svg';
-import gender from '../../assets/icons/gender.svg';
-import cal from '../../assets/icons/calendar.svg';
-import pan from '../../assets/icons/panCard.svg';
-import adhar from '../../assets/icons/adharCard.svg';
-import nextNav from '../../assets/icons/nextNav.svg';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
-
-import Avatar from '@mui/material/Avatar';
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import { useState } from "react";
 
     const CustomFontTheme = createTheme({
         typography: {

@@ -17,7 +17,7 @@ import { createTheme } from "@mui/material/styles";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 
     const CustomFontTheme = createTheme({
@@ -35,9 +35,41 @@ import { yupResolver } from '@hookform/resolvers/yup';
         };
 
         const [dob, setdob] = React.useState('');
-        const handleChanges = (event) => {
-            setdob(event.target.value);
+        const handleChanges = (e) => {
+            setdob(e.target.value);
         };
+        const handleSubmit = (values) => {
+            console.log(values);
+            // You can send the form data to the server or do something else with it.
+          };
+        
+          const validate = (values) => {
+            const errors = {};
+            if (!values.fname) {
+              errors.fname = 'Required';
+            }
+            if (!values.mname) {
+                errors.mname = 'Required';
+              }
+            if (!values.lname) {
+              errors.lname = 'Required';
+            }
+            if (!values.email) {
+              errors.email = 'Required';
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = 'Invalid email address';
+            }
+            if (!values.pan) {
+              errors.pan = 'Required';
+            } else if (values.pan.length < 6) {
+              errors.pan = 'Must be at least 6 characters';
+            }
+            return errors;
+          };
+
+       
 
         const schema = yup.object({
             fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
@@ -48,9 +80,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
             adhar: yup.string().matches(/^\d{12}$/, "*Numbers not allowed").required("*required"),
         }).required();
     
-        const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-
-
         const onSubmit = (data) => {
 
             console.log(data)
@@ -58,10 +87,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
     return(
         
-        <>
+        
+        <Formik
+      initialValues={{
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      }}
+      onSubmit={handleSubmit}
+      validate={validate}
+    >
+     
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14' onSubmit={handleSubmit(onSubmit)}>
+            <form className='mt-5 ml-14' >
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -74,8 +114,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                                {...register("fname")}
-                                helperText={errors.fname?.message}
+                                
                             />
                         </Box>
                     </div>
@@ -110,7 +149,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end'  }}>
                             <img src={gender} alt='navigate back' className='mr-2' />
-                            <InputLabel id="gend" sx={{mt:12.5,ml:15,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
+                            <InputLabel id="gend" sx={{mt:12.5,ml:11.5,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}>Gender</InputLabel>
                             <Select
@@ -135,12 +174,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
                     <div className='mt-4 display-flex justify-content' >
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <img src={cal} alt='navigate back' className='mr-2  mt-2' />
-                            <InputLabel id="DOB" sx={{mt:12.5,ml:47.5,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
+                            <InputLabel id="DOB" sx={{mt:12.5,ml:44.5,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}>Date of Birth</InputLabel>
-                            <input type="date" placeholder=" " value={dob}
-                            onChange={handleChanges} labelid="DOB"
-                            className="bg-Base  border-b border-Primary_Grey-500 focus:outline-none focus:border-"></input>
+                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}></InputLabel>
+                            <TextField type="date"  label="Date of Birth" value={dob}
+                            onChange={handleChanges} labelid="DOB"  inputProps={{
+                                style: { border: "none" }
+                              }}
+                              InputLabelProps={{
+                                shrink: true
+                              }}></TextField>
                             </Box>
                     </div>
                     </div>
@@ -192,7 +235,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
         </FormControl>
         </div>
-        </>
+        
+        
+        </Formik>
+      
     );
 }
 

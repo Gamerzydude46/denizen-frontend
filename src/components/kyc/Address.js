@@ -121,12 +121,7 @@ import { createTheme } from "@mui/material/styles";
                     
                     
                             
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
+                    
                 </ThemeProvider>
             </form>
 
