@@ -89,6 +89,28 @@ const Form = ({steps}) => {
 
   const formik = useFormik({
     initialValues: {
+        fname: '',
+        lname: '',
+        email: '',
+        pan: '',
+        adhar: '',
+        rAdd: '',
+        state:'',
+        dist:'',
+        ctv:'',
+        Cnum:'',
+        pCode:'',
+        bname:'',
+        bAdd:'',
+        bState:'',
+        bCont:'',
+        bemail:'',
+        bdist:'',
+        bctv:'',
+        type:'',
+        
+        
+
       
     },
     validationSchema: Yup.object().shape({
@@ -199,7 +221,7 @@ const Form = ({steps}) => {
              (
               <div></div>
             ) : (
-            <Button onClick={formik.handleSubmit} className=' flex justify-center gap-5 flex-row text-oswald ml-10 w-[200px] p-2 accessButton align-items-flex-end '>
+            <Button onClick={formik.handleSubmit} className=' flex justify-center gap-5 flex-row text-oswald ml-10 w-[200px] p-2 accessButton align-items-flex-end ' >
               Next
               <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
             </Button>
