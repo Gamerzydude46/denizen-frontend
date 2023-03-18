@@ -38,7 +38,7 @@ import MenuItem from '@mui/material/MenuItem';
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-14'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -158,13 +158,7 @@ import MenuItem from '@mui/material/MenuItem';
                     
                     
                     
-                            
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
+                      
                 </ThemeProvider>
             </form>
 

@@ -14,6 +14,11 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import * as yup from 'yup';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+
+
 
     const CustomFontTheme = createTheme({
         typography: {
@@ -34,13 +39,29 @@ import { createTheme } from "@mui/material/styles";
             setdob(event.target.value);
         };
 
+        const schema = yup.object({
+            fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+            mname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+            lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+            email: yup.string().email("*Enter a valid email").max(255).required("*required"),
+            pan: yup.string().matches(/^(?=.*[A-Z])(?=.*[0-9])(?=.{10,})/, "*Enter a valid Pan card number"),
+            adhar: yup.string().matches(/^\d{12}$/, "*Numbers not allowed").required("*required"),
+        }).required();
+    
+        const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
+
+        const onSubmit = (data) => {
+
+            console.log(data)
+        };
 
     return(
         
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-14' onSubmit={handleSubmit(onSubmit)}>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -53,6 +74,8 @@ import { createTheme } from "@mui/material/styles";
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("fname")}
+                                helperText={errors.fname?.message}
                             />
                         </Box>
                     </div>
@@ -163,13 +186,7 @@ import { createTheme } from "@mui/material/styles";
                     
                     
                     
-                            
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
+                      
                 </ThemeProvider>
             </form>
 
