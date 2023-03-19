@@ -18,6 +18,7 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useState } from "react";
 
 
     const CustomFontTheme = createTheme({
@@ -38,70 +39,35 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
         const handleChanges = (e) => {
             setdob(e.target.value);
         };
-        const handleSubmit = (values) => {
-            console.log(values);
-            // You can send the form data to the server or do something else with it.
-          };
+
+     //validationschema
+    const schema = yup.object({
+        fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        mname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
         
-          const validate = (values) => {
-            const errors = {};
-            if (!values.fname) {
-              errors.fname = 'Required';
-            }
-            if (!values.mname) {
-                errors.mname = 'Required';
-              }
-            if (!values.lname) {
-              errors.lname = 'Required';
-            }
-            if (!values.email) {
-              errors.email = 'Required';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'Invalid email address';
-            }
-            if (!values.pan) {
-              errors.pan = 'Required';
-            } else if (values.pan.length < 6) {
-              errors.pan = 'Must be at least 6 characters';
-            }
-            return errors;
-          };
+        email: yup.string().email("*Enter a valid email").max(255).required("*required"),
+        pan: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        adhar: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
 
-       
+    }).required();
 
-        const schema = yup.object({
-            fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-            mname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-            lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-            email: yup.string().email("*Enter a valid email").max(255).required("*required"),
-            pan: yup.string().matches(/^(?=.*[A-Z])(?=.*[0-9])(?=.{10,})/, "*Enter a valid Pan card number"),
-            adhar: yup.string().matches(/^\d{12}$/, "*Numbers not allowed").required("*required"),
-        }).required();
+    //form validation + POST(createUser) data
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
+    const onSubmit = (data) => {
+
+        
+    };
     
-        const onSubmit = (data) => {
-
-            console.log(data)
-        };
-
+    
+    
     return(
         
-        
-        <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-      }}
-      onSubmit={handleSubmit}
-      validate={validate}
-    >
      
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14' >
+            <form className='mt-5 ml-14' onSubmit={handleSubmit(onSubmit)} >
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -109,12 +75,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                             <img src={user} alt='navigate back' className='mr-2' />
                             <TextField
                                 id="fname"
-                                label="First Name"
+                                label="First Name"          
                                 variant="standard"
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                                
+                                {...register("fname")}
+                                    helperText={errors.fname?.message}
                             />
                         </Box>
                     </div>
@@ -128,6 +95,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("mname")}
+                                helperText={errors.mname?.message}
                             />
                         </Box>
                     </div>
@@ -141,6 +110,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                                 sx={{width: '200 px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("lname")}
+                                helperText={errors.lname?.message}
                             />
                         </Box>
                     </div>
@@ -161,6 +132,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                             sx={{width: '180px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                name="gender" 
                             >
                             
                             <MenuItem value={'m'}>Male</MenuItem>
@@ -177,13 +149,21 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                             <InputLabel id="DOB" sx={{mt:12.5,ml:44.5,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}></InputLabel>
-                            <TextField type="date"  label="Date of Birth" value={dob}
-                            onChange={handleChanges} labelid="DOB"  inputProps={{
-                                style: { border: "none" }
-                              }}
-                              InputLabelProps={{
-                                shrink: true
-                              }}></TextField>
+                            <TextField
+                                    id="dob"
+                                    name="dateOfBirth"
+                                    type='date'
+                                    className='w-full'
+                                    sx={{width: '24.5ch'}}
+                                    label="Date of Birth"
+                                    inputProps={{ style: { fontSize: 18  } }}
+                                    InputLabelProps={{ shrink: true,style: { fontSize: 18, color: '#8D99AE', } }}
+                                    required              
+                                    {...register("dateOfBirth", { required: true })}
+                                    variant="standard"
+                                    dateFormat="yyyy-mm-dd" 
+                                    
+                                />
                             </Box>
                     </div>
                     </div>
@@ -197,6 +177,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("email")}
+                                    helperText={errors.email?.message}
                             />
                         </Box>
                     </div>
@@ -210,6 +192,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("pan")}
+                                helperText={errors.pan?.message}
                             />
                         </Box>
                     </div>
@@ -223,6 +207,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
                                 sx={{width: '200px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                {...register("adhar")}
+                                helperText={errors.adhar?.message}
                             />
                         </Box>
                     </div>
@@ -237,8 +223,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
         </div>
         
         
-        </Formik>
-      
     );
 }
 
