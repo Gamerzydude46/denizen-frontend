@@ -10,19 +10,19 @@ const data ={
     img: dummyImg2,
 }
 
-function Home(){
-    
-    if(data.verified === false){
-        return(
-        <Layout>
-           <Welcome {...data}/>
-        </Layout>
-     );
-    }
-    else{
-        return(
+function Home() {
+
+    if (data.verified === false) {
+        return (
             <Layout>
-                 <div>Home page</div>
+                <Welcome {...data} />
+            </Layout>
+        );
+    }
+    else {
+        return (
+            <Layout>
+                <div>Home page</div>
             </Layout>
         );
     }

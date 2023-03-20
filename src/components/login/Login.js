@@ -121,19 +121,13 @@ const Login = () => {
                     </div>
                     <div className='mt-4 font-maven font-medium flex flex-row justify-between w-[369px]'>
                         <div className='flex items-center'>
-                            <input
-                                type="checkbox"
-                                id="userAgreement"
-                                name="userAgreement"
-                                className='w-5 h-5'
-                            />
-                            <label for="userAgreement" className='ml-3 font-bold text-oswald text-Primary_Grey'>Remember Me</label>
+                            
                         </div>
                         <div className='flex items-center mt-1'>
                             <NavLink
                                 to='/reset-password'
                                 className='ml-3 font-bold text-oswald text-Primary_Red  hover:text-Primary_Grey hover:-translate-y-1 hover:duration-100'>
-                                Forgot Password?
+                                Forgot Password ?
                             </NavLink>
                         </div>
                     </div>
