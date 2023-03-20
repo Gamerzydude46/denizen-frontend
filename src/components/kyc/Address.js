@@ -26,10 +26,9 @@ import { createTheme } from "@mui/material/styles";
 
     return(
         
-        <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-14'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -47,7 +46,7 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     
                     </div>
-                    <div className="flex flex-row gap-10">
+                    <div className="flex flex-row gap-6">
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <img src={state} alt='navigate back' className='mr-2' />
@@ -55,7 +54,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="state"
                                 label="State"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -68,7 +67,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="dist"
                                 label="District"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -81,7 +80,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="ctv"
                                 label="City"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -96,7 +95,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="Cnum"
                                 label="Contact Number"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -109,7 +108,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="pCode"
                                 label="Pin Code"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -121,18 +120,12 @@ import { createTheme } from "@mui/material/styles";
                     
                     
                             
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
+                    
                 </ThemeProvider>
             </form>
 
         </FormControl>
         </div>
-        </>
     );
 }
 

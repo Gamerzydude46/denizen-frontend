@@ -33,8 +33,13 @@ code {
 }
 
 .accessButton{
-  @apply mt-8  text-White text-xl font-semibold bg-Primary_Red rounded-md  h-12 hover:bg-Primary_Grey;
+  @apply mt-8  text-White text-xl font-semibold bg-Primary_Red rounded-md  h-12 hover:bg-Primary_Grey !important;
 }
+
+.documentButton{
+  @apply   text-White text-lg font-semibold bg-Primary_Grey rounded-md  h-7 hover:bg-Primary_Red;
+}
+
 
 .formError{
   @apply text-Primary_Red text-[11px] font-maven;
