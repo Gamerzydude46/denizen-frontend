@@ -5,6 +5,11 @@ import backArrow from '../../assets/icons/backArrow.svg';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 import Form from "../../components/kyc/Form";
+import { Typography } from "@mui/material";
+
+import { ThemeProvider } from "@mui/material/styles";
+
+import { createTheme } from "@mui/material/styles";
 
 const data ={
     user: 'Anna Marie',
@@ -13,6 +18,12 @@ const data ={
     img: dummyImg2,
 }
 
+const CustomFontTheme = createTheme({
+    typography: {
+
+        fontFamily: ["Maven Pro"].join(",")
+    }
+});
 
 const steps = ['Identity','Address','Business','Documents','Declaration'];
 
@@ -21,6 +32,7 @@ function SellerKyc(){
     return(
       
             <Layout {...data}>
+            <ThemeProvider theme={CustomFontTheme}>
             <main className="h-full flex flex-row justify-between padding-right-10 padding-top-5">
             <div className="z-10 w-full relative">
           
@@ -29,9 +41,9 @@ function SellerKyc(){
                         <img src={backArrow} alt="back button" className="" />
                     </button>
                 
-                    <h1 className="font-maven font-weight-600px text-[40px] mt-0.25">
-                    KYC APPLICATION
-                    </h1>
+                    <typography className="font-maven-Pro font-weight-500 font-style-bold line-height-59px text-[40px] mt-0.25">
+                    KYC Application
+                    </typography>
                 </div>
                
                 <div className="flex justify-start items-center w-70% h-auto  absolute left-30 top-100">
@@ -56,7 +68,7 @@ function SellerKyc(){
                     
                 </div>
         
-            <div className="fixed  z-10 bottom-0 right-0">
+            <div className="fixed  z-100 bottom-0 right-0">
                 <div className="bg-White rounded-t-full h-[430px] w-[900px] ">
                     <div>
                         <img src={officepaper} alt="man on the bike" className="h-[550px] w-[550px] bottom-[140px] left-[290px] relative" />
@@ -67,6 +79,7 @@ function SellerKyc(){
             <Outlet/>
             
             </main>
+            </ThemeProvider>
             </Layout>
             
  

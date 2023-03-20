@@ -31,17 +31,6 @@ import MenuItem from '@mui/material/MenuItem';
         const handleChange = (event) => {
             setGen(event.target.value);
         };
-        const account = [
-            {
-                value: 'seller',
-                label: 'Seller',
-            },
-            {
-                value: 'delivery',
-                label: 'Delivery',
-            },
-    
-        ];
     return(
         
         <>
@@ -101,7 +90,7 @@ import MenuItem from '@mui/material/MenuItem';
                                 id="bemail"
                                 label=" e.g. johndoe@gmail.com"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '250px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -124,50 +113,7 @@ import MenuItem from '@mui/material/MenuItem';
                             />
                         </Box>
                     </div>
-                    <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={city} alt='navigate back' className='mr-2' />
-                            <TextField
-                                id="bctv"
-                                label="City/Town/Village"
-                                variant="standard"
-                                sx={{width: '180px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                            />
-                        </Box>
-                    </div>
                     
-                    </div>
-                    <div className="flex flex-row gap-10">
-                    <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end'  }}>
-                            <img src={state} alt='navigate back' className='mr-2' />
-                            <InputLabel id="gend" sx={{mt:38,ml:14,fontSize: 18, color: '#8D99AE' ,w:'200px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
-                                InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}></InputLabel>
-                            <TextField
-                                    id="type"
-                                    name="type"
-                                    select
-                                    className='w-full'
-                                    sx={{width: '24.5ch'}}
-                                    label="Account Type"
-                                    inputProps={{ style: { fontSize: 18 } }}
-                                    InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
-                                    SelectProps={{
-                                        native: true,
-                                    }}
-                                    variant="standard"
-                                >
-                                    {account.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </TextField>
-                        </Box>
-                    </div>
                     </div>
                     
                     

@@ -17,6 +17,7 @@ import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import Approved from './Approved';
 
 
 
@@ -151,7 +152,7 @@ const onSubmit = (data) => {
           case 4:
             return <Declaration formik={formik}/>;
           default:
-            return <div><Processing/></div>
+            return <div><Approved/></div>
         }
 };
 
