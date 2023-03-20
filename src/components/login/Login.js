@@ -141,7 +141,7 @@ const Login = () => {
                         className='accessButton text-oswald w-[369px] flex justify-center items-center'>
                         { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center'/> : "Login" }
                     </button>
-                    <h1 className={message.flag? 'text-Primary_Red border-2 rounded-md mt-4 flex justify-center  border-x-Primary_Red bg-[#FFCCCB]' : 'hidden'}>
+                    <h1 className={message.flag? 'accessWarn bg-Warn' : 'hidden'}>
                         {message.msg}
                     </h1>
                 </ThemeProvider>

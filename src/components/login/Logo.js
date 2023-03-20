@@ -5,7 +5,6 @@ import * as React from 'react';
 
 const Logo = (nav,setNav,loc) => {
     
-   const url = window.location.href;
     return (
         <section className="flex flex-col w-[450px]">
             <div className='border-b-4 pb-4 px-3'>
@@ -13,16 +12,17 @@ const Logo = (nav,setNav,loc) => {
             </div>
             {nav.nav ? 
                 <div className='font-maven font-medium leading-[18px] p-2 text-center text-xl'>
-                    {loc !== url? 'Fill up personal information and start your journey with us.':'I hate when i forget my Password, It’s like i don’t even know me.'} 
+                    Don't have an account yet? 
                     <NavLink 
                         to='sign-up' 
-                        className='text-Primary_Red font-bold ml-2'>
+                        className='text-Primary_Red font-bold ml-2 mr-2'>
                         <button 
                             className='hover:translate-x-2 hover:animate-pulse'
                             onClick={() => nav.setNav(false)}>
                             Sign Up
                         </button>
                     </NavLink>
+                    and start your journey with Us.
                 </div> :
                 <div className='font-maven font-medium leading-[18px] p-2 text-center text-xl'>
                     Check if you already have a Account with us, Just incase you had forgotten. Login

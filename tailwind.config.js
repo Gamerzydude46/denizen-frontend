@@ -13,6 +13,7 @@ module.exports = {
         Primary_Grey: '#2B2D42',
         Secondary_Red: '#EF233C',
         Secondary_Grey: '#8D99AE',
+        warn: '#FFCCCB',
         Grad:'gradient-to-r from-purple-400 to-pink-600'
       },
       

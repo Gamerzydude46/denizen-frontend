@@ -275,8 +275,8 @@ const SignUp = (nav,setNav,outlet) => {
                         Sign Up
                     </button>
                 </ThemeProvider>
-                <div className={!msg ? ' font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
-                    {msg ? 'Account created Succefully !' : 'User alredy exist go back & Login !'}
+                <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                    {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
                 </div>
             </form>  
         </FormControl>
