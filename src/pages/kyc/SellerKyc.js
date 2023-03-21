@@ -36,16 +36,6 @@ function SellerKyc(){
             <main className="h-full flex flex-row justify-between padding-right-10 padding-top-5">
             <div className="z-10 w-full relative">
           
-                <div className="flex items-center gap-4 m-6  ">
-                    <button className="bg-Primary_Red rounded-full h-[35px] w-[35px] top-100 left-100 p-2">
-                        <img src={backArrow} alt="back button" className="" />
-                    </button>
-                
-                    <typography className="font-maven-Pro font-weight-500 font-style-bold line-height-59px text-[40px] mt-0.25">
-                    KYC Application
-                    </typography>
-                </div>
-               
                 <div className="flex justify-start items-center w-70% h-auto  absolute left-30 top-100">
                
 
