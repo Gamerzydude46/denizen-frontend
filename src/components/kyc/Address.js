@@ -28,16 +28,17 @@ import { createTheme } from "@mui/material/styles";
         
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14'>
+            <form className='mt-5 ml-8'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Box className="flex flex-end" >
                             <img src={building} alt='navigate back' className='mr-2' />
                             <TextField
                                 id="rAdd"
                                 label="Residence Address"
                                 variant="standard"
+                            
                                 sx={{width: '615px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}

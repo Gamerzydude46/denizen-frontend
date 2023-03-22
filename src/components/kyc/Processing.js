@@ -34,7 +34,7 @@ import { Typography } from "@mui/material";
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-7'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10"></div>
       
@@ -43,7 +43,7 @@ import { Typography } from "@mui/material";
                     <Typography  sx={{mt:1 ,fontSize:16 ,ml:15}}>We will Notify you once your KYC being Verified</Typography>
                     </div>
                     <div className="ml-20 w-100%">
-                    <img src={transac} alt="man on the bike" className="loading r h-[200px] w-[200px] ml-20  absolute mt-5 " />
+                    <img src={transac} alt="man on the bike" className="loading  h-[200px] w-[200px] ml-20  absolute mt-5 " />
                     </div>
         
          </ThemeProvider>

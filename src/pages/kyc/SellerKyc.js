@@ -5,6 +5,8 @@ import backArrow from '../../assets/icons/backArrow.svg';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 import Form from "../../components/kyc/Form";
+import UserForm from "../../components/kyc/UserForm";
+
 import { Typography } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
@@ -25,10 +27,13 @@ const CustomFontTheme = createTheme({
     }
 });
 
-const steps = ['Identity','Address','Business','Documents','Declaration'];
+const steps = data.type === 'Seller' ? ['Identity', 'Address', 'Business', 'Documents', 'Declaration'] : ['Identity', 'Address', 'Documents', 'Declaration'];
 
 
 function SellerKyc(){
+    
+
+    
     return(
       
             <Layout {...data}>
@@ -37,10 +42,16 @@ function SellerKyc(){
             <div className="z-10 w-full relative">
           
                 <div className="flex justify-start items-center w-70% h-auto  absolute left-30 top-100">
-               
 
+                    { data.type === 'Seller' ? 
+                    (
                     <Form steps={steps}
                     sx={{ width: '100%', maxWidth: '800px' }}/>
+                    ):(
+                    <UserForm steps={steps}
+                    sx={{ width: '100%', maxWidth: '800px' }}/>
+                    )}
+                    
                     </div>
        
     

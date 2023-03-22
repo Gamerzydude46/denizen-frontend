@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useFormik } from 'formik';
 import * as yup from "yup";
 import {
@@ -20,9 +20,11 @@ import { useForm } from "react-hook-form";
 import Approved from './Approved';
 
 import backArrow from '../../assets/icons/backArrow.svg';
+import UserDocument from './UserDocument';
 
 
 
+const MyComponent = lazy(() => import('./Approved'));
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -157,7 +159,11 @@ const onSubmit = (data) => {
           case 4:
             return <Declaration formik={formik}/>;
           default:
-            return <div><Processing/></div>
+            return <div className='h-full'>
+            <Suspense fallback={<div><Processing/></div>}>
+              <MyComponent />
+            </Suspense>
+          </div>
         }
 };
 
@@ -175,8 +181,8 @@ const onSubmit = (data) => {
               ( 
                 <div></div>
               ) : (          
-      <button onClick={handleChange}   className="bg-Primary_Red rounded-full h-[35px] w-[35px] right-20 bottom--100 left-200 p-2">
-          <img src={backArrow} alt="back button" className="" />
+      <button onClick={handleChange}   className=" flex justify-center items-center bg-Primary_Red rounded-full h-[35px] w-[35px] ">
+          <img src={backArrow} alt="back button" className=" mr-1" />
       </button>
       )}
                 
@@ -213,12 +219,12 @@ const onSubmit = (data) => {
       <Grid container>
         <Grid
           item
-          xs={12}
-          sx={{
+          xs={12}sx={{
             width: '800px',
             height: '380px',
             padding: 4
           }}
+          
         >
           {formContent(activeStep)}
         </Grid>
@@ -237,7 +243,7 @@ const onSubmit = (data) => {
           xs={12} 
           
         >
-          <div className='fixed block left-20 '>
+          <div className='fixed block left-16'>
             
           {activeStep === steps.length-1 ?  (
           <Button onClick={formik.handleSubmit} className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px] p-2  align-items-flex-end '>
