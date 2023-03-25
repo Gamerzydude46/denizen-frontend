@@ -21,6 +21,8 @@ import { NavLink } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUser } from '../../services/user';
+import load from '../../assets/icons/loader-white.svg';
+import { useNavigate } from "react-router-dom";
 
 
 const CustomFontTheme = createTheme({
@@ -45,9 +47,12 @@ const SignUp = (nav,setNav,outlet) => {
     //form validation + POST(createUser) data
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
 
+        setLoading(true);
         createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
             console.log(response);
             if (response.data.flag === false) {
@@ -55,11 +60,14 @@ const SignUp = (nav,setNav,outlet) => {
             }
             else{
                 setMsg(true);
+                window.alert("Account created Succefully !  ")
+                navigate("/");
             }
         }).catch(error => {
             console.log(error);
+        }).finally(() => {
+            setLoading(false)
         })
-        console.log(data)
     };
     const account = [
         {
@@ -271,8 +279,8 @@ const SignUp = (nav,setNav,outlet) => {
                         </div>
                     </section>
                     <button type='submit'
-                        className='accessButton text-oswald w-[535px] '>
-                        Sign Up
+                        className='accessButton text-oswald w-[535px] flex justify-center items-center '>
+                        { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : "Sign Up" }
                     </button>
                 </ThemeProvider>
                 <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>

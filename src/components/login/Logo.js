@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import * as React from 'react';
 
 
-const Logo = (nav,setNav,loc) => {
+const Logo = (nav,setNav) => {
     
     return (
         <section className="flex flex-col w-[450px]">

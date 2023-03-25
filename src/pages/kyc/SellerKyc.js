@@ -4,7 +4,7 @@ import officepaper from '../../assets/images/officepaper.png';
 import backArrow from '../../assets/icons/backArrow.svg';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
-import Form from "../../components/kyc/Form";
+import UserForm from "../../components/kyc/UserForm";
 
 const data ={
     user: 'Anna Marie',
@@ -37,7 +37,7 @@ function SellerKyc(){
                 <div className="flex justify-start items-center w-70% h-auto  absolute left-30 top-100">
                
 
-                    <Form steps={steps}
+                    <UserForm steps={steps}
                     sx={{ width: '100%', maxWidth: '800px' }}/>
                     </div>
        

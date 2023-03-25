@@ -1,5 +1,5 @@
 import logoDark from '../assets/icons/logoDark.svg';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,16 +16,28 @@ const style = {
     borderRadius: '10px',
     boxShadow: 24,
     p: 4,
-  };
+};
 
-const Header = (data) =>{
+const Header = (data) => {
 
     const [open, setOpen] = React.useState(false);
+    const [user, setUser] = React.useState(false);
+    function userType() {
+        if (data.type === 'delivery') {
+            setUser(false);
+        }
+        else {
+            setUser(true);
+        }
+    }
+    React.useEffect( () => {
+        userType();
+    })
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    return(
-        <header className='bg-gradient-to-r h-24 from-Primary_Red to-Primary_Grey'>
+    return (
+        <header className='bg-gradient-to-r h-24 from-Primary_Red to-Primary_Grey' >
             <div className='flex flex-row h-[90px] justify-between items-center bg-Base mb-3 p-8'>
                 <div>
                     <img src={logoDark} alt='logo' className='h-12' />
@@ -34,7 +46,13 @@ const Header = (data) =>{
                     <NavLink to='/home' className='headerItems'>
                         <h1>Home</h1>
                     </NavLink>
-                    <NavLink to='/track-orders' className='headerItems'>
+                    <NavLink to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
+                        <h1>My Orders</h1>
+                    </NavLink>
+                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                        <h1>Post Orders</h1>
+                    </NavLink>
+                    <NavLink to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Track Orders</h1>
                     </NavLink>
                     <NavLink to='/about-us' className='headerItems'>
@@ -58,10 +76,10 @@ const Header = (data) =>{
                             {data.user}
                         </h1>
                         <p className='font-maven font-medium'>
-                            {data.type}
+                            {user ? <h1>Seller</h1> : <h1>Delivery</h1>}
                         </p>
                     </button>
- 
+
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -71,14 +89,14 @@ const Header = (data) =>{
                         <Box sx={style}>
                             <Typography id="modal-modal-title" variant="h6" component="h2" >
                                 <div className='text-bold font-oswald text-xl'>
-                                  Logout
+                                    Logout
                                 </div>
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
                                 <div className='text-bold font-oswald text-lg'>
                                     {data.name}, you want to Logout ?
                                     <button className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14 hover:bg-Primary_Grey'>
-                                      Yes
+                                        Yes
                                     </button>
                                 </div>
                             </Typography>
