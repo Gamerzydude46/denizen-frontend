@@ -38,7 +38,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="rAdd"
                                 label="Residence Address"
                                 variant="standard"
-                                sx={{width: '600px'}}
+                                sx={{width: '615px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -87,13 +87,13 @@ import { createTheme } from "@mui/material/styles";
                         </Box>
                     </div>
                     </div>
-                    <div className="flex flex-row gap-10">
+                    <div className="flex flex-row gap-6">
                     <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={whatsapp} alt='navigate back' className='mr-2' />
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,marginLeft :-1 }}>
+                            <img src={whatsapp} alt='navigate back' className='mr-2 ' />
                             <TextField
-                                id="Cnum"
-                                label="Contact Number"
+                                id="ctv"
+                                label="Contact"
                                 variant="standard"
                                 sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
@@ -116,10 +116,6 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     
                     </div>
-                    
-                    
-                    
-                            
                     
                 </ThemeProvider>
             </form>

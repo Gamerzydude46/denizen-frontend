@@ -49,3 +49,14 @@ code {
   @apply text-Primary_Red border-2 rounded-md mt-4 flex justify-center animate-pulse border-x-Primary_Red font-maven;
 }
 
+.loading{
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+}

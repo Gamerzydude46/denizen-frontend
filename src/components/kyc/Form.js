@@ -17,7 +17,9 @@ import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import Approved from './Approved';
 
+import backArrow from '../../assets/icons/backArrow.svg';
 
 
 
@@ -137,6 +139,10 @@ const onSubmit = (data) => {
     }
   
   });
+        const handleChange = () => {
+
+          setActiveStep((prevStep) => prevStep - 1);
+        };
   
   const formContent = (step) => {
         switch(step) {
@@ -163,6 +169,21 @@ const onSubmit = (data) => {
       padding: 0
     }}
     >
+      <div className="flex items-center gap-4 m-6  ">
+              {activeStep === 0 ?  (  <div></div>):
+              activeStep > steps.length-1 ?
+              ( 
+                <div></div>
+              ) : (          
+      <button onClick={handleChange}   className="bg-Primary_Red rounded-full h-[35px] w-[35px] right-20 bottom--100 left-200 p-2">
+          <img src={backArrow} alt="back button" className="" />
+      </button>
+      )}
+                
+                   <typography className="font-maven-Pro font-weight-500 font-style-bold line-height-59px text-[40px] mt-0.25">
+                   KYC Application
+                   </typography>
+               </div>
       
       <Stepper
         activeStep={activeStep}

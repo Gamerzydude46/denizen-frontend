@@ -7,6 +7,7 @@ import nextNav from '../../assets/icons/nextNav.svg';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 
     const CustomFontTheme = createTheme({
@@ -21,7 +22,7 @@ import { useState } from "react";
         const handleChanges = (event) => {
             setdate(event.target.value);
         };
-        const [name, setName] = useState('John');
+        const [name, setName] = useState('Anna Marie');
 
         const handleChange = (event) => {
             setName(event.target.value);
@@ -35,32 +36,32 @@ import { useState } from "react";
             <form className='mt-5 ml-14'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row ">
-                        <div className=' mt-4 '>
+                        <div className=' mt-6 '>
                             
-                                <p className="  w-5/6    ">
+                                <Typography sx={{fontSize:16,fontWeight:500}}>
                                     I hereby declare that the details furnished above are true
                                     and correct to the best of my knowledge and belief and I undertake
                                     to inform you of any changes therein, immediately. In case any of
                                     the above information is found to be false or untrue or misleading
                                     or misrepresenting, I am aware that I may be held liable for it.
-                                </p>
+                                </Typography>
                                 
                         </div>
                     </div>
-                    <div className="flex flex-row gap-25 mt-10">
-                    <div className='flex mt-4 '>
+                    <div className="flex flex-row gap-25 mt-8">
+                    <div className='flex mt-2 '>
 
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,ml:0 }}>
 
-                            <img src={user} alt='navigate back' width="30px" className=' mr-2  ' style={{width:"12%"}} />
+                            <img src={user} alt='navigate back' width="30px" className=' mr-4  ' style={{width:"12%"}} />
                             <input type="text" id="name" disabled value={name} onChange={handleChange} />
                         
                         </Box>
                         </div>
                         <div className='mt-2 ml-20'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,ml:9}}>
                             <img src={cal} alt='navigate back' className='mr-4 ml-20' style={{width:"12%"}} />
-                            <input type="date" disabled value={curdate} onChange={handleChanges} className='bg-Base  border-none  '></input>
+                            <input type="date" disabled value={curdate} onChange={handleChanges} className='bg-none  border-none  '></input>
                         </Box>
                     </div>
 

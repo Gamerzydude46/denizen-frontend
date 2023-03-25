@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import { Typography } from "@mui/material";
 
     const CustomFontTheme = createTheme({
         typography: {
@@ -37,13 +38,12 @@ import { createTheme } from "@mui/material/styles";
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10"></div>
       
-                    <h1 className="mt-20 text-lg ml-10" >You Application has been submitted successfully !</h1>
-        
+                    <Typography sx={{mt:10 ,fontSize:20 ,ml:8}} >You Application has been submitted successfully !</Typography>
                     <div >
-                    <h4 className="mt-2 ml-16">We will Notify you once your KYC being Verified</h4>
+                    <Typography  sx={{mt:1 ,fontSize:16 ,ml:15}}>We will Notify you once your KYC being Verified</Typography>
                     </div>
-                    <div className="ml-10">
-                    <img src={transac} alt="man on the bike" className="r h-[180px] w-[200px] ml-20  absolute mt-5 " />
+                    <div className="ml-20 w-100%">
+                    <img src={transac} alt="man on the bike" className="loading r h-[200px] w-[200px] ml-20  absolute mt-5 " />
                     </div>
         
          </ThemeProvider>
