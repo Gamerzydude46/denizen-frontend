@@ -36,7 +36,7 @@ const ResetPassword = () => {
         e.preventDefault();
         setLoading(true);
         setMessage({flag: false, msg: ""});
-        fetch("http://localhost:8080/user/login", {
+        fetch("http://localhost:8080/user/email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
