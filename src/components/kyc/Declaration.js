@@ -33,18 +33,18 @@ import { Typography } from "@mui/material";
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14'>
+            <form className='mt-5 ml-7'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row ">
                         <div className=' mt-6 '>
                             
-                                <Typography sx={{fontSize:16,fontWeight:500}}>
+                                <typography className=' font-semibold '>
                                     I hereby declare that the details furnished above are true
                                     and correct to the best of my knowledge and belief and I undertake
                                     to inform you of any changes therein, immediately. In case any of
                                     the above information is found to be false or untrue or misleading
                                     or misrepresenting, I am aware that I may be held liable for it.
-                                </Typography>
+                                </typography>
                                 
                         </div>
                     </div>

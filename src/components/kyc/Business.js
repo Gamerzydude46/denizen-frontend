@@ -36,7 +36,7 @@ import MenuItem from '@mui/material/MenuItem';
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14'>
+            <form className='mt-5 ml-8'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>

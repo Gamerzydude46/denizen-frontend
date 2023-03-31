@@ -1,19 +1,13 @@
 import { useState } from 'react';
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from "yup";
+import * as yup from "yup";
 import {
-  Box,
-  Stepper,
-  Step,
-  StepLabel,
-  Grid,
-  FormHelperText,
+  Box,  Stepper,  Step,  StepLabel,  Grid,  FormHelperText,
   Button,Typography
 } from '@mui/material';
 import  Declaration  from './Declaration';
 import SellerDocument from './SellerDocument';
-import UserDocument from './UserDocument';
 import Identity from './Identity';
 import Business from './Business';
 import Address from './Address';
@@ -21,6 +15,12 @@ import nextNav from '../../assets/icons/nextNav.svg';
 import Processing from './Processing';
 import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
+import Approved from './Approved';
+
+import backArrow from '../../assets/icons/backArrow.svg';
+import UserDocument from './UserDocument';
 
 
 
@@ -28,7 +28,6 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 12,
-    
     boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   [`&.${stepConnectorClasses.active}`]: {
@@ -36,19 +35,18 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
       backgroundColor:
       '#90C53F',
       boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
-      
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundColor:
         '#90C53F',
-        width:120,
+        width:160,
         
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
-    width:120,
+    width:160,
     height: 7,
     border: 0,
     backgroundColor:
@@ -83,23 +81,58 @@ const ColorlibStepIcon = styled('div')(({ theme, active, completed }) => ({
   }),
 }));
 
+
+
+
+
 const UserForm = ({steps}) => {
   const [activeStep, setActiveStep] = useState(0);
+  const schema = yup.object({
+    fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+    mname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+    lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+    
+    email: yup.string().email("*Enter a valid email").max(255).required("*required"),
+    pan: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+    adhar: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
 
+}).required();
 
+//form validation + POST(createUser) data
+const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
+const onSubmit = (data) => {
+
+    
+};
   const formik = useFormik({
+
     initialValues: {
-      
-    },
-    validationSchema: Yup.object().shape({
-      
-    }),
-    
-    onSubmit: () => {
-      
-        setActiveStep((prevStep) => prevStep + 1);
-    
-    },
+      fname: '',
+      lname: '',
+      email: '',
+      pan: '',
+      adhar: '',
+      rAdd: '',
+      state:'',
+      dist:'',
+      ctv:'',
+      Cnum:'',
+      pCode:'',
+      bname:'',
+      bAdd:'',
+      bState:'',
+      bCont:'',
+      bemail:'',
+      bdist:'',
+      bctv:'',
+      type:'',
+  },
+  
+  
+  onSubmit: () => {
+    setActiveStep((prevStep) => prevStep + 1);
+  },
 
     onChange: ()=>
     {
@@ -107,6 +140,10 @@ const UserForm = ({steps}) => {
     }
   
   });
+        const handleChange = () => {
+
+          setActiveStep((prevStep) => prevStep - 1);
+        };
   
   const formContent = (step) => {
         switch(step) {
@@ -121,8 +158,6 @@ const UserForm = ({steps}) => {
           default:
             return <div><Processing/></div>
         }
-     
-    
 };
 
   return (
@@ -133,6 +168,21 @@ const UserForm = ({steps}) => {
       padding: 0
     }}
     >
+      <div className="flex items-center gap-4 m-6  ">
+              {activeStep === 0 ?  (  <div></div>):
+              activeStep > steps.length-1 ?
+              ( 
+                <div></div>
+              ) : (          
+      <button onClick={handleChange}   className="bg-Primary_Red rounded-full h-[35px] w-[35px] right-20 bottom--100 left-200 p-2">
+          <img src={backArrow} alt="back button" className="" />
+      </button>
+      )}
+                
+                   <typography className="font-maven-Pro font-weight-500 font-style-bold line-height-59px text-[40px] mt-0.25">
+                   KYC Application
+                   </typography>
+               </div>
       
       <Stepper
         activeStep={activeStep}
@@ -186,18 +236,18 @@ const UserForm = ({steps}) => {
           xs={12} 
           
         >
-          <div className='fixed block left-20 '>
+          <div className='fixed block left-16 '>
             
           {activeStep === steps.length-1 ?  (
-            <Button onClick={formik.handleSubmit} className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px] p-2  align-items-flex-end '>
+          <Button onClick={formik.handleSubmit} className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px] p-2  align-items-flex-end '>
             Submit
             <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
           </Button>
           ) : activeStep > steps.length-1 ? 
              (
               <div></div>
-            ) : (
-            <Button onClick={formik.handleSubmit} className=' flex justify-center gap-5 flex-row text-oswald ml-10 w-[200px] p-2 accessButton align-items-flex-end '>
+            ) : ( 
+            <Button type='submit' onClick={formik.handleSubmit} className=' flex justify-center gap-5 flex-row text-oswald ml-10 w-[200px] p-2 accessButton align-items-flex-end ' >
               Next
               <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
             </Button>

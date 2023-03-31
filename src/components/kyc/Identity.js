@@ -67,7 +67,7 @@ import { useState } from "react";
      
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-14' onSubmit={handleSubmit(onSubmit)} >
+            <form className='mt-5 ml-8' onSubmit={handleSubmit(onSubmit)} >
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
@@ -119,8 +119,8 @@ import { useState } from "react";
                     <div className="mt- 4 flex flex-row gap-10">
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end'  }}>
-                            <img src={gender} alt='navigate back' className='mr-2 ml-1'/>
-                            <InputLabel id="gend" sx={{mt:12.5,ml:12,fontSize: 18, color: '#8D99AE' ,width:200}}
+                            <img src={gender} alt='navigate back' className='mr-2 '/>
+                            <InputLabel id="gend" sx={{mt:12.5,ml:8,fontSize: 18, color: '#8D99AE' ,width:200}}
                             
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}>Gender</InputLabel>
