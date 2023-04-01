@@ -20,8 +20,7 @@ function Access() {
                 <div className="bg-White w-1/2 h-screen rounded-tl-[300px] flex justify-center items-center">
                     <outletContext.Provider nav={nav} setNav={setNav} outlet={outlet}>
                         <Outlet />
-                    </outletContext.Provider>
-                    
+                    </outletContext.Provider> 
                 </div>
             </div>
         </>

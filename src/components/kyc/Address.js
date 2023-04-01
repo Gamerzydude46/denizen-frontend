@@ -26,20 +26,20 @@ import { createTheme } from "@mui/material/styles";
 
     return(
         
-        <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-8'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row gap-10">
                     <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Box className="flex flex-end" >
                             <img src={building} alt='navigate back' className='mr-2' />
                             <TextField
                                 id="rAdd"
                                 label="Residence Address"
                                 variant="standard"
-                                sx={{width: '600px'}}
+                            
+                                sx={{width: '615px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -47,7 +47,7 @@ import { createTheme } from "@mui/material/styles";
                     </div>
                     
                     </div>
-                    <div className="flex flex-row gap-10">
+                    <div className="flex flex-row gap-6">
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <img src={state} alt='navigate back' className='mr-2' />
@@ -55,7 +55,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="state"
                                 label="State"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -68,7 +68,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="dist"
                                 label="District"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -81,22 +81,22 @@ import { createTheme } from "@mui/material/styles";
                                 id="ctv"
                                 label="City"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
                         </Box>
                     </div>
                     </div>
-                    <div className="flex flex-row gap-10">
+                    <div className="flex flex-row gap-6">
                     <div className='mt-4'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={whatsapp} alt='navigate back' className='mr-2' />
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,marginLeft :-1 }}>
+                            <img src={whatsapp} alt='navigate back' className='mr-2 ' />
                             <TextField
-                                id="Cnum"
-                                label="Contact Number"
+                                id="ctv"
+                                label="Contact"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -109,7 +109,7 @@ import { createTheme } from "@mui/material/styles";
                                 id="pCode"
                                 label="Pin Code"
                                 variant="standard"
-                                sx={{width: '180px'}}
+                                sx={{width: '160px'}}
                                 inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                             />
@@ -118,21 +118,11 @@ import { createTheme } from "@mui/material/styles";
                     
                     </div>
                     
-                    
-                    
-                            
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
                 </ThemeProvider>
             </form>
 
         </FormControl>
         </div>
-        </>
     );
 }
 

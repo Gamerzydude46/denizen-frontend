@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as yup from "yup";
-import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import { ThemeProvider } from "@mui/material/styles";
@@ -18,27 +17,13 @@ import user from '../../assets/icons/user.svg'
 import mail from '../../assets/icons/mail.svg'
 import building from '../../assets/icons/building.svg'
 import key from '../../assets/icons/key.svg'
-import logoDark from '../../assets/icons/logoDark.svg'
 import { NavLink } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUser } from '../../services/user';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+import load from '../../assets/icons/loader-white.svg';
+import { useNavigate } from "react-router-dom";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 450,
-    bgcolor: '#FFFFFF',
-    border: '3px solid #EF233C',
-    borderRadius: '6px',
-    boxShadow: 24,
-    p: 4,
-};
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -62,31 +47,27 @@ const SignUp = (nav,setNav,outlet) => {
     //form validation + POST(createUser) data
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
-    function sleep(ms) {
-        nav.setNav(true)
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    const handleLogin = async() =>{
-        await sleep(200)
-        navigate(-1);
-    }
+
     const onSubmit = (data) => {
 
+        setLoading(true);
         createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
             console.log(response);
             if (response.data.flag === false) {
-                handleOpen();
                 setMsg(false);
             }
             else{
-                handleOpen();
                 setMsg(true);
+                window.alert("Account created Succefully !  ")
+                navigate("/");
             }
         }).catch(error => {
             console.log(error);
+        }).finally(() => {
+            setLoading(false)
         })
-        console.log(data)
     };
     const account = [
         {
@@ -106,11 +87,6 @@ const SignUp = (nav,setNav,outlet) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
-
-    //mui modal
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(true);
 
     return (
         <FormControl variant="standard">
@@ -303,12 +279,12 @@ const SignUp = (nav,setNav,outlet) => {
                         </div>
                     </section>
                     <button type='submit'
-                        className='accessButton text-oswald w-[535px] '>
-                        Sign Up
+                        className='accessButton text-oswald w-[535px] flex justify-center items-center '>
+                        { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : "Sign Up" }
                     </button>
                 </ThemeProvider>
-                <div className={!msg ? ' font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
-                    {msg ? 'Account created Succefully !' : 'User alredy exist go back & Login !'}
+                <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                    {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
                 </div>
             </form>  
         </FormControl>

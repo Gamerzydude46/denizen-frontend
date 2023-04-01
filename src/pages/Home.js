@@ -5,24 +5,24 @@ import dummyImg2 from'../assets/images/dummyImg2.png';
 
 const data ={
     user: 'Anna Marie',
-    type: 'Seller',
+    type: 'seller',
     verified: false,
     img: dummyImg2,
 }
 
-function Home(){
-    
-    if(data.verified === false){
-        return(
-        <Layout>
-           <Welcome {...data}/>
-        </Layout>
-     );
-    }
-    else{
-        return(
+function Home() {
+
+    if (data.verified === false) {
+        return (
             <Layout>
-                 <div>Home page</div>
+                <Welcome {...data} />
+            </Layout>
+        );
+    }
+    else {
+        return (
+            <Layout>
+                <div>Home page</div>
             </Layout>
         );
     }

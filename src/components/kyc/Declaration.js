@@ -1,20 +1,13 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import city from '../../assets/icons/city.svg';
-import state from '../../assets/icons/state.svg';
-import district from '../../assets/icons/district.svg';
-import mail from '../../assets/icons/mail.svg';
 import user from '../../assets/icons/user.svg';
-import InputLabel from '@mui/material/InputLabel';
 import cal from '../../assets/icons/calendar.svg';
 import nextNav from '../../assets/icons/nextNav.svg';
-import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import Select  from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 
     const CustomFontTheme = createTheme({
@@ -29,7 +22,7 @@ import { useState } from "react";
         const handleChanges = (event) => {
             setdate(event.target.value);
         };
-        const [name, setName] = useState('John');
+        const [name, setName] = useState('Anna Marie');
 
         const handleChange = (event) => {
             setName(event.target.value);
@@ -40,40 +33,40 @@ import { useState } from "react";
         <>
         <div className="flex">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-20'>
+            <form className='mt-5 ml-7'>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row ">
-                        <div className=' mt-4 '>
+                        <div className=' mt-6 '>
                             
-                                <p className="  w-3/5    ">
+                                <typography className=' font-semibold '>
                                     I hereby declare that the details furnished above are true
                                     and correct to the best of my knowledge and belief and I undertake
                                     to inform you of any changes therein, immediately. In case any of
                                     the above information is found to be false or untrue or misleading
                                     or misrepresenting, I am aware that I may be held liable for it.
-                                </p>
+                                </typography>
                                 
                         </div>
                     </div>
-                    <div className="flex flex-row gap-25 mt-10">
-                    <div className='flex mt-4 ml-10'>
+                    <div className="flex flex-row gap-25 mt-8">
+                    <div className='flex mt-2 '>
 
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,ml:0 }}>
 
-                            <img src={user} alt='navigate back' width="30px" className=' mr-5  ' style={{width:"12%"}} />
+                            <img src={user} alt='navigate back' width="30px" className=' mr-4  ' style={{width:"12%"}} />
                             <input type="text" id="name" disabled value={name} onChange={handleChange} />
                         
                         </Box>
                         </div>
-                        <div className='mt-4 ml-20'>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={cal} alt='navigate back' className='mr-6 ml-20' style={{width:"12%"}} />
-                            <input type="date" disabled value={curdate} onChange={handleChanges} className='bg-Base  border-none  '></input>
+                        <div className='mt-2 ml-20'>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' ,ml:9}}>
+                            <img src={cal} alt='navigate back' className='mr-4 ml-20' style={{width:"12%"}} />
+                            <input type="date" disabled value={curdate} onChange={handleChanges} className='bg-none  border-none  '></input>
                         </Box>
                     </div>
 
                     </div>
-                    <section className='mt-10 font-maven font-medium'>
+                    <section className='mt-10 font-maven font-sm'>
                         <div className='flex items-center'>
                             <input
                                 type="checkbox"
@@ -94,12 +87,7 @@ import { useState } from "react";
                         </div>
                     </section>
                             
-                    <button type='button'
-                        className='flex justify-center gap-5 flex-row accessButton text-oswald w-[200px]  p-2  align-items-flex-end '>
-                        Next
-                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-
-                    </button>
+                
                 </ThemeProvider>
             </form>
 

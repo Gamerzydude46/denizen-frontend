@@ -13,8 +13,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import mail from '../../assets/icons/mail.svg'
 import key from '../../assets/icons/key.svg'
 import { NavLink } from 'react-router-dom';
+import load from '../../assets/icons/loader-white.svg';
+import { useNavigate } from "react-router-dom";
 
-  
+
 const CustomFontTheme = createTheme({
     typography: {
 
@@ -24,13 +26,49 @@ const CustomFontTheme = createTheme({
 
 
 const Login = () => {
-     
+
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
+
+    //user/login integration
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [message, setMessage] = React.useState({flag:false,msg:""});
+    const [loading, setLoading] = React.useState(false);
+    const navigate = useNavigate();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        fetch("http://localhost:8080/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if(data.message === 'Authentication Successful'){
+                    window.alert(data.message)
+                    navigate('/home');
+                }
+                else{
+                    setMessage({flag: true, msg: data.message});
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            }).finally(() => {
+                setLoading(false)
+            })
+    };
+
     return (
 
         <FormControl variant="standard">
@@ -38,7 +76,7 @@ const Login = () => {
                 <h1 className='ml-1 text-5xl font-oswald font-bold'>Login</h1>
             </div>
             <h1 className='font-maven font-medium text-lg mt-6 ml-1'>Welcome, let’s get started</h1>
-            <form className='mt-1 ml-2'>
+            <form className='mt-1 ml-2' onSubmit={handleLogin}>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -48,8 +86,10 @@ const Login = () => {
                                 label="Email"
                                 variant="standard"
                                 sx={{width: '325px'}}
-                                inputProps={{ style: { fontSize: 18,fontWeight: 'bold'}}}
+                                inputProps={{ style: { fontSize: 18 }}}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </Box>
                     </div>
@@ -61,7 +101,9 @@ const Login = () => {
                                 <Input
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
-                                    inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                    inputProps={{ style: { fontSize: 18 }}}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
@@ -77,14 +119,14 @@ const Login = () => {
                             </FormControl>
                         </div>
                     </div>
-                    <div className='mt-7 font-maven font-medium flex flex-row justify-between w-[369px]'>
+                    <div className='mt-4 font-maven font-medium flex flex-row justify-between w-[369px]'>
                         <div className='flex items-center'>
                             <input
                                 type="checkbox"
                                 id="userAgreement"
                                 name="userAgreement"
                                 className='w-5 h-5'
-                                 />
+                            />
                             <label for="userAgreement" className='ml-3 font-bold text-oswald text-Primary_Grey'>Remember Me</label>
                         </div>
                         <div className='flex items-center mt-1'>
@@ -95,13 +137,15 @@ const Login = () => {
                             </NavLink>
                         </div>
                     </div>
-                    <button type='button'
-                        className='accessButton text-oswald w-[369px]'>
-                        Login
+                    <button type='submit'
+                        className='accessButton text-oswald w-[369px] flex justify-center items-center'>
+                        { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center'/> : "Login" }
                     </button>
+                    <h1 className={message.flag? 'accessWarn bg-Warn' : 'hidden'}>
+                        {message.msg}
+                    </h1>
                 </ThemeProvider>
             </form>
-
         </FormControl>
     );
 }

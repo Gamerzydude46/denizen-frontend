@@ -8,6 +8,10 @@ import lock from '../../assets/icons/lock.svg'
 import { NavLink } from 'react-router-dom';
 import backArrow from '../../assets/icons/backArrow.svg';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/user/userSlice';
+import load from '../../assets/icons/loader-white.svg';
 
 
 const CustomFontTheme = createTheme({
@@ -21,9 +25,50 @@ const CustomFontTheme = createTheme({
 const Otp = () => {
     
     const navigate = useNavigate();
-    const handleClick = () =>{
-        navigate('/set-password');
+    const dispatch = useDispatch()
+    const [message, setMessage] = React.useState(false);
+    const [email, setEmail] = React.useState('');
+    const [key, setKey] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
+    const otp = useSelector((state) => state.user);
+
+    React.useEffect(() => {
+        setEmail(otp.email);
+    }, [otp])
+    
+    const handleClick = (e) =>{
+        if(key == otp.otp){
+            setMessage(false);
+            navigate('/set-password');
+        }
+        else{
+            setMessage(true);
+        }
     }
+    
+    const handleResend = () =>{
+        
+        setLoading(true);
+        fetch("http://localhost:8080/user/otp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email}),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                window.alert(data.message);
+                dispatch(setUser({ email: email, otp: data.key, fname: null, _id: null }))
+                setLoading(false);
+
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            }).finally(() =>  setLoading(false) );
+
+    }
+
     return (
         <FormControl variant="standard">
             <div className='flex flex-row items-center'>
@@ -44,21 +89,31 @@ const Otp = () => {
                                 variant="standard"
                                 type='number'
                                 sx={{ width: '355px' }}
-                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                inputProps={{ style: { fontSize: 18 } }}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
+                                value={key}
+                                onChange={(e) => setKey(e.target.value)}
                             />
                         </Box>
                     </div>
                     <div className='flex flex-row justify-between mt-4 ml-1'>
                         <h1 className='font-maven font-medium  '>Didn’t  receive email? </h1>
-                        <button type='button' className='font-bold text-Primary_Red hover:text-Primary_Grey hover:-translate-y-1 hover:duration-100'>Click to Resend</button>
+                        <button
+                            type='button'
+                            onClick={handleResend}
+                            className='font-bold text-Primary_Red hover:text-Primary_Grey hover:-translate-y-1 hover:duration-100'>
+                            Click to Resend
+                        </button>
                     </div>
                     <button 
                         type='button'
                         onClick={handleClick}
-                        className='w-[392px] accessButton text-oswald ml-1'>
-                        Proceed
+                        className='w-[392px] accessButton text-oswald ml-1 flex justify-center items-center'>
+                        {loading ? <img src={load} alt='loading...'  className='w-8 flex justify-center animate-spin'/> : "Procced" }
                     </button>
+                    <h1 className={message ? 'accessWarn bg-Warn ' : 'hidden'}>
+                        You have entered incorrect OTP!
+                    </h1>
                 </ThemeProvider>
             </form>
 

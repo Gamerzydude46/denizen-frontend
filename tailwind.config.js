@@ -17,6 +17,7 @@ module.exports = {
         Secondary_Red: '#EF233C',
         Secondary_Grey: '#8D99AE',
         Blue:'#7dd3fc',
+        warn: '#FFCCCB',
         Grad:'gradient-to-r from-purple-400 to-pink-600'
       },
       
