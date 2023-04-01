@@ -4,6 +4,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+      rotate:{
+        '270':'270deg',
+      },
       colors: {
         Base: '#EDF2F4',
         White: '#FFFFFF',
@@ -13,6 +16,7 @@ module.exports = {
         Primary_Grey: '#2B2D42',
         Secondary_Red: '#EF233C',
         Secondary_Grey: '#8D99AE',
+        Blue:'#7dd3fc',
         warn: '#FFCCCB',
         Grad:'gradient-to-r from-purple-400 to-pink-600'
       },
