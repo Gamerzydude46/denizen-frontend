@@ -2,8 +2,15 @@ import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import done from '../../assets/icons/newCheck.svg';
+import dummyImg2 from '../../assets/images/dummyImg2.png';
+import { useNavigate,useOutletContext } from 'react-router-dom';
 
-
+const userData = {
+    user: 'Anna Marie',
+    type: 'Seller',
+    verified: false,
+    img: dummyImg2,
+}
 
     const CustomFontTheme = createTheme({
         typography: {
@@ -13,7 +20,12 @@ import done from '../../assets/icons/newCheck.svg';
     });
 
     function Approved(){
-       
+       const navigate=useNavigate()
+       const [activeStep, setActiveStep]=useOutletContext();
+
+       React.useEffect(()=>{
+        setActiveStep(userData.type==="Seller"?4:3)
+    },[])
     return(
         
                 <ThemeProvider theme={CustomFontTheme}>
@@ -25,7 +37,7 @@ import done from '../../assets/icons/newCheck.svg';
                         <img src={done} className="w-fit h-32" ></img>
                     </div>
                     <div>
-                        <button 
+                        <button onClick={()=>navigate('/home')}
                             className='accessButton text-oswald w-[200px] '>
                             Proceed
                         </button>

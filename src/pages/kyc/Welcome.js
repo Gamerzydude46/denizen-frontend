@@ -1,8 +1,10 @@
 import React from "react";
-import manonphone from '../../assets/images/manonphone.png'
+import manonphone from '../../assets/images/manonphone.png';
+import { useNavigate } from "react-router";
 
 
 const Welcome = (data) =>{
+    const navigate=useNavigate()
     return(
         <main className="h-full flex flex-row justify-between p-10 ">
             <div className="z-30">
@@ -16,7 +18,7 @@ const Welcome = (data) =>{
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!
                 </p>
                 <div className="flex flex-row mt-10 gap-x-10">
-                    <button className="bg-Primary_Red buttonWelcome">Register</button>
+                    <button className="bg-Primary_Red buttonWelcome" onClick={()=>navigate('/kyc',{data})}>Register</button>
                     <button className="bg-Primary_Grey buttonWelcome">Know More</button>
                 </div>
             </div>

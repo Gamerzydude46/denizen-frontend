@@ -7,8 +7,20 @@ import nextNav from '../../assets/icons/nextNav.svg';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import dummyImg2 from '../../assets/images/dummyImg2.png';
+import { useNavigate,useOutletContext } from 'react-router-dom';
 
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
+
+
+const userData = {
+    user: 'Anna Marie',
+    type: 'Seller',
+    verified: false,
+    img: dummyImg2,
+}
 
     const CustomFontTheme = createTheme({
         typography: {
@@ -18,22 +30,45 @@ import { Typography } from "@mui/material";
     });
 
     function Declaration(){
+        const [activeStep, setActiveStep]=useOutletContext();
+        
+        
+        const schema = yup.object({
+        }).required();
+
+        const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
+        
+        
+        React.useEffect(()=>{
+            
+            setActiveStep(userData.type==="Seller"?4:3)
+        },[])
         const [curdate, setdate] = React.useState(new Date().toISOString().substr(0, 10));
         const handleChanges = (event) => {
             setdate(event.target.value);
         };
+        
         const [name, setName] = useState('Anna Marie');
 
         const handleChange = (event) => {
             setName(event.target.value);
         };
 
+        const navigate = useNavigate();
+
+        const onSubmit = (data) => {
+            
+            console.log(data);
+            navigate("/kyc/processing")
+        };
+
     return(
         
         <>
-        <div className="flex">
+        <div className="flex ">
          <FormControl variant="standard" >
-            <form className='mt-5 ml-7'>
+            <form className='mt-5 ml-7' onSubmit={handleSubmit(onSubmit)}>
                 <ThemeProvider theme={CustomFontTheme}>
                     <div className="flex flex-row ">
                         <div className=' mt-6 '>
@@ -86,7 +121,13 @@ import { Typography } from "@mui/material";
                             <label for="privacyPolicy" className='ml-3'>I state that I have read, understood and accept the <span className='text-Primary_Red'>Privacy Policy</span>.</label>
                         </div>
                     </section>
-                            
+                    
+                    <div className="mt-20">
+                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                                Submit
+                                <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                            </button>
+                        </div>        
                 
                 </ThemeProvider>
             </form>

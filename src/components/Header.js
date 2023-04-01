@@ -22,6 +22,9 @@ const Header = (data) => {
 
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(false);
+    React.useEffect( () => {
+        userType();
+    })
     function userType() {
         if (data.type === 'delivery') {
             setUser(false);
@@ -30,9 +33,7 @@ const Header = (data) => {
             setUser(true);
         }
     }
-    React.useEffect( () => {
-        userType();
-    })
+    
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
