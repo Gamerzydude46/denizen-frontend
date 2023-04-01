@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import officepaper from '../../assets/images/officepaper.png';
-import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
@@ -12,12 +11,6 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import backArrow from '../../assets/icons/backArrow.svg';
 import { useNavigate } from "react-router-dom";
 
-const data = {
-    user: 'Anna Marie',
-    type: 'user',
-    verified: false,
-    img: dummyImg2,
-}
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -85,7 +78,7 @@ const ColorlibStepIcon = styled('div')(({ theme, active, completed }) => ({
 }));
 
 
-function Kyc() {
+const Kyc=(data)=> {
 
     const [mainDetails,setMainDetails] = useState({identityDetails:{},addressDetails:{},businessDetails:{},sellerDetails:{},userDetails:{}});
 
@@ -115,7 +108,7 @@ function Kyc() {
                             >
                                 <div className="flex items-center gap-4 m-6  ">
                                     {activeStep === 0 ? (<div></div>) :
-                                        activeStep > (data.type === "Seller"?sellersteps: usersteps).length - 1 ?
+                                        activeStep > (data.type === "seller"?sellersteps: usersteps).length - 1 ?
                                             (
                                                 <div></div>
                                             ) : (
@@ -134,7 +127,7 @@ function Kyc() {
                                     orientation="horizontal" alternativeLabel connector={<ColorlibConnector />}
                                     sx={{ width: '100%', maxWidth: '800px', height: '30px' }}>
                                     
-                                    {(data.type === "Seller"?sellersteps: usersteps).map((label, index) => {
+                                    {(data.type === "seller"?sellersteps: usersteps).map((label, index) => {
                                         return <Step key={index} >
 
                                             <StepLabel StepIconComponent={ColorlibStepIcon} style={{}}>
@@ -151,7 +144,7 @@ function Kyc() {
                                             </StepLabel>
 
                                         </Step>
-})}
+                                    })}
                                 </Stepper>
                                 <Grid container>
                                     <Grid

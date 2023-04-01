@@ -99,7 +99,7 @@ import { Link } from "react-router-dom";
                     <div className="flex flex-row gap-10 min-h-0">
                     <div className='mt-4'>
                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <img src={user} alt='navigate back' className='mr-2' />
+                            <img src={user} alt='navigate back' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'}  />
                             <TextField
                                 id="fname"
                                 label="First Name"          

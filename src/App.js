@@ -25,14 +25,8 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Access />} >
-          <Route path="/" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/otp" element={<Otp />} />
-          <Route path="/set-password" element={<SetPassword />} />
-        </Route>
-        <Route path='/home' element={<Home />}>
+
+      <Route path='/home' element={<Home />}/>
           <Route exact path="/kyc" element={<Kyc />}>
             <Route path="/kyc" element={<Identity />} />
             <Route path="/kyc/address" element={<Address />} />
@@ -42,15 +36,17 @@ function App() {
             <Route path="/kyc/declaration" element={<Declaration />} />
             <Route path="/kyc/processing" element={<Processing />} />
             <Route path="/kyc/approved" element={<Approved />} />
-
           </Route>
+        <Route path='/' element={<Access />} >
+          <Route path="/" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/set-password" element={<SetPassword />} />
         </Route>
-
 
         <Route path='/track-orders' />
         <Route path='/about-us' />
-
-
       </Routes>
     </BrowserRouter>
   );
