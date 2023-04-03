@@ -16,7 +16,14 @@ import Processing from './components/kyc/Processing';
 import Approved from './components/kyc/Approved';
 import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
-// import { Card } from '@mui/material';
+import dummyImg2 from './assets/images/dummyImg2.png'
+
+const data = {
+  user: 'Anna Marie',
+  type: 'delivery',
+  verified: false,
+  img: dummyImg2,
+}
 
 
 function App() {
@@ -26,17 +33,17 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-      <Route path='/home' element={<Home />}/>
-          <Route exact path="/kyc" element={<Kyc />}>
-            <Route path="/kyc" element={<Identity />} />
-            <Route path="/kyc/address" element={<Address />} />
-            <Route path="/kyc/business" element={<Business />} />
-            <Route path="/kyc/sellerdocument" element={<SellerDocument />} />
-            <Route path="/kyc/userdocument" element={<UserDocument />} />
-            <Route path="/kyc/declaration" element={<Declaration />} />
-            <Route path="/kyc/processing" element={<Processing />} />
-            <Route path="/kyc/approved" element={<Approved />} />
-          </Route>
+        <Route path='/home' element={<Home />} />
+        <Route exact path="/kyc" element={<Kyc {...data} />}>
+          <Route path="/kyc" element={<Identity />} />
+          <Route path="/kyc/address" element={<Address {...data} />} />
+          <Route path="/kyc/business" element={<Business />} />
+          <Route path="/kyc/sellerdocument" element={<SellerDocument {...data} />} />
+          <Route path="/kyc/userdocument" element={<UserDocument {...data} />} />
+          <Route path="/kyc/declaration" element={<Declaration {...data} />} />
+          <Route path="/kyc/processing" element={<Processing />} />
+          <Route path="/kyc/approved" element={<Approved />} />
+        </Route>
         <Route path='/' element={<Access />} >
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />

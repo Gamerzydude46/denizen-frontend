@@ -12,6 +12,7 @@ import backArrow from '../../assets/icons/backArrow.svg';
 import { useNavigate } from "react-router-dom";
 
 
+
 const CustomFontTheme = createTheme({
     typography: {
 
@@ -21,70 +22,77 @@ const CustomFontTheme = createTheme({
 const sellersteps = ['Identity', 'Address', 'Business', 'Documents', 'Declaration'];
 const usersteps = ['Identity', 'Address', 'Documents', 'Declaration'];
 
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
-    [`&.${stepConnectorClasses.alternativeLabel}`]: {
-        top: 12,
-        boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
-    },
-    [`&.${stepConnectorClasses.active}`]: {
-        [`& .${stepConnectorClasses.line}`]: {
-            backgroundColor:
-                '#90C53F',
+
+
+
+function Kyc(data) {
+
+    const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+
+        [`&.${stepConnectorClasses.alternativeLabel}`]: {
+            top: 12,
             boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
         },
-    },
-    [`&.${stepConnectorClasses.completed}`]: {
+        [`&.${stepConnectorClasses.active}`]: {
+            [`& .${stepConnectorClasses.line}`]: {
+                backgroundColor:
+                    '#90C53F',
+                boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
+            },
+        },
+
+        [`&.${stepConnectorClasses.completed}`]: {
+
+            [`& .${stepConnectorClasses.line}`]: {
+                backgroundColor:
+                    '#90C53F',
+                width:
+                    data.type === 'seller' ? 120 : 160,
+
+            },
+        },
         [`& .${stepConnectorClasses.line}`]: {
+            width:
+                data.type === 'seller' ? 120 : 160,
+            height: 7,
+            border: 0,
             backgroundColor:
-                '#90C53F',
-            width: 120,
+                theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#FFFFFF',
+            borderRadius: '1px',
+            boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)'
 
         },
-    },
-    [`& .${stepConnectorClasses.line}`]: {
-        width: 120,
-        height: 7,
-        border: 0,
-        backgroundColor:
-            theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#FFFFFF',
-        borderRadius: '1px',
+    }));
 
-        boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)'
-
-    },
-}));
-
-const ColorlibStepIcon = styled('div')(({ theme, active, completed }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 30,
-    height: 30,
-    color: '#fff',
-    backgroundColor: '#ccc',
-    borderRadius: '50%',
-    ...(active && {
-        backgroundColor: '#90C53F',
-        boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
+    const ColorlibStepIcon = styled('div')(({ theme, active, completed }) => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: 30,
         height: 30,
-    }),
-    ...(completed && {
-        backgroundColor: '#90C53F',
-        boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
-        width: 30,
-        height: 30,
-    }),
-}));
+        color: '#fff',
+        backgroundColor: '#ccc',
+        borderRadius: '50%',
+        ...(active && {
+            backgroundColor: '#90C53F',
+            boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
+            width: 30,
+            height: 30,
+        }),
+        ...(completed && {
+            backgroundColor: '#90C53F',
+            boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
+            width: 30,
+            height: 30,
+        }),
+    }));
 
 
-const Kyc=(data)=> {
-
-    const [mainDetails,setMainDetails] = useState({identityDetails:{},addressDetails:{},businessDetails:{},sellerDetails:{},userDetails:{}});
+    const [mainDetails, setMainDetails] = useState({ identityDetails: {}, addressDetails: {}, businessDetails: {}, sellerDetails: {}, userDetails: {} });
 
     const [activeStep, setActiveStep] = useState(0);
     const navigate = useNavigate();
-    
+
     const handleChange = () => {
         setActiveStep((prevStep) => prevStep - 1);
         navigate(-1)
@@ -108,7 +116,7 @@ const Kyc=(data)=> {
                             >
                                 <div className="flex items-center gap-4 m-6  ">
                                     {activeStep === 0 ? (<div></div>) :
-                                        activeStep > (data.type === "seller"?sellersteps: usersteps).length - 1 ?
+                                        activeStep > (data.type === "seller" ? sellersteps : usersteps).length - 1 ?
                                             (
                                                 <div></div>
                                             ) : (
@@ -126,8 +134,8 @@ const Kyc=(data)=> {
                                     activeStep={activeStep}
                                     orientation="horizontal" alternativeLabel connector={<ColorlibConnector />}
                                     sx={{ width: '100%', maxWidth: '800px', height: '30px' }}>
-                                    
-                                    {(data.type === "seller"?sellersteps: usersteps).map((label, index) => {
+
+                                    {(data.type === "seller" ? sellersteps : usersteps).map((label, index) => {
                                         return <Step key={index} >
 
                                             <StepLabel StepIconComponent={ColorlibStepIcon} style={{}}>
@@ -139,7 +147,7 @@ const Kyc=(data)=> {
                                                     textFillColor: 'transparent',
                                                     color: '#FFFFFF'
                                                 }}>
-                                                    {label ||"c"}
+                                                    {label || "c"}
                                                 </Typography>
                                             </StepLabel>
 
@@ -154,7 +162,7 @@ const Kyc=(data)=> {
                                             paddingTop: 2,
                                             paddingLeft: 4
                                         }}>
-                                        <Outlet context={[activeStep, setActiveStep,mainDetails,setMainDetails]}/>
+                                        <Outlet context={[activeStep, setActiveStep, mainDetails, setMainDetails]} />
                                     </Grid>
                                 </Grid>
                             </Box>

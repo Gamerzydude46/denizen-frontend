@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
@@ -24,7 +24,7 @@ const CustomFontTheme = createTheme({
 
 
 
-function UserDocument() {
+function UserDocument(data) {
     const [userDocDetails, setUserDocDetails] = useState({ profile: '', driverlic: '', vreg: '', register: '' });
     const [activeStep, setActiveStep] = useOutletContext();
     const schema = yup.object({}).required();
