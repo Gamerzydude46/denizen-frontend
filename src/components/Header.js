@@ -49,7 +49,7 @@ const Header = (data) => {
                     <NavLink to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
                         <h1>My Orders</h1>
                     </NavLink>
-                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink to='/post-orders' className={user  ? 'headerItems' : 'hidden'}>
                         <h1>Post Orders</h1>
                     </NavLink>
                     <NavLink to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
