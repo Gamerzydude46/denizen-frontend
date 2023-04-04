@@ -16,6 +16,7 @@ import Processing from './components/kyc/Processing';
 import Approved from './components/kyc/Approved';
 import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
+import SellerFeed from './pages/home/SellerFeed';
 import dummyImg2 from './assets/images/dummyImg2.png'
 
 const data = {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/otp" element={<Otp />} />
           <Route path="/set-password" element={<SetPassword />} />
         </Route>
+        <Route exact path="/seller-feed" element={<SellerFeed/>} />       
 
         <Route path='/track-orders' />
         <Route path='/about-us' />

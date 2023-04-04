@@ -52,6 +52,10 @@ code {
   @apply text-Primary_Red border-2 rounded-md mt-4 flex justify-center animate-pulse border-x-Primary_Red font-maven;
 }
 
+.statusButton{
+  @apply mt-8  text-White text-2xl font-semibold rounded-md  h-12;
+}
+
 .loading{
   animation: spin 1s linear infinite;
   @keyframes spin {
