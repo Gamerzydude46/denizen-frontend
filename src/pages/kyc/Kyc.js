@@ -100,8 +100,6 @@ function Kyc(data) {
 
 
     return (
-
-        <Layout >
             <ThemeProvider theme={CustomFontTheme}>
                 <main className=" w-screen flex flex-row justify-between padding-right-10 padding-top-5">
                     <div className="   relative">
@@ -177,9 +175,6 @@ function Kyc(data) {
                     </div>
                 </main>
             </ThemeProvider>
-        </Layout>
-
-
     );
 }
 

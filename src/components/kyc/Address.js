@@ -28,17 +28,15 @@ const CustomFontTheme = createTheme({
 function Address(data) {
 
     const [addressDetails, setAddressDetails] = useState({ rAdd: '', state: '', dist: '', city: '', contact: '', pincode: '' });
-
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
     const schema = yup.object({
-        rAdd: yup.string().matches(/^[0-9a-zA-Z\s\-\.\,\#\+\/\(\)]+$/i, "*required").required("*required"),
+        rAdd: yup.string().matches(/^[0-9a-zA-Z\s\-.,#+/()]+$/i, "*required").required("*required"),
         state: yup.string().matches
             (/^(Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chhattisgarh|Goa|Gujarat|Haryana|Himachal Pradesh|Jharkhand|Karnataka|Kerala|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal)+$/i
                 , "*Numbers not allowed").required("*required"),
         dist: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
         city: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-
         contact: yup.string().matches(/^(?:\+91|0)?(?:[6789]\d{9})$/i, "*Enter valid number").required("*required"),
         pincode: yup.string().matches(/^\d{6}$/i, "*Alphabets not allowed").required("*required")
     }).required();
@@ -52,12 +50,10 @@ function Address(data) {
     const navigate = useNavigate();
 
     const onSubmit = (d) => {
-
         console.log(d);
         setActiveStep(activeStep + 1)
         setMainDetails({ ...mainDetails, addressDetails: addressDetails })
-
-        navigate((data.type === "seller" ? "/kyc/Business" : "/kyc/userdocument"))
+        navigate((data.type === "seller" ? "/home/kyc/Business" : "/home/kyc/userdocument"))
 
     };
     return (
@@ -75,7 +71,6 @@ function Address(data) {
                                             id="rAdd"
                                             label="Residence Address"
                                             variant="standard"
-
                                             sx={{ width: '615px' }}
                                             inputProps={{ style: { fontSize: 18 } }}
                                             InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}

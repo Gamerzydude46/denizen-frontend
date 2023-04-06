@@ -1,5 +1,4 @@
 import React from "react";
-import Welcome from './kyc/Welcome';
 import Layout from "../components/Layout";
 import dummyImg2 from'../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
@@ -16,7 +15,7 @@ function Home() {
     if (data.verified === false) {
         return (
             <Layout>
-                <Welcome {...data} />
+                <Outlet/>
             </Layout>
         );
     }

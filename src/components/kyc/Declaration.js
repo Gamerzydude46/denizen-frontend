@@ -22,19 +22,17 @@ const CustomFontTheme = createTheme({
 });
 
 function Declaration(data) {
-    const [activeStep, setActiveStep] = useOutletContext();
-
+    const [activeStep,setActiveStep] = useOutletContext();
 
     const schema = yup.object({
     }).required();
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-
-
+    const { register,handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     React.useEffect(() => {
         setActiveStep(data.type === "seller" ? 4 : 3)
     }, [])
+
     const [curdate, setdate] = React.useState(new Date().toISOString().substr(0, 10));
 
     const handleChanges = (event) => {
@@ -50,9 +48,8 @@ function Declaration(data) {
     const navigate = useNavigate();
 
     const onSubmit = (d) => {
-
         console.log(d);
-        navigate("/kyc/processing")
+        navigate("/home/kyc/processing")
     };
 
     return (
@@ -118,10 +115,8 @@ function Declaration(data) {
                                     <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
                                 </button>
                             </div>
-
                         </ThemeProvider>
                     </form>
-
                 </FormControl>
             </div>
         </>

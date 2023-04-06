@@ -4,7 +4,6 @@ import FormControl from '@mui/material/FormControl';
 import dummyImg2 from '../../assets/images/dummyImg2.png';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import { Typography } from "@mui/material";
 import nextNav from '../../assets/icons/nextNav.svg';
 import { useState } from "react";
 import * as yup from 'yup';
@@ -19,10 +18,6 @@ const CustomFontTheme = createTheme({
     }
 });
 
-
-
-
-
 function SellerDocument() {
     const [sellerDocDetails, setSellerDocDetails] = useState({ profile: '', bregdoc: '', blease: '', register: '' });
     const [activeStep, setActiveStep] = useOutletContext();
@@ -33,6 +28,7 @@ function SellerDocument() {
     React.useEffect(() => {
         setActiveStep(3)
     }, [])
+
     const imageHandler = (event) => {
         setSellerDocDetails({ ...sellerDocDetails, profile: event.target.value })
         const file = event.target.files[0];
@@ -50,7 +46,7 @@ function SellerDocument() {
     const onSubmit = (data) => {
         console.log(data);
         setActiveStep(activeStep + 1)
-        navigate("/kyc/declaration")
+        navigate("/home/kyc/declaration")
     };
     return (
 

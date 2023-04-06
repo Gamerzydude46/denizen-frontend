@@ -15,7 +15,7 @@ const CustomFontTheme = createTheme({
 function Processing() {
     const navigate = useNavigate();
     React.useEffect(() => {
-        setTimeout(() => navigate('/kyc/approved'), 3000);
+        setTimeout(() => navigate('/home/kyc/approved'), 3000);
     }, []);
     return (
 

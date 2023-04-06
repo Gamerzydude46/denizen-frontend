@@ -14,7 +14,7 @@ import { createTheme } from "@mui/material/styles";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { NavLink, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
@@ -57,7 +57,7 @@ function Identity() {
         console.log(data);
         setActiveStep(activeStep + 1)
         setMainDetails({ ...mainDetails, identityDetails: identityDetails })
-        navigate("/kyc/address")
+        navigate("/home/kyc/address")
 
     };
 
@@ -91,7 +91,7 @@ function Identity() {
                             <div className="flex flex-row gap-10 min-h-0">
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={user} alt='navigate back' className={errors?.type ? 'mb-2 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                        <img src={user} alt='navigate back' className={errors?.fname ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="fname"
                                             label="First Name"
@@ -112,7 +112,7 @@ function Identity() {
                                 </div>
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={user} alt='navigate back' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                        <img src={user} alt='navigate back' className={errors?.mname ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="mname"
                                             label="Middle Name"
@@ -133,7 +133,7 @@ function Identity() {
                                 </div>
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={user} alt='navigate back' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                        <img src={user} alt='navigate back' className={errors?.lname ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="lname"
                                             label="Last Name"
@@ -153,10 +153,10 @@ function Identity() {
                                     </Box>
                                 </div>
                             </div>
-                            <div className="mt- 4 flex flex-row gap-10">
-                                <div className='mt-4'>
+                            <div className="mt-4 flex flex-row gap-10">
+                                <div className={errors ? 'mt-2' : 'mt-4'}>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={genders} alt='navigate back' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                        <img src={genders} alt='navigate back' className={errors?.gen ? 'mb-6 mr-2 h-[30px]' : 'mr-2 h-[30px]'} />
                                         <TextField
                                             id="gen"
                                             name="gen"
@@ -187,9 +187,9 @@ function Identity() {
                                     </Box>
                                 </div>
 
-                                <div className='mt-3 display-flex justify-content' >
+                                <div className='mt-2 display-flex justify-content' >
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={cal} alt='date' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                        <img src={cal} alt='date' className="h-[25px] mr-2 ml-1" />
 
                                         <TextField
                                             id="dob"
@@ -210,31 +210,9 @@ function Identity() {
                                     </Box>
                                 </div>
                             </div>
-                            <div className='mt-4'>
+                            <div className='mt-4  flex flex-row'>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                    <img src={mail} alt='mail' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[20px]' : 'ml-1 mr-2 h-[20px]'} />
-                                    <TextField
-                                        id="email"
-                                        label="Email"
-                                        variant="standard"
-                                        sx={{ width: '250px', mr: 1 }}
-                                        inputProps={{ style: { fontSize: 16 } }}
-                                        InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
-                                        {...register("email")}
-                                        helperText={errors.email?.message}
-                                        error={errors?.email ? true : false}
-                                        FormHelperTextProps={{
-                                            style: { fontSize: 10 }
-                                        }}
-
-                                        value={identityDetails.email}
-                                        onChange={(e) => { setIdentityDetails({ ...identityDetails, email: e.target.value }) }}
-                                    />
-                                </Box>
-                            </div>
-                            <div className='mt-4 '>
-                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                    <img src={pan} alt='pancard' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                    <img src={pan} alt='pancard' className={errors?.pan ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                     <TextField
                                         id="pan"
                                         label="Pan Card Number"
@@ -255,7 +233,7 @@ function Identity() {
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                    <img src={adhar} alt='navigate back' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                    <img src={adhar} alt='navigate back' className={errors?.type ? 'mb- mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
                                     <TextField
                                         id="adhar"
                                         label="Aadhar card Number"
@@ -268,6 +246,7 @@ function Identity() {
                                         error={errors?.adhar ? true : false}
                                         FormHelperTextProps=
                                         {{
+
                                             style: { fontSize: 10 }
                                         }}
 
@@ -276,6 +255,29 @@ function Identity() {
                                     />
                                 </Box>
                             </div>
+                            <div className='mt-4'>
+                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                    <img src={mail} alt='mail' className={errors?.email ? 'mb-6 mr-2 h-[20px]' : 'mr-2 h-[20px]'} />
+                                    <TextField
+                                        id="email"
+                                        label="Email"
+                                        variant="standard"
+                                        sx={{ width: '250px', mr: 1 }}
+                                        inputProps={{ style: { fontSize: 16 } }}
+                                        InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
+                                        {...register("email")}
+                                        helperText={errors.email?.message}
+                                        error={errors?.email ? true : false}
+                                        FormHelperTextProps={{
+                                            style: { fontSize: 10 }
+                                        }}
+
+                                        value={identityDetails.email}
+                                        onChange={(e) => { setIdentityDetails({ ...identityDetails, email: e.target.value }) }}
+                                    />
+                                </Box>
+                            </div>
+
                         </div>
                         <div className='mt-2  fixed'>
 

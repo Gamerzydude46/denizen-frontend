@@ -32,7 +32,7 @@ function Business() {
 
     const schema = yup.object({
         bname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-        bAdd: yup.string().matches(/^[0-9a-zA-Z\s\-\.\,\#\+\/\(\)]+$/i, "*Numbers not allowed").required("*required"),
+        bAdd: yup.string().matches(/^[0-9a-zA-Z\s\-.,#+/()]+$/i, "*Numbers not allowed").required("*required"),
         bcontact: yup.string().matches(/^(?:\+91|0)?(?:[6789]\d{9})$/i, "*Numbers not allowed").required("*required"),
         bemail: yup.string().email("*Enter a valid email").max(255).required("*required"),
         bdist: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
@@ -51,8 +51,7 @@ function Business() {
         console.log(data);
         setActiveStep(activeStep + 1);
         setMainDetails({ ...mainDetails, businessDetails: businessDetails })
-
-        navigate("/kyc/sellerdocument");
+        navigate("/home/kyc/sellerdocument");
     };
 
     return (

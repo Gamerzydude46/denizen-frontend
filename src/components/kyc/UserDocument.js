@@ -19,11 +19,6 @@ const CustomFontTheme = createTheme({
     }
 });
 
-
-
-
-
-
 function UserDocument(data) {
     const [userDocDetails, setUserDocDetails] = useState({ profile: '', driverlic: '', vreg: '', register: '' });
     const [activeStep, setActiveStep] = useOutletContext();
@@ -45,7 +40,7 @@ function UserDocument(data) {
         reader.readAsDataURL(file);
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const { handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
 
     const onSubmit = (d) => {

@@ -16,12 +16,13 @@ import Processing from './components/kyc/Processing';
 import Approved from './components/kyc/Approved';
 import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
+import Welcome from './pages/kyc/Welcome';
 import SellerFeed from './pages/home/SellerFeed';
 import dummyImg2 from './assets/images/dummyImg2.png'
 
 const data = {
   user: 'Anna Marie',
-  type: 'delivery',
+  type: 'seller',
   verified: false,
   img: dummyImg2,
 }
@@ -29,21 +30,21 @@ const data = {
 
 function App() {
   return (
-
-
     <BrowserRouter>
       <Routes>
 
-        <Route path='/home' element={<Home />} />
-        <Route exact path="/kyc" element={<Kyc {...data} />}>
-          <Route path="/kyc" element={<Identity />} />
-          <Route path="/kyc/address" element={<Address {...data} />} />
-          <Route path="/kyc/business" element={<Business />} />
-          <Route path="/kyc/sellerdocument" element={<SellerDocument {...data} />} />
-          <Route path="/kyc/userdocument" element={<UserDocument {...data} />} />
-          <Route path="/kyc/declaration" element={<Declaration {...data} />} />
-          <Route path="/kyc/processing" element={<Processing />} />
-          <Route path="/kyc/approved" element={<Approved />} />
+      <Route exact path='/home' element={<Home {...data}/>} >
+          <Route path='/home' element={<Welcome {...data}/>}/>
+          <Route exact path="/home/kyc" element={<Kyc {...data} />}>
+            <Route path="/home/kyc" element={<Identity />} />
+            <Route path="/home/kyc/address" element={<Address {...data} />} />
+            <Route path="/home/kyc/business" element={<Business />} />
+            <Route path="/home/kyc/sellerdocument" element={<SellerDocument {...data} />} />
+            <Route path="/home/kyc/userdocument" element={<UserDocument {...data} />} />
+            <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
+            <Route path="/home/kyc/processing" element={<Processing />} />
+            <Route path="/home/kyc/approved" element={<Approved />} />
+          </Route>
         </Route>
         <Route path='/' element={<Access />} >
           <Route path="/" element={<Login />} />
