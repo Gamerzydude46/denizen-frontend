@@ -31,7 +31,7 @@ function Address(data) {
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
     const schema = yup.object({
-        rAdd: yup.string().matches(/^[0-9a-zA-Z\s\-.,#+/()]+$/i, "*required").required("*required"),
+        rAdd: yup.string().matches(/^[a-zA-Z0-9\s\-\#\.\,\/]+$/i, "*required").required("*required"),
         state: yup.string().matches
             (/^(Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chhattisgarh|Goa|Gujarat|Haryana|Himachal Pradesh|Jharkhand|Karnataka|Kerala|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal)+$/i
                 , "*Numbers not allowed").required("*required"),
@@ -62,19 +62,18 @@ function Address(data) {
             <FormControl variant="standard" >
                 <form className='mt-5 ml-8' onSubmit={handleSubmit(onSubmit)}>
                     <ThemeProvider theme={CustomFontTheme}>
-                        <div className="h-[100px]">
+                        <div className="h-[100px] mt-4">
                             <div className="flex flex-row gap-10">
-                                <div className='mt-4'>
-                                    <Box className="flex flex-end" >
-                                        <img src={building} alt='navigate back' className='mr-2' />
+                            <Box sx={{ display: 'flex', alignItems: 'flex-end ' }}>
+                                        <img src={building} alt='navigate back' className={errors?.rAdd ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="rAdd"
                                             label="Residence Address"
                                             variant="standard"
-                                            sx={{ width: '615px' }}
+                                            sx={{ width: '650px', mr: 1 }}
                                             inputProps={{ style: { fontSize: 18 } }}
                                             InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                                            {...register("rAdd")}
+                                            {...register("fname")}
                                             helperText={errors.rAdd?.message}
                                             error={errors?.rAdd ? true : false}
                                             FormHelperTextProps={{
@@ -82,16 +81,13 @@ function Address(data) {
                                             }}
                                             value={addressDetails.rAdd}
                                             onChange={(e) => { setAddressDetails({ ...addressDetails, rAdd: e.target.value }) }}
-
                                         />
                                     </Box>
-                                </div>
-
                             </div>
                             <div className="flex flex-row gap-6">
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={state} alt='navigate back' className='mr-2' />
+                                        <img src={state} alt='navigate back' className={errors?.state ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="state"
                                             label="State"
@@ -112,7 +108,7 @@ function Address(data) {
                                 </div>
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={district} alt='navigate back' className='mr-2' />
+                                        <img src={district} alt='navigate back' className={errors?.dist ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="dist"
                                             label="District"
@@ -133,7 +129,7 @@ function Address(data) {
                                 </div>
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={city} alt='navigate back' className='mr-2' />
+                                        <img src={city} alt='navigate back' className={errors?.city ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="city"
                                             label="City"
@@ -156,7 +152,7 @@ function Address(data) {
                             <div className="flex flex-row gap-6">
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end', marginLeft: -1 }}>
-                                        <img src={whatsapp} alt='navigate back' className='mr-2 ' />
+                                        <img src={whatsapp} alt='navigate back' className={errors?.contact ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="contact"
                                             label="Contact"
@@ -177,7 +173,7 @@ function Address(data) {
                                 </div>
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={pin} alt='navigate back' className='mr-2' />
+                                        <img src={pin} alt='navigate back' className={errors?.pincode ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="pincode"
                                             label="Pin Code"
@@ -199,7 +195,7 @@ function Address(data) {
 
                             </div>
                         </div>
-                        <div className='mt-20 pt-20 fixed'>
+                        <div className='mt-[144px] pt-20 fixed'>
 
                             <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
                                 Next

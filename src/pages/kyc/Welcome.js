@@ -9,7 +9,7 @@ const Welcome = (data) =>{
         <main className="h-full flex flex-row justify-between p-10 ">
             <div className="z-30">
             <h1 className="font-maven font-semibold text-[30px] mt-14">
-                    Hii,{data.user}
+                    Hii, {data.user.fname + ' ' + data.user.lname}
                 </h1>
                 <h1 className="font-oswald font-bold text-[70px] mt-1">
                     Welcome

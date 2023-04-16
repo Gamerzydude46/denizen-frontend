@@ -21,7 +21,7 @@ import SellerFeed from './pages/home/SellerFeed';
 import dummyImg2 from './assets/images/dummyImg2.png'
 
 const data = {
-  user: 'Anna Marie',
+  user: {fname:'Anna',lname: 'Marie'},
   type: 'seller',
   verified: false,
   img: dummyImg2,
@@ -36,14 +36,14 @@ function App() {
       <Route exact path='/home' element={<Home {...data}/>} >
           <Route path='/home' element={<Welcome {...data}/>}/>
           <Route exact path="/home/kyc" element={<Kyc {...data} />}>
-            <Route path="/home/kyc" element={<Identity />} />
+            <Route path="/home/kyc" element={<Identity {...data}/>} />
             <Route path="/home/kyc/address" element={<Address {...data} />} />
             <Route path="/home/kyc/business" element={<Business />} />
             <Route path="/home/kyc/sellerdocument" element={<SellerDocument {...data} />} />
             <Route path="/home/kyc/userdocument" element={<UserDocument {...data} />} />
             <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
-            <Route path="/home/kyc/processing" element={<Processing />} />
-            <Route path="/home/kyc/approved" element={<Approved />} />
+            <Route path="/home/kyc/processing" element={<Processing {...data}/>} />
+            <Route path="/home/kyc/approved" element={<Approved {...data}/>} />
           </Route>
         </Route>
         <Route path='/' element={<Access />} >

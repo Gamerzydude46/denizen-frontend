@@ -23,7 +23,7 @@ function Approved(data) {
         <ThemeProvider theme={CustomFontTheme}>
             <div className="flex flex-col justify-center items-center h-auto">
                 <div className="mt-20  h-10">
-                    <typography className='font-3xl'>You KYC Application has been Approved !</typography>
+                    <typography className='font-3xl'>Your KYC Application has been Approved !</typography>
                 </div>
                 <div className=" flex items-center justify-center mt-2 h-300 w-300 ">
                     <img src={done} className="w-fit h-32" ></img>

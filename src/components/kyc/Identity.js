@@ -18,7 +18,6 @@ import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
-
 const CustomFontTheme = createTheme({
     typography: {
 
@@ -26,11 +25,7 @@ const CustomFontTheme = createTheme({
     }
 });
 
-
-
-
-
-function Identity() {
+function Identity(data) {
 
     const [identityDetails, setIdentityDetails] = useState({ fname: '', mname: '', lname: '', gen: '', dob: '', email: '', pan: '', adhar: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
@@ -82,15 +77,14 @@ function Identity() {
     ];
 
     return (
-
         <div className="flex">
             <FormControl variant="standard" >
                 <form className='mt-5 ml-8' onSubmit={handleSubmit(onSubmit)}  >
                     <ThemeProvider theme={CustomFontTheme}>
                         <div className="h-[320px]">
-                            <div className="flex flex-row gap-10 min-h-0">
+                            <div className="flex flex-row gap-11 min-h-0">
                                 <div className='mt-4'>
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'flex-end ' }}>
                                         <img src={user} alt='navigate back' className={errors?.fname ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                         <TextField
                                             id="fname"
@@ -105,7 +99,7 @@ function Identity() {
                                             FormHelperTextProps={{
                                                 style: { fontSize: 10 }
                                             }}
-                                            value={identityDetails.fname}
+                                            value={data.user.fname}
                                             onChange={(e) => { setIdentityDetails({ ...identityDetails, fname: e.target.value }) }}
                                         />
                                     </Box>
@@ -147,13 +141,13 @@ function Identity() {
                                             FormHelperTextProps={{
                                                 style: { fontSize: 10 }
                                             }}
-                                            value={identityDetails.lname}
+                                            value={data.user.lname}
                                             onChange={(e) => { setIdentityDetails({ ...identityDetails, lname: e.target.value }) }}
                                         />
                                     </Box>
                                 </div>
                             </div>
-                            <div className="mt-4 flex flex-row gap-10">
+                            <div className="mt-4 flex flex-row gap-12">
                                 <div className={errors ? 'mt-2' : 'mt-4'}>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                         <img src={genders} alt='navigate back' className={errors?.gen ? 'mb-6 mr-2 h-[30px]' : 'mr-2 h-[30px]'} />
@@ -189,20 +183,18 @@ function Identity() {
 
                                 <div className='mt-2 display-flex justify-content' >
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={cal} alt='date' className="h-[25px] mr-2 ml-1" />
+                                        <img src={cal} alt='date' className="h-[25px] mr-2 " />
 
                                         <TextField
                                             id="dob"
                                             name="dob"
                                             type='date'
                                             className='w-full'
-                                            sx={{ width: '170px', mr: 1 }}
+                                            sx={{ width: '180px', mr: 1 }}
                                             label="Date of Birth"
                                             InputLabelProps={{ shrink: true, style: { fontSize: 16, color: '#8D99AE', } }}
                                             {...register("dob")}
                                             variant="standard"
-
-
                                             value={identityDetails.dob}
                                             onChange={(e) => { setIdentityDetails({ ...identityDetails, dob: e.target.value }) }}
 
@@ -210,14 +202,14 @@ function Identity() {
                                     </Box>
                                 </div>
                             </div>
-                            <div className='mt-4  flex flex-row'>
+                            <div className='mt-4 gap-4 flex flex-row'>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                     <img src={pan} alt='pancard' className={errors?.pan ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                     <TextField
                                         id="pan"
                                         label="Pan Card Number"
                                         variant="standard"
-                                        sx={{ width: '250px', mr: 1 }}
+                                        sx={{ width: '200px', mr: 1 }}
                                         inputProps={{ style: { fontSize: 16 } }}
                                         InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
                                         {...register("pan")}
@@ -233,12 +225,12 @@ function Identity() {
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                    <img src={adhar} alt='navigate back' className={errors?.type ? 'mb- mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                    <img src={adhar} alt='navigate back' className={errors?.pan ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                     <TextField
                                         id="adhar"
                                         label="Aadhar card Number"
                                         variant="standard"
-                                        sx={{ width: '250px', mr: 1 }}
+                                        sx={{ width: '200px', mr: 1 }}
                                         inputProps={{ style: { fontSize: 16 } }}
                                         InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
                                         {...register("adhar")}
@@ -249,7 +241,6 @@ function Identity() {
 
                                             style: { fontSize: 10 }
                                         }}
-
                                         value={identityDetails.adhar}
                                         onChange={(e) => { setIdentityDetails({ ...identityDetails, adhar: e.target.value }) }}
                                     />
@@ -262,7 +253,7 @@ function Identity() {
                                         id="email"
                                         label="Email"
                                         variant="standard"
-                                        sx={{ width: '250px', mr: 1 }}
+                                        sx={{ width: '200px', mr: 1 }}
                                         inputProps={{ style: { fontSize: 16 } }}
                                         InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
                                         {...register("email")}
@@ -279,8 +270,7 @@ function Identity() {
                             </div>
 
                         </div>
-                        <div className='mt-2  fixed'>
-
+                        <div className='mt-5  fixed'>
                             <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
                                 Next
                                 <img src={nextNav} alt='navigate back' className='mr-2 w-9' />

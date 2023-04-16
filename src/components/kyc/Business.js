@@ -32,7 +32,7 @@ function Business() {
 
     const schema = yup.object({
         bname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-        bAdd: yup.string().matches(/^[0-9a-zA-Z\s\-.,#+/()]+$/i, "*Numbers not allowed").required("*required"),
+        bAdd: yup.string().matches(/^[0-9a-zA-Z\s\-\.\,\#\+\/\(\)]+$/i, "*Numbers not allowed").required("*required"),
         bcontact: yup.string().matches(/^(?:\+91|0)?(?:[6789]\d{9})$/i, "*Numbers not allowed").required("*required"),
         bemail: yup.string().email("*Enter a valid email").max(255).required("*required"),
         bdist: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
@@ -65,13 +65,13 @@ function Business() {
                                 <div className="flex flex-row gap-10">
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={businessAddress} alt='navigate back' className='mr-2' />
+                                            <img src={businessAddress} alt='navigate back' className={errors?.bname ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                             <TextField
                                                 id="bname"
                                                 label="Registered  Name of Business/Shop"
                                                 variant="standard"
                                                 sx={{ width: '600px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18} }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bname")}
                                                 helperText={errors.bname?.message}
@@ -88,13 +88,13 @@ function Business() {
                                 <div className="flex flex-row gap-10">
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={building} alt='navigate back' className='mr-2' />
+                                            <img src={building} alt='navigate back' className={errors?.bAdd ? 'mb-6 mr-2 h-[20px]' : 'mr-2 h-[20px]'} />
                                             <TextField
                                                 id="bAdd"
                                                 label="Address of business/shop"
                                                 variant="standard"
                                                 sx={{ width: '600px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bAdd")}
                                                 helperText={errors.bAdd?.message}
@@ -112,13 +112,13 @@ function Business() {
                                 <div className="flex flex-row gap-10">
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={whatsapp} alt='navigate back' className='mr-2' />
+                                            <img src={whatsapp} alt='navigate back' className={errors?.bcontact ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                             <TextField
                                                 id="bcontact"
                                                 label="Contact"
                                                 variant="standard"
                                                 sx={{ width: '180px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bcontact")}
                                                 helperText={errors.bcontact?.message}
@@ -133,13 +133,13 @@ function Business() {
                                     </div>
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={mail} alt='navigate back' className='mr-2' />
+                                            <img src={mail} alt='navigate back' className={errors?.bemail ? 'mb-6 mr-2 h-[18px]' : 'mr-2 h-[18px]'} />
                                             <TextField
                                                 id="bemail"
                                                 label=" e.g. johndoe@gmail.com"
                                                 variant="standard"
                                                 sx={{ width: '250px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18} }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bemail")}
                                                 helperText={errors.bemail?.message}
@@ -159,13 +159,13 @@ function Business() {
 
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={district} alt='navigate back' className='mr-2' />
+                                            <img src={district} alt='navigate back' className={errors?.bdist ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                             <TextField
                                                 id="bdist"
                                                 label="District"
                                                 variant="standard"
                                                 sx={{ width: '180px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bdist")}
                                                 helperText={errors.bdist?.message}
@@ -180,13 +180,13 @@ function Business() {
                                     </div>
                                     <div className='mt-4'>
                                         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                            <img src={city} alt='navigate back' className='mr-2' />
+                                            <img src={city} alt='navigate back' className={errors?.bcity ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
                                             <TextField
                                                 id="bcity"
                                                 label="City/Town/Village"
                                                 variant="standard"
                                                 sx={{ width: '180px' }}
-                                                inputProps={{ style: { fontSize: 18, fontWeight: 'bold' } }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bcity")}
                                                 helperText={errors.bcity?.message}

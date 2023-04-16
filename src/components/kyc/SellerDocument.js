@@ -51,9 +51,9 @@ function SellerDocument() {
     return (
 
         <>
-            <div className="flex gap-10">
+            <div className="flex gap-10 mt-4">
                 <FormControl variant="standard" >
-                    <form className='mt-5 ml-7' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='mt-5 ml-8 ' onSubmit={handleSubmit(onSubmit)}>
                         <ThemeProvider theme={CustomFontTheme}>
                             <div className="flex flex-col gap-10 ">
                                 <div className="flex flex-row gap-10 ">
@@ -92,7 +92,7 @@ function SellerDocument() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-20">
+                                <div className="mt-[144px]">
                                     <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
                                         Next
                                         <img src={nextNav} alt='navigate back' className='mr-2 w-9' />

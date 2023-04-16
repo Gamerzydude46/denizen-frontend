@@ -39,7 +39,7 @@ function Declaration(data) {
         setdate(event.target.value);
     };
 
-    const [name, setName] = useState(data.user);
+    const [name, setName] = useState(data.user.fname + ' ' + data.user.lname);
 
     const handleChange = (event) => {
         setName(event.target.value);
@@ -57,7 +57,7 @@ function Declaration(data) {
         <>
             <div className="flex ">
                 <FormControl variant="standard" >
-                    <form className='mt-5 ml-7' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='mt-5 ml-6' onSubmit={handleSubmit(onSubmit)}>
                         <ThemeProvider theme={CustomFontTheme}>
                             <div className="flex flex-row ">
                                 <div className=' mt-6 '>
@@ -109,7 +109,7 @@ function Declaration(data) {
                                 </div>
                             </section>
 
-                            <div className="mt-20">
+                            <div className="mt-[89px]">
                                 <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
                                     Submit
                                     <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
