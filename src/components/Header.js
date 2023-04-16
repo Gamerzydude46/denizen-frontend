@@ -22,17 +22,20 @@ const Header = (data) => {
 
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(false);
+
+    React.useEffect( () => {
+        userType();
+
+    });
     function userType() {
         if (data.type === 'delivery') {
+    
             setUser(false);
         }
         else {
             setUser(true);
         }
     }
-    React.useEffect( () => {
-        userType();
-    })
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -73,7 +76,7 @@ const Header = (data) => {
                         className='flex flex-col justify-center pl-3 cursor-default'>
 
                         <h1 className='font-oswald font-bold'>
-                            {data.user}
+                            {data.user }
                         </h1>
                         <p className='font-maven font-medium'>
                             {user ? <h1>Seller</h1> : <h1>Delivery</h1>}

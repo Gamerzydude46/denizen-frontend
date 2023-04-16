@@ -5,7 +5,7 @@ import dummyImg2 from'../assets/images/dummyImg2.png';
 
 const data ={
     user: 'Anna Marie',
-    type: 'seller',
+    type: 'delivery',
     verified: false,
     img: dummyImg2,
 }
