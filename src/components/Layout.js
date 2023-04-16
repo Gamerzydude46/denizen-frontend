@@ -4,7 +4,11 @@ import dummyImg2 from'../assets/images/dummyImg2.png';
 
 const data ={
     user: 'Anna Marie',
+<<<<<<< HEAD
     type: 'delivery',
+=======
+    type: 'seller',
+>>>>>>> f3b41987fda00039d024d28901109082ef53e90a
     verified: false,
     img: dummyImg2,
 }

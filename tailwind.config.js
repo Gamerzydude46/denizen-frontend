@@ -4,6 +4,10 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+      rotate:{
+        '270':'270deg',
+        '90':'90deg',
+      },
       colors: {
         Base: '#EDF2F4',
         White: '#FFFFFF',
@@ -13,7 +17,13 @@ module.exports = {
         Primary_Grey: '#2B2D42',
         Secondary_Red: '#EF233C',
         Secondary_Grey: '#8D99AE',
+        Blue:'#7dd3fc',
         warn: '#FFCCCB',
+        Orange: '#FF7817',
+        Dark_Green:'#599636',
+        Grad_Blue: '#1886EA',
+        Grad_Green:'#8DB74C',
+        Grad_Orange:'#E47A3E',
         Grad:'gradient-to-r from-purple-400 to-pink-600'
       },
       
@@ -24,5 +34,7 @@ module.exports = {
         },
       },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+  ],
 }

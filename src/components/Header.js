@@ -4,6 +4,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import load from '../../src/assets/icons/loader-white.svg';
+import { useNavigate } from "react-router-dom";
 
 const style = {
     position: 'absolute',
@@ -20,13 +22,13 @@ const style = {
 
 const Header = (data) => {
 
+    
+
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(false);
-
     React.useEffect( () => {
         userType();
-
-    });
+    })
     function userType() {
         if (data.type === 'delivery') {
     
@@ -36,8 +38,40 @@ const Header = (data) => {
             setUser(true);
         }
     }
+    
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    //logout
+    const navigate = useNavigate();
+    const [loading, setLoading] = React.useState(false);
+    const handleLogout = (e) =>{
+        e.preventDefault();
+        setLoading(true);
+        fetch("http://localhost:8080/user/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.flag === true) {
+                    window.alert(data.message)
+                    navigate('/');
+                }
+                else {
+                    window.alert(data.message)
+                    setLoading(false);
+                    handleClose();
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            }).finally(() => {
+                setLoading(false)
+            })
+    };
 
     return (
         <header className='bg-gradient-to-r h-24 from-Primary_Red to-Primary_Grey' >
@@ -97,9 +131,12 @@ const Header = (data) => {
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
                                 <div className='text-bold font-oswald text-lg'>
-                                    {data.name}, you want to Logout ?
-                                    <button className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14 hover:bg-Primary_Grey'>
-                                        Yes
+                                    {data.user}, you want to Logout ?
+                                    <button 
+                                        className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-14 hover:bg-Primary_Grey'
+                                        onClick={handleLogout}
+                                    >
+                                        {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center' /> : "Yes"}
                                     </button>
                                 </div>
                             </Typography>

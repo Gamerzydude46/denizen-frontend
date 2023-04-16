@@ -15,8 +15,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
-    "cors": "^2.8.5",
     "classnames": "^2.3.2",
+    "cors": "^2.8.5",
     "formik": "^2.2.9",
     "postcss": "^8.4.21",
     "react": "^18.2.0",
@@ -27,6 +27,7 @@
     "react-router-outlet": "^0.2.4",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.9",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
   },
