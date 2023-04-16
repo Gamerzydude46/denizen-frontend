@@ -56,14 +56,3 @@ code {
   @apply mt-8  text-White text-2xl font-semibold rounded-md  h-12;
 }
 
-.loading{
-  animation: spin 1s linear infinite;
-  @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-}
