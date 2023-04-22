@@ -17,7 +17,6 @@ import load from '../../assets/icons/loader-white.svg';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const CustomFontTheme = createTheme({
     typography: {
 
@@ -54,18 +53,7 @@ const Login = () => {
     }
     //session handeling
     React.useEffect(() => {
-        console.log("session !!!");
-        //fetch("http://localhost:8080/user/auth", {
-       //     method: "GET",
-        //    headers: {
-       //         "Content-Type": "application/json",
-       //     },
-       //     credentials: 'include',
-       // })  
-       //     .then((res) =>{
-       //             console.log(res.data2)
-        //    })
-        cookies();
+        axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => console.log(data))
     })
 
     //user/login integration
@@ -137,7 +125,7 @@ const Login = () => {
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
                                     inputProps={{ style: { fontSize: 18 } }}
-                                    sx={{ width: '325px'}}
+                                    sx={{ width: '325px' }}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     endAdornment={
