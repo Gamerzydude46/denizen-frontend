@@ -15,6 +15,7 @@ import key from '../../assets/icons/key.svg'
 import { NavLink } from 'react-router-dom';
 import load from '../../assets/icons/loader-white.svg';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const CustomFontTheme = createTheme({
@@ -34,20 +35,39 @@ const Login = () => {
         event.preventDefault();
     }
 
+    async function cookies (){
+
+        var config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:8080/user/auth',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+        try{
+            const res = await axios.get(config.url,config,{credentials: true});
+            console.log(res);
+        }catch(error){
+            console.log(error)
+        }
+    }
     //session handeling
     React.useEffect(() => {
         console.log("session !!!");
-        fetch("http://localhost:8080/user/auth", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })  
-            .then((res) => res.json())
-            .then((res)=>{
-                console.log(res);
-            })
+        //fetch("http://localhost:8080/user/auth", {
+       //     method: "GET",
+        //    headers: {
+       //         "Content-Type": "application/json",
+       //     },
+       //     credentials: 'include',
+       // })  
+       //     .then((res) =>{
+       //             console.log(res.data2)
+        //    })
+        cookies();
     })
+
     //user/login integration
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -63,6 +83,7 @@ const Login = () => {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: JSON.stringify({ email, password }),
         })
             .then((res) => res.json())

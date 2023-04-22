@@ -207,7 +207,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
                                     inputProps={{ style: { fontSize: 18 } }}
-                                    sx={{width: '23.5ch'}}
+                                    sx={{width: '20.5ch'}}
                                     {...register("password")}
                                     error={errors?.password? true : false}
                                     endAdornment={
@@ -225,7 +225,7 @@ const SignUp = (nav,setNav,outlet) => {
                                 <FormHelperText id="password"><p className='formError'>{errors.password?.message}</p></FormHelperText>
                             </FormControl>
                         </div>
-                        <div className=' flex flex-row mt-4 ml-1'>
+                        <div className=' flex flex-row mt-4 ml-2'>
                             <div className='flex  items-end'>
                                 <img
                                     src={key}
@@ -241,7 +241,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     id="confirmpassword"
                                     type={showPassword ? 'text' : 'password'}
                                     inputProps={{ style: { fontSize: 18 } }}
-                                    sx={{width: '23.5ch'}}
+                                    sx={{width: '20.5ch'}}
                                     {...register("confirmpassword")}
                                     error={errors?.confirmpassword? true : false}
                                     endAdornment={
