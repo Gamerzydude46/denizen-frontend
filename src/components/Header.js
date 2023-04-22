@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import load from '../../src/assets/icons/loader-white.svg';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const style = {
     position: 'absolute',
@@ -21,8 +22,6 @@ const style = {
 };
 
 const Header = (data) => {
-
-    
 
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(false);
@@ -45,23 +44,18 @@ const Header = (data) => {
     //logout
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(false);
-    const handleLogout = (e) =>{
+    const handleLogout = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:8080/user/logout", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
+        axios.post("http://localhost:8080/user/logout",{},{ withCredentials: true })
             .then((data) => {
-                if (data.flag === true) {
-                    window.alert(data.message)
+                //console.log(data)
+                if (data.data.flag === true) {
+                    window.alert(data.data.message)
                     navigate('/');
                 }
                 else {
-                    window.alert(data.message)
+                    window.alert(data.data.message)
                     setLoading(false);
                     handleClose();
                 }
@@ -83,13 +77,13 @@ const Header = (data) => {
                     <NavLink to='/home' className='headerItems'>
                         <h1>Home</h1>
                     </NavLink>
-                    <NavLink to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
+                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}}  to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
                         <h1>My Orders</h1>
                     </NavLink>
-                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Post Orders</h1>
                     </NavLink>
-                    <NavLink to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Track Orders</h1>
                     </NavLink>
                     <NavLink to='/about-us' className='headerItems'>

@@ -3,14 +3,8 @@ import Layout from "../components/Layout";
 import dummyImg2 from'../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 
-const data ={
-    user: 'Anna Marie',
-    type: 'delivery',
-    verified: false,
-    img: dummyImg2,
-}
 
-function Home() {
+function Home(data) {
 
     if (data.verified === false) {
         return (

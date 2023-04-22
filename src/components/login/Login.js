@@ -34,26 +34,17 @@ const Login = () => {
         event.preventDefault();
     }
 
-    async function cookies (){
-
-        var config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: 'http://localhost:8080/user/auth',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }
-        try{
-            const res = await axios.get(config.url,config,{credentials: true});
-            console.log(res);
-        }catch(error){
-            console.log(error)
-        }
-    }
     //session handeling
     React.useEffect(() => {
-        axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => console.log(data))
+        axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => {
+            //console.log(data)
+            if (data.data.authData.loggedIn === true) {
+                window.alert("User session exist ! Auto logging....");
+                navigate('/home');
+            }else{
+                window.alert("User session expired ! Login again.")
+            }
+        })
     })
 
     //user/login integration

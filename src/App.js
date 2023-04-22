@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Access from './pages/Access';
@@ -18,34 +18,50 @@ import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
 import Welcome from './pages/kyc/Welcome';
 import SellerFeed from './pages/home/SellerFeed';
-import dummyImg2 from './assets/images/dummyImg2.png'
+import dummyImg2 from './assets/images/dummyImg2.png';
+import axios from "axios";
+import AboutUs from './pages/AboutUs';
 
-const data = {
-  user: {fname:'Anna',lname: 'Marie'},
-  type: 'seller',
-  verified: false,
-  img: dummyImg2,
-}
 
 
 function App() {
+  const[data,setData] = React.useState({
+    user: {fname:"",lname: ""},
+    type: "",
+    verified: false,
+    img: dummyImg2,
+  })
+  React.useEffect(() => {
+    axios.get("http://localhost:8080/user/userData", { withCredentials: true }).then((info) => {
+      setData({
+        user: {
+          fname: info.data.data.fname,
+          lname: info.data.data.lname
+        },
+        type: info.data.data.type,
+        verified: info.data.data.verified,
+        img: dummyImg2,
+      })
+    })
+  },)
   return (
     <BrowserRouter>
       <Routes>
 
-      <Route exact path='/home' element={<Home {...data}/>} >
-          <Route path='/home' element={<Welcome {...data}/>}/>
+        <Route exact path='/home' element={<Home {...data} />} >
+          <Route path='/home' element={<Welcome {...data} />} />
           <Route exact path="/home/kyc" element={<Kyc {...data} />}>
-            <Route path="/home/kyc" element={<Identity {...data}/>} />
+            <Route path="/home/kyc" element={<Identity {...data} />} />
             <Route path="/home/kyc/address" element={<Address {...data} />} />
             <Route path="/home/kyc/business" element={<Business />} />
             <Route path="/home/kyc/sellerdocument" element={<SellerDocument {...data} />} />
             <Route path="/home/kyc/userdocument" element={<UserDocument {...data} />} />
             <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
-            <Route path="/home/kyc/processing" element={<Processing {...data}/>} />
-            <Route path="/home/kyc/approved" element={<Approved {...data}/>} />
+            <Route path="/home/kyc/processing" element={<Processing {...data} />} />
+            <Route path="/home/kyc/approved" element={<Approved {...data} />} />
           </Route>
         </Route>
+    
         <Route path='/' element={<Access />} >
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
@@ -53,10 +69,10 @@ function App() {
           <Route path="/otp" element={<Otp />} />
           <Route path="/set-password" element={<SetPassword />} />
         </Route>
-        <Route exact path="/seller-feed" element={<SellerFeed/>} />       
+        <Route exact path="/seller-feed" element={<SellerFeed />} />
 
         <Route path='/track-orders' />
-        <Route path='/about-us' />
+        <Route path='/about-us' element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   );
