@@ -24,7 +24,7 @@ const cardData = Data.map((data) => {
 
 function SellerFeed(){
     return(
-        <Layout>
+        
         <main className="h-full w-full pb-16 flex flex-row padding-right-10 padding-top-5 fixed">
         <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide h-full"> 
               {cardData}
@@ -44,7 +44,6 @@ function SellerFeed(){
                 </button>
             </div> 
         </main>
-    </Layout>
   );
 }
 

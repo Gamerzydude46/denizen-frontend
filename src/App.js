@@ -70,6 +70,7 @@ function App() {
           <Route path="/set-password" element={<SetPassword />} />
         </Route>
         <Route exact path="/seller-feed" element={<SellerFeed />} />
+        
 
         <Route path='/track-orders' />
         <Route path='/about-us' element={<AboutUs />} />
