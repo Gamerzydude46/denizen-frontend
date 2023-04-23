@@ -20,9 +20,8 @@ const Layout = (props) => {
                 verified: info.data.data.verified,
                 img: dummyImg2,
             })
-
         })
-    },)
+    },[])
 
     return(
         <div className="h-screen">

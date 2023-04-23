@@ -33,9 +33,8 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
-
-    //session handeling
-    React.useEffect(() => {
+    
+    function cookie () {
         axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => {
             //console.log(data)
             if (data.data.authData.loggedIn === true) {
@@ -45,7 +44,11 @@ const Login = () => {
                 window.alert("User session expired ! Login again.")
             }
         })
-    })
+    }
+    //session handeling
+    React.useEffect(() => {
+        cookie();
+    },)
 
     //user/login integration
     const [email, setEmail] = React.useState("");

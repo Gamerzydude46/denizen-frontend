@@ -51,7 +51,6 @@ const SignUp = (nav,setNav,outlet) => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-
         setLoading(true);
         createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
             console.log(response);
