@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/Layout";
-import dummyImg2 from'../assets/images/dummyImg2.png';
 import { Outlet } from "react-router-dom";
 import SellerFeed from "./home/SellerFeed";
 
