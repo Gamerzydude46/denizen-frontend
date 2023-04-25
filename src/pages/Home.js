@@ -1,28 +1,22 @@
 import React from "react";
-import Welcome from './kyc/Welcome';
 import Layout from "../components/Layout";
-import dummyImg2 from'../assets/images/dummyImg2.png';
+import { Outlet } from "react-router-dom";
+import SellerFeed from "./home/SellerFeed";
 
-const data ={
-    user: 'Anna Marie',
-    type: 'seller',
-    verified: false,
-    img: dummyImg2,
-}
 
-function Home() {
+function Home(data) {
 
     if (data.verified === false) {
         return (
             <Layout>
-                <Welcome {...data} />
+                <Outlet/>
             </Layout>
         );
     }
     else {
         return (
             <Layout>
-                <div>Home page</div>
+                <SellerFeed/>
             </Layout>
         );
     }

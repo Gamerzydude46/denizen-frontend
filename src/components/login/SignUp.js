@@ -51,7 +51,6 @@ const SignUp = (nav,setNav,outlet) => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-
         setLoading(true);
         createUser(data.fname, data.lname, data.email, data.password, data.type).then((response) => {
             console.log(response);
@@ -60,7 +59,7 @@ const SignUp = (nav,setNav,outlet) => {
             }
             else{
                 setMsg(true);
-                window.alert("Account created Succefully !  ")
+                window.alert("Account created Succefully !")
                 navigate("/");
             }
         }).catch(error => {
@@ -103,7 +102,7 @@ const SignUp = (nav,setNav,outlet) => {
                         <Box sx={{ display: 'flex', alignItems: 'flex-end',flexDirection: 'column'}} className=''>
                             <div className='flex flex-row'>
                                 <div className='flex  items-end'>
-                                    <img src={user} alt='user' className={errors?.fname? 'mb-6 mr-2 h-[35px]' : 'mr-2 h-[35px]'} />
+                                    <img src={user} alt='user' className={errors?.fname? 'mb-6 mr-2 h-[32px]' : 'mr-2 h-[32px]'} />
                                 </div>
                                 <TextField
                                     id="fname"
@@ -111,7 +110,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     label="Firstname"
                                     variant="standard"
                                     className='w-full'
-                                    
+                                    sx={{width: '24.5ch'}}
                                     inputProps={{ style: { fontSize: 18} }}
                                     InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
                                     {...register("fname")}
@@ -122,7 +121,7 @@ const SignUp = (nav,setNav,outlet) => {
                         <Box sx={{ display: 'flex', alignItems: 'flex-end',flexDirection: 'column'}} className=''>
                             <div className='flex flex-row'>
                                 <div className='flex  items-end'>
-                                    <img src={user} alt='user' className={errors?.lname? 'mb-6 mr-2 h-[35px]' : 'mr-2 h-[35px]'} />
+                                    <img src={user} alt='user' className={errors?.lname? 'mb-6 mr-2 h-[32px]' : 'mr-2 h-[32px]'} />
                                 </div>
                                 <TextField
                                     id="lname"
@@ -130,7 +129,7 @@ const SignUp = (nav,setNav,outlet) => {
                                     label="Lastname"
                                     variant="standard"
                                     className='w-full'
-                                    
+                                    sx={{width: '24.5ch'}}
                                     inputProps={{ style: { fontSize: 18} }}
                                     InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE', } }}
                                     {...register("lname")}
@@ -143,7 +142,7 @@ const SignUp = (nav,setNav,outlet) => {
                         <div>
                             <div className='flex flex-row w-full'>
                                 <div className='flex  items-end'>
-                                    <img src={building} alt='building' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]'} />
+                                    <img src={building} alt='building' className={errors?.type ? 'mb-6 mr-2 ml-1 h-[28px]' : 'ml-1 mr-2 h-[28px]'} />
                                 </div>
                                 <TextField
                                     id="type"
@@ -173,7 +172,7 @@ const SignUp = (nav,setNav,outlet) => {
                         <Box sx={{ display: 'flex', alignItems: 'flex-end',flexDirection: 'column' }}>
                             <div className='flex flex-row w-full'>
                                 <div className='flex  items-end'>
-                                    <img src={mail} alt='mail' className={errors?.email? 'mb-6 mr-2 ml-1 h-[24px]' : 'ml-1 mr-2 h-[24px]' } />
+                                    <img src={mail} alt='mail' className={errors?.email? 'mb-6 mr-2 ml-1 h-[25px]' : 'ml-1 mr-2 h-[25px]' } />
                                 </div>
                                 <TextField
                                     id="email"
@@ -197,16 +196,17 @@ const SignUp = (nav,setNav,outlet) => {
                                     src={key}
                                     alt='key'
                                     className={
-                                        errors?.password ? 'ml-1 mb-5 mr-2 h-[28px]' :
-                                            errors?.confirmpassword ? 'ml-1 mb-5 mr-2 h-[27px]' : 'ml-1 mr-2 h-[28px]'
+                                        errors?.password ? 'ml-1 mb-5 mr-2 h-[27px]' :
+                                            errors?.confirmpassword ? 'ml-1 mb-5 mr-2 h-[26px]' : 'ml-1 mr-2 h-[27px]'
                                     } />
                             </div>
-                            <FormControl sx={{ width: '24.5ch', alignItems: 'flex-start' }} variant="standard">
+                            <FormControl sx={{ alignItems: 'flex-start' }} variant="standard">
                                 <InputLabel htmlFor="password" sx={{ fontSize: 18, color: '#8D99AE' }}>Enter  password</InputLabel>
                                 <Input
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
                                     inputProps={{ style: { fontSize: 18 } }}
+                                    sx={{width: '20.5ch'}}
                                     {...register("password")}
                                     error={errors?.password? true : false}
                                     endAdornment={
@@ -224,22 +224,23 @@ const SignUp = (nav,setNav,outlet) => {
                                 <FormHelperText id="password"><p className='formError'>{errors.password?.message}</p></FormHelperText>
                             </FormControl>
                         </div>
-                        <div className=' flex flex-row mt-4'>
+                        <div className=' flex flex-row mt-4 ml-2'>
                             <div className='flex  items-end'>
                                 <img
                                     src={key}
                                     alt='key'
                                     className={
-                                        errors?.confirmpassword ? 'ml-1 mb-5 mr-2 h-[28px]' :
-                                            errors?.password ? 'ml-1 mb-5 mr-2 h-[27px]' : 'ml-1 mr-2 h-[28px]'
+                                        errors?.confirmpassword ? 'ml-1 mb-5 mr-2 h-[27px]' :
+                                            errors?.password ? 'ml-1 mb-5 mr-2 h-[26px]' : 'ml-1 mr-2 h-[27px]'
                                     } />
                             </div>
-                            <FormControl sx={{ width: '24.5ch', alignItems:'flex-start' }} variant="standard">
+                            <FormControl sx={{ alignItems:'flex-start' }} variant="standard">
                                 <InputLabel htmlFor="confirmpassword" sx={{ fontSize: 18, color: '#8D99AE' }}>Confirm password</InputLabel>
                                 <Input
                                     id="confirmpassword"
                                     type={showPassword ? 'text' : 'password'}
                                     inputProps={{ style: { fontSize: 18 } }}
+                                    sx={{width: '20.5ch'}}
                                     {...register("confirmpassword")}
                                     error={errors?.confirmpassword? true : false}
                                     endAdornment={
@@ -278,8 +279,9 @@ const SignUp = (nav,setNav,outlet) => {
                             <label for="privacyPolicy" className='ml-3'>I state that I have read, understood and accept the <span className='text-Primary_Red'>Privacy Policy</span>.</label>
                         </div>
                     </section>
-                    <button type='submit'
-                        className='accessButton text-oswald w-[535px] flex justify-center items-center '>
+                    <button 
+                         type='submit'
+                        className='accessButton text-oswald w-full flex justify-center items-center '>
                         { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : "Sign Up" }
                     </button>
                 </ThemeProvider>

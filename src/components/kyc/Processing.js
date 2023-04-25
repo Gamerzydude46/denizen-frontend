@@ -1,55 +1,48 @@
 import React from "react";
-import Box from '@mui/material/Box';
-import Select  from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import mail from '../../assets/icons/mail.svg';
-import user from '../../assets/icons/user.svg';
-import gender from '../../assets/icons/gender.svg';
-import cal from '../../assets/icons/calendar.svg';
-import pan from '../../assets/icons/panCard.svg';
-import adhar from '../../assets/icons/adharCard.svg';
-import nextNav from '../../assets/icons/nextNav.svg';
 import transac from '../../assets/images/syncUpdate.png';
-
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
-    const CustomFontTheme = createTheme({
-        typography: {
+const CustomFontTheme = createTheme({
+    typography: {
+        fontFamily: ["Maven Pro"].join(",")
+    }
+});
 
-            fontFamily: ["Maven Pro"].join(",")
-        }
-    });
+function Processing(data) {
+    const [activeStep, setActiveStep] = useOutletContext();
 
-    function Processing(){
-       
+    const navigate = useNavigate();
+    React.useEffect(() => {
+        setActiveStep(data.type === "seller" ? 4 : 3)
+        setTimeout(() => navigate('/home/kyc/approved'), 3000);
+    }, []);
+    return (
 
-
-    return(
-        
         <>
-        <div className="flex">
-         <FormControl variant="standard" >
-            <form className='mt-5 ml-7'>
-                <ThemeProvider theme={CustomFontTheme}>
-                    <div className="flex flex-row gap-10"></div>
-      
-                    <Typography sx={{mt:10 ,fontSize:20 ,ml:8}} >You Application has been submitted successfully !</Typography>
-                    <div >
-                    <Typography  sx={{mt:1 ,fontSize:16 ,ml:15}}>We will Notify you once your KYC being Verified</Typography>
-                    </div>
-                    <div className="ml-20 w-100%">
-                    <img src={transac} alt="man on the bike" className="loading  h-[200px] w-[200px] ml-20  absolute mt-5 " />
-                    </div>
-        
-         </ThemeProvider>
-         </form>
-         </FormControl>
-         </div>
+            <div className="flex">
+                <FormControl variant="standard" >
+                    <form className='mt-5 ml-12'>
+                        <ThemeProvider theme={CustomFontTheme}>
+                            <div className="flex flex-col  items-center justify-center ml-[120px]">
+                                <div className="mt-20 ">
+                                    <Typography sx={{ mt: 1, fontSize: 18 }} >Your Application has been submitted successfully !</Typography>
+                                </div>
+                                <div className="">
+                                    <Typography sx={{ mt: 1, fontSize: 16 }} >We will Notify you once your KYC being Verified</Typography>
+                                </div>
+                                <div className=" mr-[180px] w-100%">
+                                    <img src={transac} alt="loading" className="  h-[200px] w-[200px]  absolute mt-5 animate-spin " />
+                                </div>
+                            </div>
+
+                        </ThemeProvider>
+                    </form>
+                </FormControl>
+            </div>
         </>
     );
 }

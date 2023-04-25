@@ -1,15 +1,37 @@
-import React from "react";
+import * as React from 'react';
 import Header from "./Header";
 import dummyImg2 from'../assets/images/dummyImg2.png';
+import axios from "axios";
 
+
+<<<<<<< HEAD
 const data ={
     user: 'Anna Marie',
     type: 'deliveryc',
     verified: false,
     img: dummyImg2,
 }
+=======
+>>>>>>> 4b757fe1c2652e2bceb1f40a62f7ea9adb240740
 
 const Layout = (props) => {
+    const[data,setData] = React.useState({
+        user: "",
+        type: "",
+        verified: false,
+        img: dummyImg2,
+    })
+    React.useEffect(() => {
+        axios.get("http://localhost:8080/user/userData", { withCredentials: true }).then((info) => {
+            setData({
+                user: info.data.data.fname,
+                type: info.data.data.type,
+                verified: info.data.data.verified,
+                img: dummyImg2,
+            })
+        })
+    },[])
+
     return(
         <div className="h-screen">
             <div>

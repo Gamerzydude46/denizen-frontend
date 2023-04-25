@@ -1,22 +1,27 @@
 import React from "react";
-import manonphone from '../../assets/images/manonphone.png'
+import manonphone from '../../assets/images/manonphone.png';
+import { useNavigate } from "react-router";
 
 
 const Welcome = (data) =>{
+    const navigate=useNavigate()
     return(
         <main className="h-full flex flex-row justify-between p-10 ">
             <div className="z-30">
             <h1 className="font-maven font-semibold text-[30px] mt-14">
-                    Hii,{data.user}
+                    Hii, {data.user.fname + ' ' + data.user.lname}
                 </h1>
                 <h1 className="font-oswald font-bold text-[70px] mt-1">
                     Welcome
                 </h1>
-                <p className="font-maven font-bold text-2xl w-1/2 mt-6">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!
+                <p className="font-maven font-bold text-xl w-1/2 mt-6">
+                From restaurants serving the most incredible food to a book-store selling their best seller books, Denizen covers it all. 
+                <br></br>
+                Denizen is a provider of choice for its customers, whether you are a seller or a delivery agent, due to its customer centric approach 
+                and aims to further strengthen this partnership.
                 </p>
                 <div className="flex flex-row mt-10 gap-x-10">
-                    <button className="bg-Primary_Red buttonWelcome">Register</button>
+                    <button className="bg-Primary_Red buttonWelcome" onClick={()=>navigate('/home/kyc')}>Register</button>
                     <button className="bg-Primary_Grey buttonWelcome">Know More</button>
                 </div>
             </div>

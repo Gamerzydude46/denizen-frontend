@@ -15,7 +15,7 @@ import key from '../../assets/icons/key.svg'
 import { NavLink } from 'react-router-dom';
 import load from '../../assets/icons/loader-white.svg';
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -33,11 +33,27 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
+    
+    function cookie () {
+        axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => {
+            //console.log(data)
+            if (data.data.authData.loggedIn === true) {
+                window.alert("User session exist ! Auto logging....");
+                navigate('/home');
+            }else{
+                window.alert("User session expired ! Login again.")
+            }
+        })
+    }
+    //session handeling
+    React.useEffect(() => {
+        cookie();
+    },)
 
     //user/login integration
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [message, setMessage] = React.useState({flag:false,msg:""});
+    const [message, setMessage] = React.useState({ flag: false, msg: "" });
     const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
 
@@ -49,17 +65,18 @@ const Login = () => {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: JSON.stringify({ email, password }),
         })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if(data.message === 'Authentication Successful'){
+                if (data.message === 'Authentication Successful') {
                     window.alert(data.message)
                     navigate('/home');
                 }
-                else{
-                    setMessage({flag: true, msg: data.message});
+                else {
+                    setMessage({ flag: true, msg: data.message });
                 }
             })
             .catch((error) => {
@@ -85,8 +102,8 @@ const Login = () => {
                                 id="email"
                                 label="Email"
                                 variant="standard"
-                                sx={{width: '325px'}}
-                                inputProps={{ style: { fontSize: 18 }}}
+                                sx={{ width: '325px' }}
+                                inputProps={{ style: { fontSize: 18 } }}
                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +118,8 @@ const Login = () => {
                                 <Input
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
-                                    inputProps={{ style: { fontSize: 18 }}}
+                                    inputProps={{ style: { fontSize: 18 } }}
+                                    sx={{ width: '325px' }}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     endAdornment={
@@ -139,9 +157,9 @@ const Login = () => {
                     </div>
                     <button type='submit'
                         className='accessButton text-oswald w-[369px] flex justify-center items-center'>
-                        { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center'/> : "Login" }
+                        {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center' /> : "Login"}
                     </button>
-                    <h1 className={message.flag? 'accessWarn bg-Warn' : 'hidden'}>
+                    <h1 className={message.flag ? 'accessWarn bg-Warn' : 'hidden'}>
                         {message.msg}
                     </h1>
                 </ThemeProvider>
