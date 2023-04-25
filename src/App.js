@@ -73,13 +73,7 @@ function App() {
         
 
         <Route path='/track-orders' />
-<<<<<<< HEAD
-        <Route path='/about-us' />
-        <Route exact path="/kyc" element={<SellerKyc />} />
-        <Route exact path="/post-orders" element={<PostOrders />} />
-=======
         <Route path='/about-us' element={<AboutUs />} />
->>>>>>> 4b757fe1c2652e2bceb1f40a62f7ea9adb240740
       </Routes>
     </BrowserRouter>
   );
