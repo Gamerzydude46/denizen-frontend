@@ -1,9 +1,9 @@
 import React from 'react';
-import dummyImg1 from "../../src/assets/images/dummyImg1.png";
-import map from "../../src/assets/icons/map.svg";
-import foodDelivery from "../../src/assets/icons/foodDelivery.svg";
-import user from "../../src/assets/icons/user.svg";
-import check from "../../src/assets/icons/check.svg";
+import dummyImg1 from "../../assets/images/dummyImg1.png";
+import map from "../../assets/icons/map.svg";
+import foodDelivery from "../../assets/icons/foodDelivery.svg";
+import user from "../../assets/icons/userColor.svg";
+import check from "../../assets/icons/check.svg";
 import { NavLink } from 'react-router-dom';
 import { borderRadius } from '@mui/system';
 

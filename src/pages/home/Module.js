@@ -1,5 +1,5 @@
 import React from "react";
-import request from '../../src/assets/images/request.png';
+import request from '../../assets/images/request.png';
 import { Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";

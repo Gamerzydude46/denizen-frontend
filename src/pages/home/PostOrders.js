@@ -10,12 +10,15 @@ import trolley from '../../assets/icons/trolley.svg';
 import cal from '../../assets/icons/schedule.svg';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import Card from "../Card";
+import Card from "../../components/home/Card";
 import "./post-order.css";
-import { Schedule } from "@mui/icons-material";
+import {Schedule } from "@mui/icons-material";
 import transaction from '../../assets/icons/transaction.svg';
 import distance from '../../assets/icons/distance.svg';
 import deadline from '../../assets/icons/deadline.svg';
+import Info from '../../assets/icons/Info.svg';
+
+
 
 
 
@@ -77,13 +80,14 @@ function PostOrders() {
                                     </div>
                                     <div className="flex flex-col form-first">
                                         <div>
-                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[200px] '} />
+                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[170px] '} />
                                         </div>
-
+-
                                         <input type="file" name="file" id="file" class="inputfile hidden" onChange={imageHandler} />
                                         <label for="file" className="upload-btn">UPLOAD</label>
                                         <div>
-                                            <button className="helpButton  max-100">HELP!</button>
+                                            <button className="helpButton  max-100 ">
+                                            <img src={Info} alt='' height='5' flex  />HELP!</button>
                                         </div>
                                     </div>
                                     <div className="form-middle relative mr-5 ml-5">

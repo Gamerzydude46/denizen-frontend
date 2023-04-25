@@ -9,8 +9,8 @@ import ResetPassword from './components/login/ResetPassword';
 import Otp from './components/login/Otp';
 import SetPassword from './components/login/SetPassword';
 import PostOrders from './pages/home/PostOrders';
-import Module from './pages/Module';
-import Card from './pages/Card';
+// import Module from './pages/home/Module';
+// import Card from './src/components/home/Card';
 // import { Card } from '@mui/material';
  
 
@@ -31,8 +31,6 @@ function App() {
         <Route path='/about-us' />
         <Route exact path="/kyc" element={<SellerKyc />} />
         <Route exact path="/post-orders" element={<PostOrders />} />
-        <Route exact path="/card" element={<Card/>}/>
-        <Route exact path="/module" element={<Module />} />
       </Routes>
     </BrowserRouter>
   );
