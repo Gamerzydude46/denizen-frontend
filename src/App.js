@@ -7,13 +7,6 @@ import SignUp from './components/login/SignUp';
 import ResetPassword from './components/login/ResetPassword';
 import Otp from './components/login/Otp';
 import SetPassword from './components/login/SetPassword';
-<<<<<<< HEAD
-import PostOrders from './pages/home/PostOrders';
-// import Module from './pages/home/Module';
-// import Card from './src/components/home/Card';
-// import { Card } from '@mui/material';
- 
-=======
 import Identity from './components/kyc/Identity';
 import Business from './components/kyc/Business';
 import Address from './components/kyc/Address';
@@ -30,7 +23,6 @@ import axios from "axios";
 import AboutUs from './pages/AboutUs';
 
 
->>>>>>> 4b757fe1c2652e2bceb1f40a62f7ea9adb240740
 
 function App() {
   const[data,setData] = React.useState({
