@@ -34,7 +34,7 @@ function App() {
     img: dummyImg2,
   })
   React.useEffect(() => {
-    axios.get("http://localhost:8081/user/userData", { withCredentials: true }).then((info) => {
+    axios.get("http://localhost:8080/user/userData", { withCredentials: true }).then((info) => {
       setData({
         user: {
           fname: info.data.data.fname,
