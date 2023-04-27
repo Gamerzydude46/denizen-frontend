@@ -2,48 +2,46 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import girlinbox from '../../assets/images/girlinbox.png';
 import deadline from '../../assets/icons/deadline.svg';
-import Card from '../../components/home/Sel_Card';
-import Data from '../../components/home/Sel_Data';
-
+import Card from '../../components/TrackCard';
+import Data from '../../components/TrackData';
+import Layout from "../../components/Layout";
 const cardData = Data.map((data) => {
     return (
         <Card
-            key={data.key}
+
+            Oid={data.Oid}
             image={data.image}
             item_title={data.item_title}
-            del_address={data.del_address}
+            name={data.name}
+            rating={data.rating}
+            address={data.address}
+            deliveries={data.deliveries}
+            contact={data.contact}
             deliver_date={data.deliver_date}
             deliver_time={data.deliver_time}
-            selling_cost={data.selling_cost}
-            delivery_charges={data.delivery_charges}
             status={data.status}
         />
     );
 });
 
-function SellerFeed(){
+function TrackOrders(){
     return(
-        
+        <Layout>
         <main className="h-full w-full pb-16 flex flex-row padding-right-10 padding-top-5 fixed">
-        <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide h-full"> 
+          <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide h-full"> 
               {cardData}
           </div>   
+
           
           <div className="fixed z-100 bottom-0 right-0">
                 <div className="bg-White rounded-t-full h-[550px] w-[1000px] "> 
                     <img src={girlinbox} alt="girl in box" className="h-[520px] w-[550px] bottom-[130px] left-[430px] relative" /> 
                 </div> 
-                <button type="button" className="fixed justify-center flex-center bottom-[45px] right-[160px]">
-                 <NavLink to="/post-orders" className='flex justify-center gap-3 font-semibold cursor-pointer flex-row text-oswald w-[250px] pt-3 p-12 accessButton' >
-                        Post Orders
-                        <span className='ml-0'>
-                            <img src={deadline} alt='deadline' className='w-7 mt-1' />
-                        </span>
-                </NavLink>
-                </button>
             </div> 
         </main>
+        </Layout>
   );
 }
 
-export default SellerFeed;
+export default TrackOrders;
+

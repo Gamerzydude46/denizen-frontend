@@ -16,11 +16,12 @@ import Processing from './components/kyc/Processing';
 import Approved from './components/kyc/Approved';
 import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
-import Welcome from './pages/kyc/Welcome';
 import SellerFeed from './pages/home/SellerFeed';
+import Welcome from './pages/kyc/Welcome';
 import dummyImg2 from './assets/images/dummyImg2.png';
 import axios from "axios";
 import AboutUs from './pages/AboutUs';
+import TrackOrders from './pages/home/TrackOrders';
 
 
 
@@ -69,10 +70,10 @@ function App() {
           <Route path="/otp" element={<Otp />} />
           <Route path="/set-password" element={<SetPassword />} />
         </Route>
-        <Route exact path="/seller-feed" element={<SellerFeed />} />
-        
+        <Route exact path="/seller-feed" element={<SellerFeed/>} />
 
-        <Route path='/track-orders' />
+           
+        <Route path='/track-orders' element={<TrackOrders/>}/>
         <Route path='/about-us' element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
