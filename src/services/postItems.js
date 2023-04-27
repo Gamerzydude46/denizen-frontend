@@ -16,7 +16,7 @@ export const createItem = async (
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:8080/postItems/post',
+        url: 'http://localhost:8081/postItems/post',
         headers: {
             'Content-Type': 'application/json'
         },

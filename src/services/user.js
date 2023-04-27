@@ -13,7 +13,7 @@ export const createUser = async (fname,lname,email,password,type)=>{
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:8080/user/create',
+        url: 'http://localhost:8081/user/create',
         headers: {
             'Content-Type': 'application/json'
         },

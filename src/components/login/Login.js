@@ -35,7 +35,7 @@ const Login = () => {
     }
     
     function cookie () {
-        axios.get("http://localhost:8080/user/auth", { withCredentials: true }).then((data) => {
+        axios.get("http://localhost:8081/user/auth", { withCredentials: true }).then((data) => {
             //console.log(data)
             if (data.data.authData.loggedIn === true) {
                 window.alert("User session exist ! Auto logging....");
@@ -60,7 +60,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:8080/user/login", {
+        fetch("http://localhost:8081/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

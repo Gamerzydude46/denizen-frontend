@@ -47,7 +47,7 @@ const Header = (data) => {
     const handleLogout = (e) => {
         e.preventDefault();
         setLoading(true);
-        axios.post("http://localhost:8080/user/logout",{},{ withCredentials: true })
+        axios.post("http://localhost:8081/user/logout",{},{ withCredentials: true })
             .then((data) => {
                 //console.log(data)
                 if (data.data.flag === true) {
@@ -80,7 +80,7 @@ const Header = (data) => {
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}}  to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
                         <h1>My Orders</h1>
                     </NavLink>
-                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Post Orders</h1>
                     </NavLink>
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
