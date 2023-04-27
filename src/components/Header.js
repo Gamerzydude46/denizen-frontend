@@ -27,7 +27,7 @@ const Header = (data) => {
     const [user, setUser] = React.useState(false);
     React.useEffect( () => {
         userType();
-    },[])
+    })
     function userType() {
         if (data.type === 'delivery') {
     
