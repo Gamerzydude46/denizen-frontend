@@ -10,12 +10,23 @@ import trolley from '../../assets/icons/trolley.svg';
 import cal from '../../assets/icons/schedule.svg';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import Card from "../Card";
+import Card from "../../components/home/Card";
 import "./post-order.css";
-import { Schedule } from "@mui/icons-material";
+import {Schedule } from "@mui/icons-material";
 import transaction from '../../assets/icons/transaction.svg';
 import distance from '../../assets/icons/distance.svg';
 import deadline from '../../assets/icons/deadline.svg';
+import Info from '../../assets/icons/Info.svg';
+import { calculateCharges } from "../../services/priceAlgo";
+import { Modal } from "@mui/material";
+import Typography from "@mui/material";
+import whatsapp from '../../assets/images/whatsapp.png';
+import userColor from '../../assets/icons/userColor.svg';
+
+
+ 
+
+
 
 
 
@@ -33,6 +44,7 @@ const CustomFontTheme = createTheme({
 
 
 function PostOrders() {
+    const [open, setOpen] = React.useState(false);
     const [details, setDetails] = React.useState({
         itemName: '',
         address: '',
@@ -51,12 +63,12 @@ function PostOrders() {
     function imageHandler(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
-        reader.onload = function() {
-          const img = document.getElementById("order-img");
-          img.src = reader.result;
+        reader.onload = function () {
+            const img = document.getElementById("order-img");
+            img.src = reader.result;
         };
         reader.readAsDataURL(file);
-      }
+    }
 
     return (
 
@@ -77,48 +89,57 @@ function PostOrders() {
                                     </div>
                                     <div className="flex flex-col form-first">
                                         <div>
-                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[200px] '} />
+                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[210px] '} />
                                         </div>
 
                                         <input type="file" name="file" id="file" class="inputfile hidden" onChange={imageHandler} />
                                         <label for="file" className="upload-btn">UPLOAD</label>
-                                        <div>
-                                            <button className="helpButton  max-100">HELP!</button>
-                                        </div>
+                                         
                                     </div>
                                     <div className="form-middle relative mr-5 ml-5">
                                         <div className="custom-form-wrap" >
                                             <img src={mail} alt='mail' className={'h-[24px]'} />
-                                            <input placeholder="ITEM NAME" value={details.itemName} onChange={(e) => setDetails({ ...details, itemName: e.target.value })} />
+                                            <input placeholder="Item Name" value={details.itemName} onChange={(e) => setDetails({ ...details, itemName: e.target.value })} />
+                                        </div>
+                                        <div className="flex justify-between">
+                                         
+                                        <div className="custom-form-wrap w-50" >
+                                            <img src={userColor} alt='user' className={'h-[24px]'} />
+                                            <input placeholder="User Name" value={details.userName} onChange={(e) => setDetails({ ...details, userName: e.target.value })} />
+                                        </div>
+                                        <div className="custom-form-wrap w-50" >
+                                            <img src={whatsapp} alt='contact' className={'h-[24px]'} />
+                                            <input placeholder="Contact Number" value={details.contactNumber} onChange={(e) => setDetails({ ...details, contactNumber: e.target.value })} />
+                                        </div>
                                         </div>
                                         <div className="custom-form-wrap">
-                                            <img src={loc} alt='location' className={'mr-2 ml-1 h-[24px]'} />
+                                            <img src={loc} alt='Location' className={'mr-2 ml-1 h-[24px]'} />
 
 
-                                            <input placeholder="location" value={details.address} onChange={(e) => setDetails({ ...details, address: e.target.value })} />
+                                            <input placeholder="Location" value={details.address} onChange={(e) => setDetails({ ...details, address: e.target.value })} />
                                         </div>
                                         <div className="flex justify-between">
                                             <div className="custom-form-wrap w-30">
-                                                <img src={price} alt='price' className={'mr-2 ml-1 h-[24px]'} />
+                                                <img src={price} alt='Price' className={'mr-2 ml-1 h-[24px]'} />
 
-                                                <input placeholder="selling cost" value={details.sellingCost} onChange={(e) => setDetails({ ...details, sellingCost: e.target.value })} />
+                                                <input placeholder="Selling Cost" value={details.sellingCost} onChange={(e) => setDetails({ ...details, sellingCost: e.target.value })} />
                                             </div>
                                             <div className="custom-form-wrap w-30">
-                                                <img src={cal} alt='calender' className='ml-2  mt-2 h-[24px]' />
+                                                <img src={cal} alt='Calender' className='ml-2  mt-2 h-[24px]' />
 
                                                 <input placeholder="Date" type="date" value={details.date} onChange={(e) => setDetails({ ...details, date: e.target.value })} />
                                             </div>
                                             <div className="custom-form-wrap w-30">
                                                 <img src={cal} alt='navigate back' className='ml-2  mt-2 h-[24px]' />
 
-                                                <input placeholder="ITEM NAME" type="time" value={details.time} onChange={(e) => setDetails({ ...details, time: e.target.value })} />
+                                                <input placeholder="Time" type="time" value={details.time} onChange={(e) => setDetails({ ...details, time: e.target.value })} />
                                             </div>
                                         </div>
                                         <div className="flex justify-between">
                                             <div className="custom-form-wrap w-30">
                                                 <img src={trolley} alt='navigate back' className='ml-2  mt-2 h-[24px]' />
 
-                                                <select name="type" id="size" value={details.category} onChange={(value) => { setDetails({ ...details, category: value.target.value })}}>
+                                                <select name="type" id="size" value={details.category} onChange={(value) => { setDetails({ ...details, category: value.target.value }) }}>
                                                     {/* <option value=""></option> */}
                                                     <option value="small">Small</option>
                                                     <option value="medium">Medium</option>
@@ -127,22 +148,22 @@ function PostOrders() {
                                             </div>
                                             <div className="custom-form-wrap w-30">
                                                 <img src={distance} alt='distance' className={'h-[24px]'} />
-                                                <input placeholder="distance" value={details.distance} onChange={(e) => setDetails({ ...details, distance: e.target.value })} />
+                                                <input placeholder="Distance" value={details.distance} onChange={(e) => setDetails({ ...details, distance: e.target.value })} />
                                             </div>
                                             <div className="custom-form-wrap w-30">
                                                 <img src={transaction} alt='mail' className={'h-[24px]'} />
-                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} />
+                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""} onClick={() => setDetails({...details, charges: calculateCharges(details.distance, details.category)})}/>
                                             </div>
                                         </div>
-                                        <button className="absolute post-order-btn">
-                                            <img src={deadline} alt='deadline' height='10' />POST ORDERS TO FEED</button>
+                                        <button className="absolute post-order-btn" onClick={() => setOpen(true) }>
+                                            <img src={deadline} alt='deadline' height='30' />POST ORDERS TO FEED</button>
                                     </div>
                                 </div>
 
                             </form>
 
-                            <div className="drivers-wrspper mt-10" style={{ flexWrap: "no-wrap", overflowX: "scroll" }}>
-                                <h1 className="driver-title text-2xl mt-2 mb-2 ">Featured Delivery Buddies</h1>
+                            <div className="drivers-wrspper mt-8" style={{ flexWrap: "no-wrap", overflowX: "scroll" }}>
+                                <h1 className="driver-title text-2xl mt-2 mb-2 ml-2">Featured Delivery Buddies</h1>
                                 <div className="flex">
                                     {
                                         drivers.map(data => <Card data={data} />)
@@ -152,8 +173,12 @@ function PostOrders() {
                             </div>
 
                         </div>
-                    </div>
+                        <div className="absolute -z-10 bg-White rounded-t-full h-[430px] w-[900px] bottom-[0px] right-[20px]">
 
+                    </div>
+                    </div>
+                    
+                      
                 </ThemeProvider>
             </main>
         </Layout>

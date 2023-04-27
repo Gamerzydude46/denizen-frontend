@@ -64,7 +64,7 @@ const SetPassword = () => {
 
         setPassword(data.password);
         setLoading(true);
-        fetch("http://localhost:8080/user/password-reset", {
+        fetch("http://localhost:8081/user/password-reset", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
