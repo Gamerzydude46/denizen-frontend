@@ -27,7 +27,7 @@ const Header = (data) => {
     const [user, setUser] = React.useState(false);
     React.useEffect( () => {
         userType();
-    },[])
+    })
     function userType() {
         if (data.type === 'delivery') {
     
@@ -80,7 +80,7 @@ const Header = (data) => {
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}}  to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
                         <h1>My Orders</h1>
                     </NavLink>
-                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Post Orders</h1>
                     </NavLink>
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/track-orders' className={user ? 'headerItems' : 'hidden'}>
