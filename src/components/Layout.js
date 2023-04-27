@@ -13,7 +13,7 @@ const Layout = (props) => {
         img: dummyImg2,
     })
     React.useEffect(() => {
-        axios.get("http://localhost:8080/user/userData", { withCredentials: true }).then((info) => {
+        axios.get("http://localhost:8081/user/userData", { withCredentials: true }).then((info) => {
             setData({
                 user: info.data.data.fname,
                 type: info.data.data.type,

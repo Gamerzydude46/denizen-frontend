@@ -3,7 +3,7 @@
     display: flex;
     padding: 10px;
     /* ggg */
-    height: 65px;
+    height: 52px;
     align-items: center;
 
 }
@@ -21,6 +21,10 @@
     width: 30%;
 }
 
+.w-50 {
+    width: 48%;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -29,7 +33,7 @@
     height: 50px;
     background-color: rgb(217 4 41 / var(--tw-bg-opacity));
     /*  */
-    width: 260px;
+    width: 250px;
     top: 45%;
     right: -200px;
     transform: rotate(-90deg);

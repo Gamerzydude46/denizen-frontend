@@ -21,6 +21,8 @@ import SellerFeed from './pages/home/SellerFeed';
 import dummyImg2 from './assets/images/dummyImg2.png';
 import axios from "axios";
 import AboutUs from './pages/AboutUs';
+import PostOrders from './pages/home/PostOrders';
+import Module from './pages/home/Module';
 
 
 
@@ -32,7 +34,7 @@ function App() {
     img: dummyImg2,
   })
   React.useEffect(() => {
-    axios.get("http://localhost:8080/user/userData", { withCredentials: true }).then((info) => {
+    axios.get("http://localhost:8081/user/userData", { withCredentials: true }).then((info) => {
       setData({
         user: {
           fname: info.data.data.fname,
@@ -59,6 +61,8 @@ function App() {
             <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
             <Route path="/home/kyc/processing" element={<Processing {...data} />} />
             <Route path="/home/kyc/approved" element={<Approved {...data} />} />
+            {/* <Route path="/home/PostOrders/" element={<PostOrders {...data} />} /> */}
+
           </Route>
         </Route>
     
@@ -70,7 +74,8 @@ function App() {
           <Route path="/set-password" element={<SetPassword />} />
         </Route>
         <Route exact path="/seller-feed" element={<SellerFeed />} />
-        
+        <Route exact path="/post-orders" element={<PostOrders />} />
+        <Route exact path="/module" element={<Module />} />
 
         <Route path='/track-orders' />
         <Route path='/about-us' element={<AboutUs />} />

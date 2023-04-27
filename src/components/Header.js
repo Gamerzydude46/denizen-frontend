@@ -47,7 +47,7 @@ const Header = (data) => {
     const handleLogout = (e) => {
         e.preventDefault();
         setLoading(true);
-        axios.post("http://localhost:8080/user/logout",{},{ withCredentials: true })
+        axios.post("http://localhost:8081/user/logout",{},{ withCredentials: true })
             .then((data) => {
                 //console.log(data)
                 if (data.data.flag === true) {

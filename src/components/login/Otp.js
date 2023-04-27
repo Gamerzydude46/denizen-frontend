@@ -49,7 +49,7 @@ const Otp = () => {
     const handleResend = () =>{
         
         setLoading(true);
-        fetch("http://localhost:8080/user/otp", {
+        fetch("http://localhost:8081/user/otp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

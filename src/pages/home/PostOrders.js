@@ -17,6 +17,14 @@ import transaction from '../../assets/icons/transaction.svg';
 import distance from '../../assets/icons/distance.svg';
 import deadline from '../../assets/icons/deadline.svg';
 import Info from '../../assets/icons/Info.svg';
+import { calculateCharges } from "../../services/priceAlgo";
+import { Modal } from "@mui/material";
+import Typography from "@mui/material";
+import whatsapp from '../../assets/images/whatsapp.png';
+import userColor from '../../assets/icons/userColor.svg';
+
+
+ 
 
 
 
@@ -36,6 +44,7 @@ const CustomFontTheme = createTheme({
 
 
 function PostOrders() {
+    const [open, setOpen] = React.useState(false);
     const [details, setDetails] = React.useState({
         itemName: '',
         address: '',
@@ -80,20 +89,28 @@ function PostOrders() {
                                     </div>
                                     <div className="flex flex-col form-first">
                                         <div>
-                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[170px] '} />
+                                            <img src={Chair} id="order-img" alt="chair" className={' w-[200px] h-[210px] '} />
                                         </div>
--
+
                                         <input type="file" name="file" id="file" class="inputfile hidden" onChange={imageHandler} />
                                         <label for="file" className="upload-btn">UPLOAD</label>
-                                        <div>
-                                            <button className="helpButton  max-100 ">
-                                            <img src={Info} alt='' height='5' flex  />HELP!</button>
-                                        </div>
+                                         
                                     </div>
                                     <div className="form-middle relative mr-5 ml-5">
                                         <div className="custom-form-wrap" >
                                             <img src={mail} alt='mail' className={'h-[24px]'} />
                                             <input placeholder="Item Name" value={details.itemName} onChange={(e) => setDetails({ ...details, itemName: e.target.value })} />
+                                        </div>
+                                        <div className="flex justify-between">
+                                         
+                                        <div className="custom-form-wrap w-50" >
+                                            <img src={userColor} alt='user' className={'h-[24px]'} />
+                                            <input placeholder="User Name" value={details.userName} onChange={(e) => setDetails({ ...details, userName: e.target.value })} />
+                                        </div>
+                                        <div className="custom-form-wrap w-50" >
+                                            <img src={whatsapp} alt='contact' className={'h-[24px]'} />
+                                            <input placeholder="Contact Number" value={details.contactNumber} onChange={(e) => setDetails({ ...details, contactNumber: e.target.value })} />
+                                        </div>
                                         </div>
                                         <div className="custom-form-wrap">
                                             <img src={loc} alt='Location' className={'mr-2 ml-1 h-[24px]'} />
@@ -135,18 +152,18 @@ function PostOrders() {
                                             </div>
                                             <div className="custom-form-wrap w-30">
                                                 <img src={transaction} alt='mail' className={'h-[24px]'} />
-                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} />
+                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""} onClick={() => setDetails({...details, charges: calculateCharges(details.distance, details.category)})}/>
                                             </div>
                                         </div>
-                                        <button className="absolute post-order-btn">
-                                            <img src={deadline} alt='deadline' height='10' />POST ORDERS TO FEED</button>
+                                        <button className="absolute post-order-btn" onClick={() => setOpen(true) }>
+                                            <img src={deadline} alt='deadline' height='30' />POST ORDERS TO FEED</button>
                                     </div>
                                 </div>
 
                             </form>
 
                             <div className="drivers-wrspper mt-8" style={{ flexWrap: "no-wrap", overflowX: "scroll" }}>
-                                <h1 className="driver-title text-2xl mt-2 mb-2 ">Featured Delivery Buddies</h1>
+                                <h1 className="driver-title text-2xl mt-2 mb-2 ml-2">Featured Delivery Buddies</h1>
                                 <div className="flex">
                                     {
                                         drivers.map(data => <Card data={data} />)
@@ -161,7 +178,7 @@ function PostOrders() {
                     </div>
                     </div>
                     
-
+                      
                 </ThemeProvider>
             </main>
         </Layout>
