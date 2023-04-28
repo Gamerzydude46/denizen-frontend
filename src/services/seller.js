@@ -4,7 +4,7 @@ export const insertSeller = async (ref_id,ref_email)=>{
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:8081/seller/create',
+        url: 'http://localhost:8080/seller/create',
         headers: {
             'Content-Type': 'application/json'
         },
