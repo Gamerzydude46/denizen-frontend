@@ -50,7 +50,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route exact path='/home' element={<Home {...data} />} >
           <Route path='/home' element={<Welcome {...data} />} />
           <Route exact path="/home/kyc" element={<Kyc {...data} />}>
@@ -62,8 +61,6 @@ function App() {
             <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
             <Route path="/home/kyc/processing" element={<Processing {...data} />} />
             <Route path="/home/kyc/approved" element={<Approved {...data} />} />
-             
-
           </Route>
         </Route>
     
