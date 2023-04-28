@@ -6,6 +6,11 @@ import user from "../../assets/icons/userColor.svg";
 import check from "../../assets/icons/check.svg";
 import { NavLink } from 'react-router-dom';
 import { borderRadius } from '@mui/system';
+import star from "../../assets/images/star.png";
+import filledstar from "../../assets/images/filledstar.png";
+
+
+ 
 
 const Card = ({data}) => {
        return (
@@ -22,7 +27,7 @@ const Card = ({data}) => {
                                    </div>
                                    <div className="mt-3 flex items-center">
                                           <img className="h-6 w-6 mr-2" src={map} alt="Map" />
-                                          <p className="text-sm"> {data?.address}</p>                                          
+                                          <p className="text-sm"> {data?.contact}</p>                                          
                                    </div>
                                    <div className="mt-3 flex items-center">
                                           <img className="h-6 w-6 mr-2" src={foodDelivery} alt="FoodDelivery" /> 
@@ -30,7 +35,7 @@ const Card = ({data}) => {
                                    </div>
                                    <div className="mt-3" style={{display:"flex"}}>
                                           {[1,2,3,4,5,].map((value)=>{
-                                                 return value <= data?.rating?<img src="https://img.icons8.com/material-outlined/24/null/filled-star.png "/>: <img src="https://img.icons8.com/material-outlined/24/null/star--v2.png"/>
+                                                 return value <= data?.rating?<img src={filledstar} className='w-8'/>: <img src={star} className='w-8'/>
                                           })}
                                    </div>
                             </div>

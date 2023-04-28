@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import girlwithlaptop from '../../assets/images/girlwithaptop.png'
-import dummyImg2 from '../../assets/images/dummyImg2.png';
+ 
 import Chair from '../../assets/images/chair.png';
 import mail from '../../assets/icons/edit.svg';
 import loc from '../../assets/icons/map.svg';
@@ -12,22 +12,36 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import Card from "../../components/home/Card";
 import "./post-order.css";
-import {Schedule } from "@mui/icons-material";
+import { Schedule } from "@mui/icons-material";
 import transaction from '../../assets/icons/transaction.svg';
 import distance from '../../assets/icons/distance.svg';
 import deadline from '../../assets/icons/deadline.svg';
-import Info from '../../assets/icons/Info.svg';
+// import Info from '../../assets/icons/Info.svg';
 import { calculateCharges } from "../../services/priceAlgo";
 import { Modal } from "@mui/material";
-import Typography from "@mui/material";
+import Typography from "@mui/material/Typography";
 import whatsapp from '../../assets/images/whatsapp.png';
 import userColor from '../../assets/icons/userColor.svg';
-
-
  
+import { Box } from "@mui/material";
 
 
 
+
+
+
+const style = {
+    position: 'absolute',
+    top: '100%',
+    left: '100%',
+    transform: 'translate(-50%, -50%)',
+    width: '600px',
+    bgcolor: 'background.paper',
+    border: '4px solid #EF233C',
+    borderRadius: '10px',
+    boxShadow: 24,
+    p: 4,
+};
 
 
 
@@ -39,8 +53,8 @@ const CustomFontTheme = createTheme({
         fontFamily: ["Maven Pro"].join(",")
     }
 });
-
-
+ 
+ 
 
 
 function PostOrders() {
@@ -94,7 +108,7 @@ function PostOrders() {
 
                                         <input type="file" name="file" id="file" class="inputfile hidden" onChange={imageHandler} />
                                         <label for="file" className="upload-btn">UPLOAD</label>
-                                         
+
                                     </div>
                                     <div className="form-middle relative mr-5 ml-5">
                                         <div className="custom-form-wrap" >
@@ -102,15 +116,15 @@ function PostOrders() {
                                             <input placeholder="Item Name" value={details.itemName} onChange={(e) => setDetails({ ...details, itemName: e.target.value })} />
                                         </div>
                                         <div className="flex justify-between">
-                                         
-                                        <div className="custom-form-wrap w-50" >
-                                            <img src={userColor} alt='user' className={'h-[24px]'} />
-                                            <input placeholder="User Name" value={details.userName} onChange={(e) => setDetails({ ...details, userName: e.target.value })} />
-                                        </div>
-                                        <div className="custom-form-wrap w-50" >
-                                            <img src={whatsapp} alt='contact' className={'h-[24px]'} />
-                                            <input placeholder="Contact Number" value={details.contactNumber} onChange={(e) => setDetails({ ...details, contactNumber: e.target.value })} />
-                                        </div>
+
+                                            <div className="custom-form-wrap w-50" >
+                                                <img src={userColor} alt='user' className={'h-[24px]'} />
+                                                <input placeholder="User Name" value={details.userName} onChange={(e) => setDetails({ ...details, userName: e.target.value })} />
+                                            </div>
+                                            <div className="custom-form-wrap w-50" >
+                                                <img src={whatsapp} alt='contact' className={'h-[24px]'} />
+                                                <input placeholder="Contact Number" value={details.contactNumber} onChange={(e) => setDetails({ ...details, contactNumber: e.target.value })} />
+                                            </div>
                                         </div>
                                         <div className="custom-form-wrap">
                                             <img src={loc} alt='Location' className={'mr-2 ml-1 h-[24px]'} />
@@ -152,10 +166,10 @@ function PostOrders() {
                                             </div>
                                             <div className="custom-form-wrap w-30">
                                                 <img src={transaction} alt='mail' className={'h-[24px]'} />
-                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""} onClick={() => setDetails({...details, charges: calculateCharges(details.distance, details.category)})}/>
+                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""} onClick={() => setDetails({ ...details, charges: calculateCharges(details.distance, details.category) })} />
                                             </div>
                                         </div>
-                                        <button className="absolute post-order-btn" onClick={() => setOpen(true) }>
+                                        <button className="absolute post-order-btn"   onClick={()=>setOpen(true)}>
                                             <img src={deadline} alt='deadline' height='30' />POST ORDERS TO FEED</button>
                                     </div>
                                 </div>
@@ -175,10 +189,38 @@ function PostOrders() {
                         </div>
                         <div className="absolute -z-10 bg-White rounded-t-full h-[430px] w-[900px] bottom-[0px] right-[20px]">
 
+                        </div>
                     </div>
-                    </div>
+
                     
-                      
+                     
+                    <Modal
+                     
+                        open={open}
+                        onClose={()=>setOpen(false)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2" >
+                                <div className='text-bold font-oswald text-xl text-align-centre '>
+                                    ORDERS POSTED SUCCESSFULLY!
+                                </div>
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
+                                <div className='text-bold font-oswald text-lg'>
+                                    {/* {data.user}, you want to Logout ? */}
+                                    
+                                    <button 
+                                        className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-100 hover:bg-Primary_Grey'
+                                        // onClick={handleLogout}
+                                    >
+                                        {false ? <img alt='loading...' className='w-20 flex justify-center' /> : "CLICK HERE TO GO BACK TO MAIN MENU"}
+                                    </button>
+                                </div>
+                            </Typography>
+                        </Box>
+                    </Modal>
                 </ThemeProvider>
             </main>
         </Layout>
@@ -190,13 +232,13 @@ export default PostOrders;
 
 
 const drivers = [
-    { name: "Saish Naik", rating: 4, address: "Panjim-Goa", deliveries: 53 },
-    { name: "Vassant Kalangutkar", rating: 3, address: "Mapusa-Goa", deliveries: 53 },
-    { name: "Aarush Sharma", rating: 5, address: "Sankhali-Goa", deliveries: 53 },
-    { name: "Abhi Gaonkar", rating: 2, address: "Porvorim-Goa", deliveries: 53 },
-    { name: "Meera Pai", rating: 4, address: "old-Goa", deliveries: 53 },
-    { name: "Nisha Kamat", rating: 5, address: "Ponda-Goa", deliveries: 53 },
-    { name: "Prachi Dessai", rating: 5, address: "Vasco-Goa", deliveries: 53 },
-    { name: "Niraj Lotlikar", rating: 3, address: "Valpoi-Goa", deliveries: 53 },
+    { name: "Saish Naik", rating: 4, contact: "Panjim-Goa", deliveries: 53 },
+    { name: "Vassant Dhempo", rating: 3, contact: "Mapusa-Goa", deliveries: 53 },
+    { name: "Aarush Sharma", rating: 5, contact: "Sankhali-Goa", deliveries: 53 },
+    { name: "Abhi Gaonkar", rating: 2, contact: "Porvorim-Goa", deliveries: 53 },
+    { name: "Meera Pai", rating: 4, contact: "old-Goa", deliveries: 53 },
+    { name: "Nisha Kamat", rating: 5, contact: "Ponda-Goa", deliveries: 53 },
+    { name: "Prachi Dessai", rating: 5, contact: "Vasco-Goa", deliveries: 53 },
+    { name: "Niraj Lotlikar", rating: 3, contact: "Valpoi-Goa", deliveries: 53 },
 
 ] 

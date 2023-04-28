@@ -62,7 +62,7 @@ function App() {
             <Route path="/home/kyc/declaration" element={<Declaration {...data} />} />
             <Route path="/home/kyc/processing" element={<Processing {...data} />} />
             <Route path="/home/kyc/approved" element={<Approved {...data} />} />
-            {/* <Route path="/home/PostOrders/" element={<PostOrders {...data} />} /> */}
+             
 
           </Route>
         </Route>
