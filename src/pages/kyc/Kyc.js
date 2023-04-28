@@ -26,7 +26,7 @@ const usersteps = ['Identity', 'Address', 'Documents', 'Declaration'];
 
 
 function Kyc(data) {
-
+console.log(data);
     const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 
         [`&.${stepConnectorClasses.alternativeLabel}`]: {
