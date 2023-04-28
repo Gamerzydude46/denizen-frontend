@@ -16,14 +16,16 @@ import { Schedule } from "@mui/icons-material";
 import transaction from '../../assets/icons/transaction.svg';
 import distance from '../../assets/icons/distance.svg';
 import deadline from '../../assets/icons/deadline.svg';
+import request from '../../assets/images/request.png';
 // import Info from '../../assets/icons/Info.svg';
 import { calculateCharges } from "../../services/priceAlgo";
 import { Modal } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import whatsapp from '../../assets/images/whatsapp.png';
 import userColor from '../../assets/icons/userColor.svg';
- 
+
 import { Box } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -32,12 +34,13 @@ import { Box } from "@mui/material";
 
 const style = {
     position: 'absolute',
-    top: '100%',
-    left: '100%',
+    top: '50%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '600px',
+    height:'300px',
     bgcolor: 'background.paper',
-    border: '4px solid #EF233C',
+    border: '4px solid 	#8B0000',
     borderRadius: '10px',
     boxShadow: 24,
     p: 4,
@@ -61,7 +64,7 @@ function PostOrders() {
     const [open, setOpen] = React.useState(false);
     const [details, setDetails] = React.useState({
         itemName: '',
-        address: '',
+        contact: '',
         sellingCost: '',
         date: '',
         time: '',
@@ -84,6 +87,12 @@ function PostOrders() {
         reader.readAsDataURL(file);
     }
 
+    const onSubmit = (d) => {
+        console.log(d);
+        setDetails({ details: details })
+
+    };
+
     return (
 
         <Layout>
@@ -96,6 +105,7 @@ function PostOrders() {
                         </div>
 
                         <div className="upper">
+                            {/* <form onSubmit={onSubmit} > */}
                             <form onSubmit={e => e.preventDefault()}>
                                 <div className="form-wrapper flex relative ml-6">
                                     <div>
@@ -122,7 +132,7 @@ function PostOrders() {
                                                 <input placeholder="User Name" value={details.userName} onChange={(e) => setDetails({ ...details, userName: e.target.value })} />
                                             </div>
                                             <div className="custom-form-wrap w-50" >
-                                                <img src={whatsapp} alt='contact' className={'h-[24px]'} />
+                                                <img src={whatsapp} alt='contact' className={'mr-2 ml-1 h-[24px]'} />
                                                 <input placeholder="Contact Number" value={details.contactNumber} onChange={(e) => setDetails({ ...details, contactNumber: e.target.value })} />
                                             </div>
                                         </div>
@@ -161,24 +171,24 @@ function PostOrders() {
                                                 </select>
                                             </div>
                                             <div className="custom-form-wrap w-30">
-                                                <img src={distance} alt='distance' className={'h-[24px]'} />
+                                                <img src={distance} alt='distance' className={'mr-2 ml-1 h-[24px]'} />
                                                 <input placeholder="Distance" value={details.distance} onChange={(e) => setDetails({ ...details, distance: e.target.value })} />
                                             </div>
                                             <div className="custom-form-wrap w-30">
-                                                <img src={transaction} alt='mail' className={'h-[24px]'} />
-                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""} onClick={() => setDetails({ ...details, charges: calculateCharges(details.distance, details.category) })} />
+                                                <img src={transaction} alt='mail' className={'mr-2 ml-1 h-[24px]'} />
+                                                <input placeholder="Delivery Charges" value={details.charges} onChange={(e) => setDetails({ ...details, charges: e.target.value })} defaultValue={details.category ? details.category : ""}  onClick={() => setDetails({ ...details, charges: calculateCharges(details.distance, details.category) })} />
                                             </div>
                                         </div>
-                                        <button className="absolute post-order-btn"   onClick={()=>setOpen(true)}>
+                                        <button type="submit"  className="absolute post-order-btn"  onClick={()=>setOpen(true)} >
                                             <img src={deadline} alt='deadline' height='30' />POST ORDERS TO FEED</button>
                                     </div>
                                 </div>
 
                             </form>
+                            <h1 className="driver-title text-2xl mt-6 mb-2 ml-2">Featured Delivery Buddies</h1>
 
-                            <div className="drivers-wrspper mt-8" style={{ flexWrap: "no-wrap", overflowX: "scroll" }}>
-                                <h1 className="driver-title text-2xl mt-2 mb-2 ml-2">Featured Delivery Buddies</h1>
-                                <div className="flex">
+                            <div className="drivers-wrspper mt-8 scrollbar-hide overflow-x-hidden" style={{ flexWrap: "no-wrap", overflowX: "scroll" }}>
+                                <div className="flex p-1">
                                     {
                                         drivers.map(data => <Card data={data} />)
                                     }
@@ -201,24 +211,27 @@ function PostOrders() {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
-                        <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2" >
-                                <div className='text-bold font-oswald text-xl text-align-centre '>
-                                    ORDERS POSTED SUCCESSFULLY!
-                                </div>
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }} className='text-maven'>
-                                <div className='text-bold font-oswald text-lg'>
-                                    {/* {data.user}, you want to Logout ? */}
-                                    
-                                    <button 
-                                        className='ml-5 border-spacing-2 bg-Primary_Red rounded px-2 text-Base w-100 hover:bg-Primary_Grey'
-                                        // onClick={handleLogout}
-                                    >
-                                        {false ? <img alt='loading...' className='w-20 flex justify-center' /> : "CLICK HERE TO GO BACK TO MAIN MENU"}
-                                    </button>
-                                </div>
-                            </Typography>
+                        <Box sx={style} classname="relative p-2">
+                            
+                
+                        <div className="absolute p-4 left-[140px] top-[30px]">
+                        <Typography className="" style={{fontSize:'20px',fontWeight:'bold' ,background: 'linear-gradient(90deg, #CF0A0A 0%, #2B2D42 140.91%)',
+                        '-webkit-background-clip': 'text',
+                        '-webkit-text-fill-color': 'transparent',
+                        backgroundClip: 'text',
+                        textFillColor: 'transparent',
+                        color: '#FFFFFF'}}>Order Posted Successfully !!</Typography>
+                        </div>
+                        
+                        <div className="absolute ml-16 p-2 left-[120px] mt-[60px]">
+                        <img src={request} alt="Request"className={' ml-20 left-[370px] w-[60px] h-[60px] center '}/>
+                        </div>
+                        <div className="absolute p-2 left-[220px] mt-[120px]">
+                            <NavLink to="/home">
+                                <button className=" accessButton text-Primary_Grey font-sm p-2">Head to Home</button>
+                            </NavLink>
+                        </div>
+                           
                         </Box>
                     </Modal>
                 </ThemeProvider>
@@ -232,13 +245,13 @@ export default PostOrders;
 
 
 const drivers = [
-    { name: "Saish Naik", rating: 4, contact: "Panjim-Goa", deliveries: 53 },
-    { name: "Vassant Dhempo", rating: 3, contact: "Mapusa-Goa", deliveries: 53 },
-    { name: "Aarush Sharma", rating: 5, contact: "Sankhali-Goa", deliveries: 53 },
-    { name: "Abhi Gaonkar", rating: 2, contact: "Porvorim-Goa", deliveries: 53 },
-    { name: "Meera Pai", rating: 4, contact: "old-Goa", deliveries: 53 },
-    { name: "Nisha Kamat", rating: 5, contact: "Ponda-Goa", deliveries: 53 },
-    { name: "Prachi Dessai", rating: 5, contact: "Vasco-Goa", deliveries: 53 },
-    { name: "Niraj Lotlikar", rating: 3, contact: "Valpoi-Goa", deliveries: 53 },
+    { name: "Saish Naik", rating: 4, contact: "7283894973", deliveries: 52 },
+    { name: "Vassant Dhempo", rating: 3, contact: "9517893083", deliveries: 30 },
+    { name: "Aarush Sharma", rating: 5, contact: "864890234", deliveries: 43 },
+    { name: "Abhi Gaonkar", rating: 2, contact: "7389031245", deliveries: 53 },
+    { name: "Meera Pai", rating: 4, contact: "97618963", deliveries: 45 },
+    { name: "Nisha Kamat", rating: 5, contact: "896434590", deliveries: 53 },
+    { name: "Prachi Dessai", rating: 5, contact: "823456789", deliveries: 33 },
+    { name: "Niraj Lotlikar", rating: 3, contact: "223456789", deliveries: 30 },
 
 ] 

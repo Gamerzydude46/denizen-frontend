@@ -46,7 +46,7 @@ function App() {
         img: dummyImg2,
       })
     })
-  },[])
+  })
   return (
     <BrowserRouter>
       <Routes>

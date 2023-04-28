@@ -80,7 +80,7 @@ const Header = (data) => {
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}}  to='/my-orders' className={!user ? 'headerItems' : 'hidden'}>
                         <h1>My Orders</h1>
                     </NavLink>
-                    <NavLink to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
+                    <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/post-orders' className={user ? 'headerItems' : 'hidden'}>
                         <h1>Post Orders</h1>
                     </NavLink>
                     <NavLink style={{pointerEvents: data.verified ? '' : 'none'}} to='/track-orders' className={user ? 'headerItems' : 'hidden'}>

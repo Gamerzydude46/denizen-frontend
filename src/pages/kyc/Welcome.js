@@ -34,7 +34,9 @@ const Welcome = (data) =>{
                 </div>
             </div>
         </main>
+
     );
+
 }
 
 export default Welcome;
