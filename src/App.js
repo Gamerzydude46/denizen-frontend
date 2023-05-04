@@ -22,6 +22,7 @@ import dummyImg2 from './assets/images/dummyImg2.png';
 import axios from "axios";
 import AboutUs from './pages/AboutUs';
 import TrackOrders from './pages/home/TrackOrders';
+import MyOrders from './pages/MyOrders';
 import PostOrders from './pages/home/PostOrders';
 
 
@@ -74,7 +75,7 @@ function App() {
         <Route exact path="/seller-feed" element={<SellerFeed/>} />
         <Route exact path="/post-orders" element={<PostOrders />} />
 
-           
+        <Route path='/my-orders' element={<MyOrders/>}/>
         <Route path='/track-orders' element={<TrackOrders/>}/>
         <Route path='/about-us' element={<AboutUs />} />
       </Routes>

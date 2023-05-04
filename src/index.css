@@ -59,3 +59,11 @@ code {
 .statusButton{
   @apply mt-8  text-White text-2xl font-semibold rounded-md  h-12;
 }
+
+.orderstatusButton{
+  @apply   text-White text-2xl font-oswald font-bold rounded-tr-lg rounded-bl-lg  h-12;
+}
+
+.direcButton{
+  @apply mt-8  text-White text-xl font-oswald font-bold bg-Primary_Red rounded-br-lg rounded-tl-lg  h-12 hover:bg-Primary_Grey !important;
+}

@@ -94,7 +94,7 @@ function TrackCard(props) {
         </div>
         <div className="absolute right-[-87px] top-[96px] transform -translate-y-1/2">
           {status === 'pending' ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-b from-Orange via-Grad_Orange to-Grad_Orange -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
               <img src={stopwatch} alt="stopwatch" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p>Pending</p>
             </div>

@@ -20,10 +20,12 @@ module.exports = {
         Blue:'#7dd3fc',
         warn: '#FFCCCB',
         Orange: '#FF7817',
-        Dark_Green:'#599636',
+        GradOrange: '#f6af73',
+        Dark_Green:'#90C53F',
         Grad_Blue: '#1886EA',
-        Grad_Green:'#8DB74C',
+        Grad_Green:'#b8e17c',
         Grad_Orange:'#E47A3E',
+        Sky_Blue:'#1EA6C6',
         Grad:'gradient-to-r from-purple-400 to-pink-600'
       },
       

@@ -178,12 +178,12 @@ function Card(props) {
         )}
         <div className="absolute right-[-87px] top-[80px] transform -translate-y-1/2">
           {status === 'pending' ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-b from-Orange via-Grad_Orange to-Grad_Orange -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
               <img src={stopwatch} alt="stopwatch" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p>Pending</p>
             </div>
           ) : (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-b from-Green via-Grad_Green to-Grad_Green -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
               <img src={check} alt="check" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p className=''>Accepted</p>
             </div>
