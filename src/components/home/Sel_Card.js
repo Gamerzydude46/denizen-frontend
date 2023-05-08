@@ -94,7 +94,7 @@ function Edit(props) {
     <div>
       <div className="relative right-[120px] top-[115px] ">
         <button
-          className="flex justify-center gap-1 flex-row text-oswald w-[130px] pt-2 p-4 accessButton align-items-flex-end"
+          className="flex justify-center gap-1 flex-row text-oswald w-[140px] pt-2 p-4 accessButton align-items-flex-end"
           onClick={handleOpenModal}>
           Edit
         </button>
@@ -126,7 +126,7 @@ function Card(props) {
   } = props;
 
   return (
-    <div className="z-10 relative flex items-start flex-shrink-0 w-[933px] h-[228px] top-[25px] left-[65px] mb-8 rounded-lg border border-solid border-Primary_Red bg-White border-t-0 border-l-4 border-b-4">
+    <div className="z-10 relative flex items-start flex-shrink-0 w-[933px] h-[228px] top-[25px] left-[65px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-l-4 border-b-4">
       <img
         className="absolute top-4 left-6 w-[193px] h-[193px] rounded-lg shadow-md"
         src={image}
@@ -169,7 +169,7 @@ function Card(props) {
         </div>
         {status === 'accepted' ? (
           <div className="relative right-[120px] top-[115px] ">
-            <button className="flex justify-center gap-1 flex-row font-bold text-oswald w-[130px] pt-2 p-4 accessButton align-items-flex-end">
+            <button className="flex justify-center gap-1 flex-row font-bold text-oswald w-[140px] pt-2 p-4 accessButton align-items-flex-end">
               View
             </button>
           </div>
@@ -178,12 +178,12 @@ function Card(props) {
         )}
         <div className="absolute right-[-87px] top-[80px] transform -translate-y-1/2">
           {status === 'pending' ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[224px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
               <img src={stopwatch} alt="stopwatch" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p>Pending</p>
             </div>
           ) : (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[223px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[224px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
               <img src={check} alt="check" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p className=''>Accepted</p>
             </div>

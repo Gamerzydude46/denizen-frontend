@@ -17,6 +17,7 @@ import Approved from './components/kyc/Approved';
 import UserDocument from './components/kyc/UserDocument';
 import Kyc from './pages/kyc/Kyc';
 import SellerFeed from './pages/home/SellerFeed';
+import UserFeed from './pages/home/UserFeed';
 import Welcome from './pages/kyc/Welcome';
 import dummyImg2 from './assets/images/dummyImg2.png';
 import axios from "axios";
@@ -74,6 +75,7 @@ function App() {
         </Route>
         <Route exact path="/seller-feed" element={<SellerFeed/>} />
         <Route exact path="/post-orders" element={<PostOrders />} />
+        <Route exact path="/user-feed" element={<UserFeed/>} />
 
         <Route path='/my-orders' element={<MyOrders/>}/>
         <Route path='/track-orders' element={<TrackOrders/>}/>
