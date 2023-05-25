@@ -8,6 +8,7 @@ import city from '../assets/icons/city.svg';
 import user from '../assets/icons/userColor.svg';
 import call from '../assets/icons/whatsapp.svg';
 import check from '../assets/icons/check.svg';
+import { NavLink } from 'react-router-dom';
 
 
 function MyCard(props) {
@@ -28,11 +29,11 @@ function MyCard(props) {
   } = props;
 
   return (
-    <div className="z-10 relative flex items-start flex-shrink-0 w-[1400px] h-[228px] top-[25px] left-[65px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
+    <div className="z-10 relative flex items-start flex-shrink-0 w-[1400px] h-[228px] top-[25px] left-[65px] mb-8  rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
       <img className="absolute top-4 left-6 w-[193px] h-[193px] rounded-lg shadow-md"
         src={image}
         alt={item_title} />
-      <div className='absolute box-border h-[200px]  w-[1140px] top-4 left-[253px]  flex flex-row '>
+      <div className='absolute  box-border h-[200px]  w-[1140px] top-4 left-[253px]  flex flex-row '>
         <div className=' h-[200px] w-1/2 flex flex-col border border-Secondary_Grey border-t-0 border-l-0 border-b-0 border-r-1'>
           <div className='h-2/3  '>
             <div className="absolute">
@@ -87,7 +88,7 @@ function MyCard(props) {
             </div>
           </div>
         </div>
-        <div className=' w-1/2 '>
+        <div className=' w-1/2  '>
           <div className='absolute inline'>
             <div className="del-charges ml-2 ">
               <img alt="trc" src={transaction} className=" inline w-6 h-6 mr-2" />
@@ -113,7 +114,7 @@ function MyCard(props) {
               </p>
             </div>
           </div>
-          <div className="absolute inline right-0">
+          <div className="absolute inline top-[-16px] right-[-2px]">
             <div className="">
               {status === 'pending' ? (
                 <div className="flex justify-center gap-3 flex-row text-oswald  w-[340px] pt-2 p-11 orderstatusButton bg-gradient-to-t from-Orange  to-GradOrange ...  ">
@@ -127,17 +128,19 @@ function MyCard(props) {
                 </div>
               )}
             </div>
-            <div className="absolute inline right-0 mt-4 mr-8">
+            <div className="absolute inline right-0 mt-6 mr-8">
               <img alt="contact" src={call} className=" inline w-6 h-6 mr-2" />
               <h3 className=" inline w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
                 Seller Contact:
               </h3>
               <p className=" mt-[-2px] ml-8">{sel_contact}</p>
             </div>
-            <div className="absolute  right-0 mt-16 ">
+            <div className="absolute  right-0 mt-20 ">
+              <NavLink to="/my-orders/direction">
               <button className=" flex justify-center gap-1 flex-row font-bold text-oswald w-[180px] pt-2 p-4 direcButton align-items-flex-end">
                 Direction
               </button>
+              </NavLink>
             </div>
           </div>
         </div>

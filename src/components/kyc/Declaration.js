@@ -76,7 +76,7 @@ function Declaration(data) {
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 0 }}>
 
                                         <img src={user} alt='navigate back' width="30px" className=' mr-4  ' style={{ width: "12%" }} />
-                                        <input type="text" id="name" disabled value={name} onChange={handleChange} />
+                                        <input type="text" id="name" disabled value={data.user.fname +" " +data.user.lname} onChange={handleChange} />
 
                                     </Box>
                                 </div>

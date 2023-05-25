@@ -31,10 +31,10 @@ function Identity(data) {
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
     const schema = yup.object({
-        fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        // fname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
         mname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-        lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
-        email: yup.string().email("*Enter a valid email").max(255).required("*required"),
+        // lname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
+        // email: yup.string().email("*Enter a valid email").max(255).required("*required"),
         pan: yup.string().matches(/^[A-Z]{5}[0-9]{4}[A-Z]$/i, "*Numbers not allowed").required("*required"),
         adhar: yup.string().matches(/^\d{12}$/i, "*Numbers not allowed").required("*required"),
         dob: yup.string().required("*required"),
@@ -90,6 +90,7 @@ function Identity(data) {
                                             id="fname"
                                             label="First Name"
                                             variant="standard"
+                                            disable
                                             sx={{ width: '200px', mr: 1 }}
                                             inputProps={{ style: { fontSize: 16 } }}
                                             InputLabelProps={{ style: { fontSize: 16, color: '#8D99AE' } }}
@@ -100,7 +101,7 @@ function Identity(data) {
                                                 style: { fontSize: 10 }
                                             }}
                                             value={data.user.fname}
-                                            onChange={(e) => { setIdentityDetails({ ...identityDetails, fname: e.target.value }) }}
+                                            // onChange={(e) => { setIdentityDetails({ ...identityDetails, fname: e.target.value }) }}
                                         />
                                     </Box>
                                 </div>
@@ -142,7 +143,7 @@ function Identity(data) {
                                                 style: { fontSize: 10 }
                                             }}
                                             value={data.user.lname}
-                                            onChange={(e) => { setIdentityDetails({ ...identityDetails, lname: e.target.value }) }}
+                                            // onChange={(e) => { setIdentityDetails({ ...identityDetails, lname: e.target.value }) }}
                                         />
                                     </Box>
                                 </div>
@@ -262,9 +263,9 @@ function Identity(data) {
                                         FormHelperTextProps={{
                                             style: { fontSize: 10 }
                                         }}
-
-                                        value={identityDetails.email}
-                                        onChange={(e) => { setIdentityDetails({ ...identityDetails, email: e.target.value }) }}
+                                        disable
+                                        value={data.email}
+                                        // onChange={(e) => { setIdentityDetails({ ...identityDetails, email: e.target.value }) }}
                                     />
                                 </Box>
                             </div>
