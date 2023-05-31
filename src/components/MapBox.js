@@ -23,7 +23,8 @@ function MapBox() {
                 zoom: 3.5
             }}
             style={{ width: 600, height: 400 }}
-            mapStyle="mapbox://styles/mapbox/streets-v9"
+            mapboxAccessToken = {TOKEN}
+            mapStyle="mapbox://styles/sujayk46/clia4nzl100uo01qu677r7jw7"
         />
     );
 }
