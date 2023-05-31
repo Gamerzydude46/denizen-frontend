@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import MapBox from "../components/MapBox";
+import { CalculateRouteMetrics } from "../services/map-utils";
 
 function Mapping() {
-  const [data, setData] = useState(undefined);
-  useEffect(()=>{
-
-    console.log(data)
-  },[data])
+  useEffect(() => {
+    (async () => {
+      const res = await CalculateRouteMetrics(
+        [73.7928177, 15.5949912],
+        [73.801293, 15.594164]
+      );
+      console.log(res)
+    })();
+  }, []);
 
   return (
     <div className="h-screen w-screen">
@@ -15,7 +20,6 @@ function Mapping() {
         start={[73.7928177, 15.5949912]}
         end={[73.801293, 15.594164]}
         //stores distance and duration
-        setRouteData={(data) => setData(data)}
       />
     </div>
   );

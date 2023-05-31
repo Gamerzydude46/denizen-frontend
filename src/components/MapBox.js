@@ -2,10 +2,9 @@ import React, { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 // import MapboxDirections from "@mapbox/mapbox-gl-directions/src/directions";
 
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoic3VqYXlrNDYiLCJhIjoiY2xpYTNwbzQ2NGJ0aTNqbXc3ODkxZG53MCJ9.zsckXSkZk0E8YhqbPEdotQ";
+mapboxgl.accessToken =process.env.REACT_APP_MAPBOX_TOKEN
 
-export default function MapBox({ start, end, setRouteData }) {
+export default function MapBox({ start, end }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
@@ -30,12 +29,7 @@ export default function MapBox({ start, end, setRouteData }) {
         { method: "GET" }
       );
       const json = await query.json();
-      if (setRouteData) {
-        setRouteData({
-          distance: json.routes[0].distance,
-          duration: json.routes[0].duration,
-        });
-      }
+
       const data = json.routes[0];
       const route = data.geometry.coordinates;
       const geojson = {
