@@ -27,6 +27,7 @@ import MyOrder from './components/MyOrder';
 import Direction from './components/Direction';
 import PostOrders from './pages/home/PostOrders';
 import UserFeed from './pages/home/UserFeed';
+import Mapping from './pages/Mapping';
 
 
 
@@ -89,6 +90,7 @@ function App() {
         
         <Route path='/track-orders' element={<TrackOrders/>}/>
         <Route path='/about-us' element={<AboutUs />} />
+        <Route path='/maps' element={<Mapping />} />
       </Routes>
     </BrowserRouter>
   );

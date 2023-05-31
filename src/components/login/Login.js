@@ -48,7 +48,7 @@ const Login = () => {
     //session handeling
     React.useEffect(() => {
         cookie();
-    },)
+    },[])
 
     //user/login integration
     const [email, setEmail] = React.useState("");
