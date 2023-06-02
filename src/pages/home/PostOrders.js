@@ -69,6 +69,7 @@ function PostOrders() {
 
   //gets location based on text
   useEffect(() => {
+    try{
     if (geoLocationQuery) {
       (async () => {
         setGeoLocationLoading(true);
@@ -76,6 +77,8 @@ function PostOrders() {
         setGeoLocationLoading(false);
         setGeoLocationResult(res);
       })();
+    }}catch(err){
+      console.log(err)
     }
   }, [geoLocationQuery]);
 
