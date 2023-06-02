@@ -16,7 +16,8 @@ import nextNav from '../../assets/icons/nextNav.svg';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-
+import { updateUserAddDetails } from '../../services/user';
+import load from '../../assets/icons/loader-white.svg';
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -27,15 +28,14 @@ const CustomFontTheme = createTheme({
 
 function Address(data) {
 
-    const [addressDetails, setAddressDetails] = useState({ rAdd: '', state: '', dist: '', city: '', contact: '', pincode: '' });
+    const [addressDetails, setAddressDetails] = useState({ rAdd: '', state: '', city: '', contact: '', pincode: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
     const schema = yup.object({
-        rAdd: yup.string().matches(/^[a-zA-Z0-9\s\-\#\.\,\/]+$/i, "*required").required("*required"),
+        // rAdd: yup.string().matches(/^[a-zA-Z0-9\s,'-.#]+$/).required("*required"),
         state: yup.string().matches
             (/^(Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chhattisgarh|Goa|Gujarat|Haryana|Himachal Pradesh|Jharkhand|Karnataka|Kerala|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal)+$/i
                 , "*Numbers not allowed").required("*required"),
-        dist: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
         city: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
         contact: yup.string().matches(/^(?:\+91|0)?(?:[6789]\d{9})$/i, "*Enter valid number").required("*required"),
         pincode: yup.string().matches(/^\d{6}$/i, "*Alphabets not allowed").required("*required")
@@ -48,12 +48,24 @@ function Address(data) {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
+    const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
 
     const onSubmit = (d) => {
-        console.log(d);
-        setActiveStep(activeStep + 1)
-        setMainDetails({ ...mainDetails, addressDetails: addressDetails })
-        navigate((data.type === "seller" ? "/home/kyc/Business" : "/home/kyc/userdocument"))
+        setLoading(true);
+        
+        updateUserAddDetails(d.rAdd, d.state, d.dist, d.city, d.contact,d.pincode).then((response) => {
+            console.log(response);
+            setMsg(true);
+            window.alert("Address info successfull !")
+            setActiveStep(activeStep + 1)
+            setMainDetails({ ...mainDetails, addressDetails: addressDetails })
+            navigate((data.type === "seller" ? "/home/kyc/Business" : "/home/kyc/userdocument"))
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            setLoading(false)
+        })        
 
     };
     return (
@@ -106,27 +118,7 @@ function Address(data) {
                                         />
                                     </Box>
                                 </div>
-                                <div className='mt-4'>
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <img src={district} alt='navigate back' className={errors?.dist ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
-                                        <TextField
-                                            id="dist"
-                                            label="District"
-                                            variant="standard"
-                                            sx={{ width: '160px' }}
-                                            inputProps={{ style: { fontSize: 18 } }}
-                                            InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
-                                            {...register("dist")}
-                                            helperText={errors.dist?.message}
-                                            error={errors?.dist ? true : false}
-                                            FormHelperTextProps={{
-                                                style: { fontSize: 10 }
-                                            }}
-                                            value={addressDetails.dist}
-                                            onChange={(e) => { setAddressDetails({ ...addressDetails, dist: e.target.value }) }}
-                                        />
-                                    </Box>
-                                </div>
+                                
                                 <div className='mt-4'>
                                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                         <img src={city} alt='navigate back' className={errors?.city ? 'mb-6 mr-2 h-[25px]' : 'mr-2 h-[25px]'} />
@@ -197,12 +189,18 @@ function Address(data) {
                         </div>
                         <div className='mt-[144px] pt-20 fixed'>
 
-                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                                Next
-                                <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                        <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                            { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : 
+                            <>
+                             Next
+                             <img src={nextNav} alt='navigate back' className='mr-2 w-9' /> 
+                            </>}    
                             </button>
                         </div>
                     </ThemeProvider>
+                    <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                        {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
+                    </div>
                 </form>
 
             </FormControl>

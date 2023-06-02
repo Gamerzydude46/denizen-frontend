@@ -16,6 +16,8 @@ import TextField from '@mui/material/TextField';
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { useState } from 'react';
+import { updateSellerDetails } from '../../services/seller';
+import load from '../../assets/icons/loader-white.svg';
 
 
 const CustomFontTheme = createTheme({
@@ -46,12 +48,24 @@ function Business() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
+    const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
+
 
     const onSubmit = (data) => {
-        console.log(data);
-        setActiveStep(activeStep + 1);
-        setMainDetails({ ...mainDetails, businessDetails: businessDetails })
-        navigate("/home/kyc/sellerdocument");
+        setLoading(true);
+        updateSellerDetails(data.bname, data.bAdd, data.bcontact, data.bemail, data.bdist,data.bcity).then((response) => {
+            console.log(response);
+            setMsg(true);
+            setActiveStep(activeStep + 1)
+            setMainDetails({ ...mainDetails, businessDetails: businessDetails })
+            navigate("/home/kyc/sellerdocument")
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            window.alert("Business Details info successfull !")
+            setLoading(false)
+        })        
     };
 
     return (
@@ -204,14 +218,20 @@ function Business() {
                             </div>
                             <div className='mt-10  fixed'>
 
-                                <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                                    Next
-                                    <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-                                </button>
+                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                            { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : 
+                            <>
+                             Next
+                             <img src={nextNav} alt='navigate back' className='mr-2 w-9' /> 
+                            </>}    
+                            </button>
                             </div>
 
 
                         </ThemeProvider>
+                        <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                        {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
+                    </div>
                     </form>
 
                 </FormControl>

@@ -12,6 +12,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 
+import { verified } from "../../services/user";
+import load from '../../assets/icons/loader-white.svg';
 
 
 const CustomFontTheme = createTheme({
@@ -23,11 +25,9 @@ const CustomFontTheme = createTheme({
 
 function Declaration(data) {
     const [activeStep,setActiveStep] = useOutletContext();
+    const [loading, setLoading] = React.useState(false);
 
-    const schema = yup.object({
-    }).required();
-
-    const { register,handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+  
 
     React.useEffect(() => {
         setActiveStep(data.type === "seller" ? 4 : 3)
@@ -47,9 +47,12 @@ function Declaration(data) {
 
     const navigate = useNavigate();
 
-    const onSubmit = (d) => {
-        console.log(d);
-        navigate("/home/kyc/processing")
+    const handleUpload = (e) => {
+        e.preventDefault();
+      
+            setActiveStep(activeStep + 1)
+            navigate("/home/kyc/processing")
+        
     };
 
     return (
@@ -57,7 +60,7 @@ function Declaration(data) {
         <>
             <div className="flex ">
                 <FormControl variant="standard" >
-                    <form className='mt-5 ml-6' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='mt-5 ml-6' onSubmit={handleUpload}>
                         <ThemeProvider theme={CustomFontTheme}>
                             <div className="flex flex-row ">
                                 <div className=' mt-6 '>
@@ -110,10 +113,13 @@ function Declaration(data) {
                             </section>
 
                             <div className="mt-[89px]">
-                                <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                                    Submit
-                                    <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
-                                </button>
+                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                                        {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin' /> :
+                                            <>
+                                                Submit
+                                                <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                                            </>}
+                                    </button>
                             </div>
                         </ThemeProvider>
                     </form>

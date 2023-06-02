@@ -17,6 +17,9 @@ import { useForm } from "react-hook-form";
 import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import { updateUserDetails } from '../../services/user';
+import load from '../../assets/icons/loader-white.svg';
+
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -27,7 +30,7 @@ const CustomFontTheme = createTheme({
 
 function Identity(data) {
 
-    const [identityDetails, setIdentityDetails] = useState({ fname: '', mname: '', lname: '', gen: '', dob: '', email: '', pan: '', adhar: '' });
+    const [identityDetails, setIdentityDetails] = useState({ mname: '', gen: '', dob: '', pan: '', adhar: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
     const schema = yup.object({
@@ -47,12 +50,25 @@ function Identity(data) {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
+    const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
 
     const onSubmit = (data) => {
-        console.log(data);
-        setActiveStep(activeStep + 1)
-        setMainDetails({ ...mainDetails, identityDetails: identityDetails })
-        navigate("/home/kyc/address")
+        setLoading(true);
+        
+        updateUserDetails(data.mname, data.dob, data.gen, data.pan, data.adhar).then((response) => {
+            console.log(response);
+            setMsg(true);
+            window.alert("Identity info successfull !")
+            setActiveStep(activeStep + 1)
+            setMainDetails({ ...mainDetails, identityDetails: identityDetails })
+            navigate("/home/kyc/address");
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            setLoading(false)
+        })
+        
 
     };
 
@@ -70,7 +86,7 @@ function Identity(data) {
             label: 'Female',
         },
         {
-            value: 'other',
+            value: 'others',
             label: 'Other',
         },
 
@@ -273,13 +289,19 @@ function Identity(data) {
                         </div>
                         <div className='mt-5  fixed'>
                             <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                                Next
-                                <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                            { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : 
+                            <>
+                             Next
+                             <img src={nextNav} alt='navigate back' className='mr-2 w-9' /> 
+                            </>}    
                             </button>
                         </div>
 
 
                     </ThemeProvider>
+                    <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
+                        {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
+                    </div>
                 </form>
 
             </FormControl>

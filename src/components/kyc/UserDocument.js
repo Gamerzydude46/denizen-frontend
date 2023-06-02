@@ -10,6 +10,10 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { getFiles,getFileName,uploadImage } from "../../services/web3.storages";
+import { sellerResident } from "../../services/seller";
+import load from '../../assets/icons/loader-white.svg';
+
 
 
 const CustomFontTheme = createTheme({
@@ -19,7 +23,7 @@ const CustomFontTheme = createTheme({
     }
 });
 
-function UserDocument(data) {
+function UserDocument() {
     const [userDocDetails, setUserDocDetails] = useState({ profile: '', driverlic: '', vreg: '', register: '' });
     const [activeStep, setActiveStep] = useOutletContext();
     const schema = yup.object({}).required();
@@ -29,7 +33,7 @@ function UserDocument(data) {
     }, [])
 
     const imageHandler = (event) => {
-        setUserDocDetails({ ...userDocDetails, profile: event.target.value })
+        // setUserDocDetails({ ...userDocDetails, profile: event.target.value })
 
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -38,24 +42,64 @@ function UserDocument(data) {
             img.src = reader.result;
         };
         reader.readAsDataURL(file);
+        
+
     }
 
     const { handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
+    const [loading, setLoading] = React.useState(false);
 
-    const onSubmit = (d) => {
-        console.log(d);
-        setActiveStep(activeStep + 1)
-        navigate("/kyc/declaration")
 
-    };
+    const handleUpload = async (e) => {console.log("start")
+    e.preventDefault();
+    setLoading(true);
+
+    // profile picture
+    const profileFilePointer = getFiles('.input');
+    const profileFileName = getFileName('.input');
+    const profileImageURL = await uploadImage(profileFilePointer);
+
+    // business registration  
+    const bregFilePointer = getFiles('.bregdoc');
+    const bregFileName = getFileName('.bregdoc');
+    const bregDocURL = await uploadImage(bregFilePointer);
+    
+    // business lease 
+    const bleaseFilePointer = getFiles('.blease');
+    const bleaseFileName = getFileName('.blease');
+    const bleaseURL = await uploadImage(bleaseFilePointer);
+    
+    // resident doc 
+    const residentFilePointer = getFiles('.resident');
+    const residentFileName = getFileName('.resident');
+    const residentURL = await uploadImage(residentFilePointer);
+
+
+    console.log(profileFileName,profileImageURL,bregFileName,bregDocURL,bleaseFileName,bleaseURL,residentFileName,residentURL);
+    sellerResident(profileFileName,profileImageURL,bregFileName,bregDocURL,bleaseFileName,bleaseURL,residentFileName,residentURL).then((response) => {
+        console.log(response);
+
+        setActiveStep(activeStep + 1);
+        navigate("/home/kyc/declaration");
+        if (response.data.flag === false) {
+            window.alert("document already uploaded !")
+        }
+    }).catch(error => {
+        console.log(error);
+    }).finally(() => {
+        window.alert("seller document successfull !")
+        setLoading(false)
+    })   ;
+    
+};
 
     return (
 
         <>
             <div className="flex gap-10 mt-4">
                 <FormControl variant="standard" >
-                    <form className='mt-5 ml-8' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='mt-5 ml-8' onSubmit={handleUpload}>
                         <ThemeProvider theme={CustomFontTheme}>
                             <div className="flex flex-col gap-10 ">
                                 <div className="flex flex-row gap-10 ">
@@ -65,7 +109,7 @@ function UserDocument(data) {
                                                 <div className="img-holder  w-full h-full" >
                                                     <img src={dummyImg2} alt="" id="img" className="img" style={{ width: '120px', height: '120px' }} />
                                                 </div>
-                                                <input type="file" id="input" accept="image/*" name="image-upload" hidden="yes" onChange={imageHandler} />
+                                                <input type="file" id="input" accept="image/*" name="image-upload" hidden="yes" className="input" onChange={imageHandler} />
                                                 <label for="input" className='flex justify-center  documentButton text-oswald w-[120px] mt-4  '>Upload
                                                 </label>
                                             </div>
@@ -74,7 +118,7 @@ function UserDocument(data) {
                                     <div className='mt-8 display-flex justify-content gap-15 ml-20'>
                                         <div className="flex ml-12  gap-20"  >
                                             <typography className="font-bold!important">Driver License</typography>
-                                            <input type="file" id="driverlic" hidden="yes"
+                                            <input type="file" id="driverlic" hidden="yes" className=""
                                                 value={userDocDetails.driverlic}
                                                 onChange={(e) => { setUserDocDetails({ ...userDocDetails, driverlic: e.target.value }) }} />
                                             <label for='driverlic' className='flex justify-center ml-20 documentButton text-oswald w-[120px]'>  Browse</label>
@@ -97,8 +141,11 @@ function UserDocument(data) {
                                 </div>
                                 <div className="mt-[144px]">
                                     <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                                        Next
-                                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                                        {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin' /> :
+                                            <>
+                                                Next
+                                                <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                                            </>}
                                     </button>
                                 </div>
                             </div>

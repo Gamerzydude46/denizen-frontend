@@ -36,7 +36,7 @@ export const  updateSellerDetails = async (bname,bAdd,bcontact,bemail,bdist,bcit
             "business_name": bname, 
             "business_address": {
                 "city": bcity,
-                "contact": bcontact,
+                "contact": Number(bcontact),
                 "email": bemail,
                 "residence": bAdd,
                 "district": bdist
@@ -56,43 +56,35 @@ export const  updateSellerDetails = async (bname,bAdd,bcontact,bemail,bdist,bcit
 
 
 
-export const  sellerprofile = async (profile_picture)=>{
+
+
+
+export const  sellerResident = async (profileFileName,profileImageURL,bregFileName,bregDocURL,bleaseFileName,bleaseURL,residentFileName,residentURL)=>{
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: "http://localhost:8080/user/update",
+        url: "http://localhost:8080/documents/upload",
         headers: {
             'Content-Type': 'application/json'
         },
         data: {
-            "profile_picture": profile_picture
+            "profile_picture": {
+                "URL":profileImageURL,
+                "name":profileFileName
+                },
+            "resident": {
+                "URL":residentURL,
+                "name":residentFileName
+                   },
+            "liscence": {
+                "URL":bleaseURL,
+                "name":bleaseFileName
+                   },
+            "registration": {
+                "URL":bregDocURL,
+                "name":bregFileName
+                   }
             
-        }
-    };
-
-    try{
-        const response = await axios.post(config.url,config.data,{withCredentials: true})
-        console.log(response);
-        return (response);
-    }
-    catch(error){
-        console.log("Error occurred during API call:",error);
-    }
-}
-
-
-export const  sellerResident = async (registration,liscence,resident)=>{
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: "http://localhost:8080/user/update",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: {
-            "resident": resident,
-            "liscence": liscence,
-            "registration": registration,
             
         }
     };

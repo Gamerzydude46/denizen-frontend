@@ -4,6 +4,7 @@ import MyCard from '../components/MyCard';
 import MyData from '../components/MyData';
 
 const cardData = MyData.map((data) => {
+    
     return (
         <MyCard
             key={data.key}

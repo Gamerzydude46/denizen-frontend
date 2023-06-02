@@ -1,9 +1,18 @@
 import React from "react";
 import manonphone from '../../assets/images/manonphone.png';
 import { useNavigate } from "react-router";
-
+import { insertSeller } from "../../services/seller";
 
 const Welcome = (data) =>{
+    const register=(e)=>{
+        e.preventDefault();
+        insertSeller().then((response)=>{
+            console.log(response);
+            navigate("/home/kyc"); 
+        }).catch(error => {
+            console.log(error);
+        })
+    };
     const navigate=useNavigate()
     return(
         <main className="h-full flex flex-row justify-between p-10 ">
@@ -21,7 +30,7 @@ const Welcome = (data) =>{
                 and aims to further strengthen this partnership.
                 </p>
                 <div className="flex flex-row mt-10 gap-x-10">
-                    <button className="bg-Primary_Red buttonWelcome" onClick={()=>navigate('/home/kyc')}>Register</button>
+                    <button className="bg-Primary_Red buttonWelcome" onClick={register}>Register</button>
                     <button className="bg-Primary_Grey buttonWelcome">Know More</button>
                 </div>
             </div>

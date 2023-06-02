@@ -35,6 +35,8 @@ function AboutUs() {
             console.log(error);
         })
     }
+
+    
         return (
             <Layout>
                 <h1>About us</h1>
