@@ -4,6 +4,8 @@ import axios from 'axios';
 export const createItem = async (
     item_name,
     delivery_address,
+    latitude,
+    longitude,
     item_cost,
     delivery_cost,
     distance,
@@ -23,6 +25,8 @@ export const createItem = async (
         data: {
             "item_name": item_name,
             "delivery_address": delivery_address,
+            "latitude": Number(latitude),
+            "longitude": Number(longitude),
             "item_cost": item_cost,
             "delivery_cost": delivery_cost,
             "distance": distance,

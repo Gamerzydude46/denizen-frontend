@@ -61,13 +61,13 @@ function UserDocument() {
     const profileImageURL = await uploadImage(profileFilePointer);
 
     // business registration  
-    const bregFilePointer = getFiles('.bregdoc');
-    const bregFileName = getFileName('.bregdoc');
+    const bregFilePointer = getFiles('.vreg');
+    const bregFileName = getFileName('.vreg');
     const bregDocURL = await uploadImage(bregFilePointer);
     
     // business lease 
-    const bleaseFilePointer = getFiles('.blease');
-    const bleaseFileName = getFileName('.blease');
+    const bleaseFilePointer = getFiles('.driverlic');
+    const bleaseFileName = getFileName('.driverlic');
     const bleaseURL = await uploadImage(bleaseFilePointer);
     
     // resident doc 
@@ -88,7 +88,7 @@ function UserDocument() {
     }).catch(error => {
         console.log(error);
     }).finally(() => {
-        window.alert("seller document successfull !")
+        window.alert("User document successfull !")
         setLoading(false)
     })   ;
     
@@ -118,21 +118,21 @@ function UserDocument() {
                                     <div className='mt-8 display-flex justify-content gap-15 ml-20'>
                                         <div className="flex ml-12  gap-20"  >
                                             <typography className="font-bold!important">Driver License</typography>
-                                            <input type="file" id="driverlic" hidden="yes" className=""
+                                            <input type="file" id="driverlic" hidden="yes" className="driverlic"
                                                 value={userDocDetails.driverlic}
                                                 onChange={(e) => { setUserDocDetails({ ...userDocDetails, driverlic: e.target.value }) }} />
                                             <label for='driverlic' className='flex justify-center ml-20 documentButton text-oswald w-[120px]'>  Browse</label>
                                         </div>
                                         <div className="flex ml-12 mt-3 gap-10"  >
                                             <typography className="font-mfont-bold!important">Vehicle Registration Document</typography>
-                                            <input type="file" id="vreg" hidden="yes"
+                                            <input type="file" id="vreg" hidden="yes" className="vreg"
                                                 value={userDocDetails.vreg}
                                                 onChange={(e) => { setUserDocDetails({ ...userDocDetails, vreg: e.target.value }) }} />
                                             <label for='vreg' className='flex justify-center  documentButton text-oswald w-[120px]   '>Browse</label>
                                         </div>
                                         <div className="flex ml-12 mt-3 gap-20" >
                                             <typography className="font-extrabold!important" >Resident Ceritificate</typography>
-                                            <input type="file" id="resident" hidden="yes"
+                                            <input type="file" id="resident" hidden="yes" className="resident"
                                                 value={userDocDetails.resident}
                                                 onChange={(e) => { setUserDocDetails({ ...userDocDetails, resident: e.target.value }) }} />
                                             <label for='resident' className='flex justify-center ml-9 documentButton text-oswald w-[120px]  '> Browse</label>
