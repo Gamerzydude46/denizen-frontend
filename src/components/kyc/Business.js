@@ -42,11 +42,10 @@ function Business() {
         bcity: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
     }).required();
 
-    React.useEffect(() => {
-        setBusinessDetails({ ...businessDetails, ...mainDetails.businessDetails })
-        setActiveStep(2)
-    }, [])
-
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const navigate = useNavigate();
+    const [msg,setMsg] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
     const [geoLocationQuery, setGeoLocationQuery] = useState(undefined);
     const [geoLocationResult, setGeoLocationResult] = useState([]);
     const [geoLocationLoading, setGeoLocationLoading] = useState(false);
@@ -67,12 +66,11 @@ function Business() {
         }
     }, [geoLocationQuery]);
 
+    React.useEffect(() => {
+        setBusinessDetails({ ...businessDetails, ...mainDetails.businessDetails })
+        setActiveStep(2)
+    }, [])
 
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-    const navigate = useNavigate();
-    const [msg,setMsg] = React.useState(true);
-    const [loading, setLoading] = React.useState(false);
 
 
     const onSubmit = (data) => {

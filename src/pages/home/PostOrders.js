@@ -121,7 +121,7 @@ function PostOrders() {
         const imageURL = await uploadImage(filePointer);
         createItem(details.itemName,details.recieverName, details.contact,details.address,details.latitude,details.longitude,details.sellingCost,details.charges,details.distance,details.date,details.time,details.category,fileName,imageURL).then((response) => {
             
-            console.log(response.flag);
+            console.log(response);
             window.alert("Post created Succefully !")
             // navigate("/");
             
@@ -236,7 +236,7 @@ function PostOrders() {
                                                 placeholder="Location"
                                                 // {...register("address","latitude","longitude")}
 
-                                                value={details.address}
+                                                // value={details.address}
                                                 onChange={(e) => setGeoLocationQuery(e.target.value)}
                                             />
                                             <div className="absolute h-fit w-full bg-White text-black top-[50px] rounded-xl shadow-md group-hover:block hidden p-4 space-y-2">
