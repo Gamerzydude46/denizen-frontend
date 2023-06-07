@@ -3,9 +3,9 @@ export function calculateCharges(d, category) {
         const lowerlim = [0, 11, 51, 101];
         const upperlim = [10, 50, 100, 200];
         const cats = {
-            1: [5, 1.2, 1.3, 0.4],
-            2: [7, 1.5, 1.4, 0.6],
-            3: [14, 6, 5, 4]
+            3: [5, 1.2, 1.3, 0.4],
+            1: [7, 1.5, 1.4, 0.6],
+            2: [14, 6, 5, 4]
         }
         var cat;
         if (category == 'small') {
