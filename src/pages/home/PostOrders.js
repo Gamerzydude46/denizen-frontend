@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import girlwithlaptop from "../../assets/images/girlwithaptop.png";
 
@@ -77,7 +77,7 @@ function PostOrders() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
-
+    const addRef = useRef(null)
     const [gen, setGen] = React.useState("");
     const [geoLocationQuery, setGeoLocationQuery] = useState(undefined);
     const [geoLocationResult, setGeoLocationResult] = useState([]);
@@ -235,7 +235,7 @@ function PostOrders() {
                                             <input
                                                 placeholder="Location"
                                                 // {...register("address","latitude","longitude")}
-
+                                                ref={addRef}
                                                 // value={details.address}
                                                 onChange={(e) => setGeoLocationQuery(e.target.value)}
                                             />
@@ -258,7 +258,8 @@ function PostOrders() {
                                                                             longitude: d.cordinates[1],
 
                                                                         }));
-                                                                        window.alert(d.place)
+                                                                        addRef.current.value=d.place
+                                                                        // window.alert(d.place)
                                                                         
                                                                     }}
                                                                 >
