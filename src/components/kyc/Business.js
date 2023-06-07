@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import building from '../../assets/icons/building.svg';
@@ -31,7 +31,7 @@ const CustomFontTheme = createTheme({
 function Business() {
     const [businessDetails, setBusinessDetails] = useState({ bname: '', bAdd: '',longitude:'',latitude:'', bcontact: '', bemail: '', bdist: '', bcity: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
-
+    const addRef=useRef(null)
 
     const schema = yup.object({
         bname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
@@ -138,7 +138,8 @@ function Business() {
                                                 FormHelperTextProps={{
                                                     style: { fontSize: 10 }
                                                 }}
-                                                value={businessDetails.bAdd}
+                                                ref={addRef}
+                                                // value={businessDetails.bAdd}
                                                 onChange={(e) => setGeoLocationQuery(e.target.value)}
 
                                                 // onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
@@ -162,7 +163,7 @@ function Business() {
                                                                             longitude: d.cordinates[1],
 
                                                                         }));
-                                                                        window.alert(d.place)
+                                                                        addRef.current.target.value=d.place
                                                                         
                                                                     }}
                                                                 >
