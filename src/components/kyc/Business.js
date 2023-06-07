@@ -138,8 +138,7 @@ function Business() {
                                                 FormHelperTextProps={{
                                                     style: { fontSize: 10 }
                                                 }}
-                                                ref={addRef}
-                                                // value={businessDetails.bAdd}
+                                                inputRef={addRef}
                                                 onChange={(e) => setGeoLocationQuery(e.target.value)}
 
                                                 // onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
@@ -163,8 +162,7 @@ function Business() {
                                                                             longitude: d.cordinates[1],
 
                                                                         }));
-                                                                        addRef.current.target.value=d.place
-                                                                        
+                                                                        addRef.current.value=d.place
                                                                     }}
                                                                 >
                                                                     {d.place}
