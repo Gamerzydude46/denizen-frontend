@@ -3,6 +3,8 @@ import axios from 'axios';
 
 export const createItem = async (
     item_name,
+    recieverName,
+    recieverContact,
     delivery_address,
     latitude,
     longitude,
@@ -24,6 +26,9 @@ export const createItem = async (
         },
         data: {
             "item_name": item_name,
+            "reciever":{"name":recieverName,
+                        "contact": recieverContact
+                        },
             "delivery_address": delivery_address,
             "latitude": Number(latitude),
             "longitude": Number(longitude),
@@ -41,6 +46,7 @@ export const createItem = async (
     };
 
     try{
+        console.log(config.data)
         const response = await axios.post(config.url,config.data,{withCredentials: true})
         return (response);
     }
