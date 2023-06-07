@@ -18,7 +18,8 @@ import { createTheme } from "@mui/material/styles";
 import { useState } from 'react';
 import { updateSellerDetails } from '../../services/seller';
 import load from '../../assets/icons/loader-white.svg';
-
+import { getGeoLocations } from "../../services/map-utils";
+import { useEffect } from 'react';
 
 const CustomFontTheme = createTheme({
     typography: {
@@ -28,7 +29,7 @@ const CustomFontTheme = createTheme({
 });
 
 function Business() {
-    const [businessDetails, setBusinessDetails] = useState({ bname: '', bAdd: '', bcontact: '', bemail: '', bdist: '', bcity: '' });
+    const [businessDetails, setBusinessDetails] = useState({ bname: '', bAdd: '',longitude:'',latitude:'', bcontact: '', bemail: '', bdist: '', bcity: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
 
 
@@ -46,6 +47,28 @@ function Business() {
         setActiveStep(2)
     }, [])
 
+    const [geoLocationQuery, setGeoLocationQuery] = useState(undefined);
+    const [geoLocationResult, setGeoLocationResult] = useState([]);
+    const [geoLocationLoading, setGeoLocationLoading] = useState(false);
+
+    //gets location based on text
+    useEffect(() => {
+        try {
+            if (geoLocationQuery) {
+                (async () => {
+                    setGeoLocationLoading(true);
+                    let res = await getGeoLocations(geoLocationQuery);
+                    setGeoLocationLoading(false);
+                    setGeoLocationResult(res);
+                })();
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }, [geoLocationQuery]);
+
+
+
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
     const [msg,setMsg] = React.useState(true);
@@ -54,7 +77,7 @@ function Business() {
 
     const onSubmit = (data) => {
         setLoading(true);
-        updateSellerDetails(data.bname, data.bAdd, data.bcontact, data.bemail, data.bdist,data.bcity).then((response) => {
+        updateSellerDetails(data.bname, data.bAdd,data.longitude,data.latitude, data.bcontact, data.bemail, data.bdist,data.bcity).then((response) => {
             console.log(response);
             setMsg(true);
             setActiveStep(activeStep + 1)
@@ -101,10 +124,11 @@ function Business() {
                                 </div>
                                 <div className="flex flex-row gap-10">
                                     <div className='mt-4'>
-                                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className="custom-form-wrap group relative">
                                             <img src={building} alt='navigate back' className={errors?.bAdd ? 'mb-6 mr-2 h-[20px]' : 'mr-2 h-[20px]'} />
                                             <TextField
                                                 id="bAdd"
+                                                placeholder='Location'
                                                 label="Address of business/shop"
                                                 variant="standard"
                                                 sx={{ width: '600px' }}
@@ -117,8 +141,38 @@ function Business() {
                                                     style: { fontSize: 10 }
                                                 }}
                                                 value={businessDetails.bAdd}
-                                                onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
+                                                onChange={(e) => setGeoLocationQuery(e.target.value)}
+
+                                                // onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
                                             />
+                                             <div className="absolute z-10 h-fit w-full bg-White text-black top-[50px] rounded-xl shadow-md group-hover:block hidden p-4 space-y-2">
+                                                {geoLocationLoading
+                                                    ? "Loading..."
+                                                    : geoLocationResult.length === 0
+                                                        ? "No result"
+                                                        : geoLocationResult.map((d) => {
+                                                            return (
+                                                                <button
+                                                                    className="w-full py-2 px-1 text-black text-left hover:bg-Grad_Blue/10"
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        //set selected location
+                                                                        setBusinessDetails((prev) => ({
+                                                                            ...prev,
+                                                                            bAdd: d.place,
+                                                                            latitude: d.cordinates[0],
+                                                                            longitude: d.cordinates[1],
+
+                                                                        }));
+                                                                        window.alert(d.place)
+                                                                        
+                                                                    }}
+                                                                >
+                                                                    {d.place}
+                                                                </button>
+                                                            );
+                                                        })}
+                                            </div>
                                         </Box>
                                     </div>
                                 </div>
