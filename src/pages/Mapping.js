@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MapBox from "../components/MapBox";
-import { CalculateRouteMetrics } from "../services/map-utils";
+import { calculateRouteMetrics } from "../services/map-utils";
 
 function Mapping() {
   useEffect(() => {
     (async () => {
-      const res = await CalculateRouteMetrics(
+      const res = await calculateRouteMetrics(
         [73.7928177, 15.5949912],
         [73.801293, 15.594164]
       );

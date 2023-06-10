@@ -26,13 +26,14 @@ import userColor from "../../assets/icons/userColor.svg";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { getGeoLocations } from "../../services/map-utils";
+import { calculateRouteMetrics, getGeoLocations } from "../../services/map-utils";
 import { createItem } from "../../services/postItems"
-import { getFiles,getFileName,uploadImage } from "../../services/web3.storages";
+import { getFiles, getFileName, uploadImage } from "../../services/web3.storages";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import load from '../../assets/icons/loader-white.svg';
+import axios from "axios";
 
 const style = {
     position: "absolute",
@@ -60,25 +61,25 @@ function PostOrders() {
 
     const [details, setDetails] = React.useState({
         itemName: undefined,
-        recieverName:undefined,
+        recieverName: undefined,
         contact: undefined,
         sellingCost: undefined,
         date: undefined,
         time: undefined,
         category: undefined,
-        distance:undefined,
+        distance: undefined,
         charges: undefined,
-        address:undefined,
+        address: undefined,
         latitude: undefined,
         longitude: undefined
     });
     const schema = yup.object({
-       }).required();
+    }).required();
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     const addRef = useRef(null)
-    const [gen, setGen] = React.useState("");
+    const [gen, setGen] = React.useState({});
     const [geoLocationQuery, setGeoLocationQuery] = useState(undefined);
     const [geoLocationResult, setGeoLocationResult] = useState([]);
     const [geoLocationLoading, setGeoLocationLoading] = useState(false);
@@ -88,6 +89,11 @@ function PostOrders() {
     useEffect(() => {
         try {
             if (geoLocationQuery) {
+                axios.get("http://localhost:8080/seller/getDistance", { withCredentials: true }).then(({ data }) => {
+                    console.log(data)
+                    setGen({ x: data.data.x, y: data.data.y })
+                }).catch((err) => console.log(err));
+
                 (async () => {
                     setGeoLocationLoading(true);
                     let res = await getGeoLocations(geoLocationQuery);
@@ -111,7 +117,7 @@ function PostOrders() {
         reader.readAsDataURL(file);
     }
 
-    const submitHandler = async(details) => {
+    const submitHandler = async () => {
         // setDetails(details);
         console.log(details);
 
@@ -119,12 +125,12 @@ function PostOrders() {
         const filePointer = getFiles('.itemImg');
         const fileName = getFileName('.itemImg');
         const imageURL = await uploadImage(filePointer);
-        createItem(details.itemName,details.recieverName, details.contact,details.address,details.latitude,details.longitude,details.sellingCost,details.charges,details.distance,details.date,details.time,details.category,fileName,imageURL).then((response) => {
-            
+        createItem(details.itemName, details.recieverName, details.contact, details.address, details.latitude, details.longitude, details.sellingCost, details.charges, details.distance, details.date, details.time, details.category, fileName, imageURL).then((response) => {
+
             console.log(response);
             window.alert("Post created Succefully !")
             // navigate("/");
-            
+
         }).catch(error => {
             console.log(error);
         }).finally(() => {
@@ -172,7 +178,7 @@ function PostOrders() {
                                             name="file"
                                             id="file"
                                             className="itemImg inputfile hidden"
-                                            
+
                                             onChange={imageHandler}
                                         />
                                         <label for="file" className="upload-btn">
@@ -187,7 +193,7 @@ function PostOrders() {
                                                 {...register("itemName")}
                                                 value={details.itemName}
                                                 onChange={(e) =>
-                                                    setDetails((prev)=>({ ...prev, itemName: e.target.value }))
+                                                    setDetails((prev) => ({ ...prev, itemName: e.target.value }))
                                                 }
                                             />
                                         </div>
@@ -200,10 +206,10 @@ function PostOrders() {
                                                 />
                                                 <input
                                                     placeholder="Reciever Name"
-                                                    {...register("recieverName")}                                                    
+                                                    {...register("recieverName")}
                                                     value={details.recieverName}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev, recieverName: e.target.value }))
+                                                        setDetails((prev) => ({ ...prev, recieverName: e.target.value }))
                                                     }
                                                 />
                                             </div>
@@ -218,7 +224,8 @@ function PostOrders() {
                                                     {...register("contact")}
                                                     value={details.contact}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev,
+                                                        setDetails((prev) => ({
+                                                            ...prev,
                                                             contact: e.target.value,
                                                         }))
                                                     }
@@ -248,19 +255,24 @@ function PostOrders() {
                                                             return (
                                                                 <button
                                                                     className="w-full py-2 px-1 text-black text-left hover:bg-Grad_Blue/10"
-                                                                    onClick={(e) => {
+                                                                    onClick={async      (e) => {
                                                                         e.preventDefault();
+                                                                        console.log(`GEN`, gen)
+                                                                        const metrics = await calculateRouteMetrics([gen.x, gen.y], [d.cordinates[0], d.cordinates[1]])
+                                                                        console.log(`METRICS`, metrics)
+
                                                                         //set selected location
                                                                         setDetails((prev) => ({
                                                                             ...prev,
                                                                             address: d.place,
                                                                             latitude: d.cordinates[0],
                                                                             longitude: d.cordinates[1],
+                                                                            distance: metrics.distance
 
                                                                         }));
-                                                                        addRef.current.value=d.place
+                                                                        addRef.current.value = d.place
                                                                         // window.alert(d.place)
-                                                                        
+
                                                                     }}
                                                                 >
                                                                     {d.place}
@@ -282,7 +294,8 @@ function PostOrders() {
                                                     {...register("sellingcost")}
                                                     value={details.sellingCost}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev,
+                                                        setDetails((prev) => ({
+                                                            ...prev,
                                                             sellingCost: e.target.value,
                                                         }))
                                                     }
@@ -301,7 +314,7 @@ function PostOrders() {
                                                     {...register("date")}
                                                     value={details.date}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev,date: e.target.value }))
+                                                        setDetails((prev) => ({ ...prev, date: e.target.value }))
                                                     }
                                                 />
                                             </div>
@@ -318,7 +331,7 @@ function PostOrders() {
                                                     {...register("time")}
                                                     value={details.time}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev, time: e.target.value }))
+                                                        setDetails((prev) => ({ ...prev, time: e.target.value }))
                                                     }
                                                 />
                                             </div>
@@ -337,7 +350,8 @@ function PostOrders() {
                                                     {...register("category")}
                                                     value={details.category}
                                                     onChange={(value) => {
-                                                        setDetails((prev)=>({ ...prev,
+                                                        setDetails((prev) => ({
+                                                            ...prev,
                                                             category: value.target.value,
                                                             charges: calculateCharges(
                                                                 details.distance,
@@ -355,6 +369,7 @@ function PostOrders() {
                                                 <img
                                                     src={distance}
                                                     alt="distance"
+                                                    disabled
                                                     className={"mr-2 ml-1 h-[24px]"}
                                                 />
                                                 <input
@@ -362,10 +377,10 @@ function PostOrders() {
                                                     {...register("distance")}
                                                     value={details.distance}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev, distance: e.target.value,
-                                                            charges: calculateCharges(
-                                                            details.distance,
-                                                            details.category) }))
+                                                        setDetails((prev) => ({
+                                                            ...prev, distance: e.target.value,
+                                                           
+                                                        }))
                                                     }
                                                 />
                                             </div>
@@ -381,36 +396,36 @@ function PostOrders() {
                                                     {...register("charges")}
                                                     value={details.charges}
                                                     onChange={(e) =>
-                                                        setDetails((prev)=>({ ...prev, charges: e.target.value }))
+                                                        setDetails((prev) => ({ ...prev, charges: e.target.value }))
                                                     }
                                                     defaultValue={
                                                         details.category ? details.category : ""
                                                     }
-                                                    
-                                                    // onClick={() =>
-                                                    //     setDetails({
-                                                    //         ...details,
-                                                    //         charges: calculateCharges(
-                                                    //             details.distance,
-                                                    //             details.category
-                                                    //         ),
-                                                    //     })
-                                                    // }
+
+                                                // onClick={() =>
+                                                //     setDetails({
+                                                //         ...details,
+                                                //         charges: calculateCharges(
+                                                //             details.distance,
+                                                //             details.category
+                                                //         ),
+                                                //     })
+                                                // }
                                                 />
                                             </div>
                                         </div>
-                                        
+
                                         <button
                                             type="button"
                                             className="absolute post-order-btn"
                                             onClick={submitHandler}
                                         >
                                             {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin' /> :
-                                            <>
-                                               <img src={deadline} alt="deadline" height="30" />
-                                                POST ORDERS TO FEED
-                                            </>}
-                                            
+                                                <>
+                                                    <img src={deadline} alt="deadline" height="30" />
+                                                    POST ORDERS TO FEED
+                                                </>}
+
                                         </button>
                                     </div>
                                 </div>

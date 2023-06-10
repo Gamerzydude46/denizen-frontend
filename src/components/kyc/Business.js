@@ -29,9 +29,9 @@ const CustomFontTheme = createTheme({
 });
 
 function Business() {
-    const [businessDetails, setBusinessDetails] = useState({ bname: '', bAdd: '',longitude:'',latitude:'', bcontact: '', bemail: '', bdist: '', bcity: '' });
+    const [businessDetails, setBusinessDetails] = useState({ bname: '', bAdd: '', longitude: '', latitude: '', bcontact: '', bemail: '', bdist: '', bcity: '' });
     const [activeStep, setActiveStep, mainDetails, setMainDetails] = useOutletContext();
-    const addRef=useRef(null)
+    const addRef = useRef(null)
 
     const schema = yup.object({
         bname: yup.string().matches(/^[A-Za-z]+$/i, "*Numbers not allowed").required("*required"),
@@ -44,7 +44,7 @@ function Business() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const navigate = useNavigate();
-    const [msg,setMsg] = React.useState(true);
+    const [msg, setMsg] = React.useState(true);
     const [loading, setLoading] = React.useState(false);
     const [geoLocationQuery, setGeoLocationQuery] = useState(undefined);
     const [geoLocationResult, setGeoLocationResult] = useState([]);
@@ -66,6 +66,10 @@ function Business() {
         }
     }, [geoLocationQuery]);
 
+    useEffect(() => {
+        console.log(geoLocationResult)
+    }, [geoLocationResult])
+
     React.useEffect(() => {
         setBusinessDetails({ ...businessDetails, ...mainDetails.businessDetails })
         setActiveStep(2)
@@ -73,9 +77,9 @@ function Business() {
 
 
 
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         setLoading(true);
-        updateSellerDetails(data.bname, data.bAdd,data.longitude,data.latitude, data.bcontact, data.bemail, data.bdist,data.bcity).then((response) => {
+        updateSellerDetails(businessDetails.bname, businessDetails.bAdd, businessDetails.longitude, businessDetails.latitude, businessDetails.bcontact, businessDetails.bemail, businessDetails.bdist, businessDetails.bcity).then((response) => {
             console.log(response);
             setMsg(true);
             setActiveStep(activeStep + 1)
@@ -86,7 +90,7 @@ function Business() {
         }).finally(() => {
             window.alert("Business Details info successfull !")
             setLoading(false)
-        })        
+        })
     };
 
     return (
@@ -106,7 +110,7 @@ function Business() {
                                                 label="Registered  Name of Business/Shop"
                                                 variant="standard"
                                                 sx={{ width: '600px' }}
-                                                inputProps={{ style: { fontSize: 18} }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bname")}
                                                 helperText={errors.bname?.message}
@@ -141,9 +145,9 @@ function Business() {
                                                 inputRef={addRef}
                                                 onChange={(e) => setGeoLocationQuery(e.target.value)}
 
-                                                // onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
+                                            // onChange={(e) => { setBusinessDetails({ ...businessDetails, bAdd: e.target.value }) }}
                                             />
-                                             <div className="absolute z-10 h-fit w-full bg-White text-black top-[50px] rounded-xl shadow-md group-hover:block hidden p-4 space-y-2">
+                                            <div className="absolute z-10 h-fit w-full bg-White text-black top-[50px] rounded-xl shadow-md group-hover:block hidden p-4 space-y-2">
                                                 {geoLocationLoading
                                                     ? "Loading..."
                                                     : geoLocationResult.length === 0
@@ -155,14 +159,17 @@ function Business() {
                                                                     onClick={(e) => {
                                                                         e.preventDefault();
                                                                         //set selected location
-                                                                        setBusinessDetails((prev) => ({
-                                                                            ...prev,
-                                                                            bAdd: d.place,
-                                                                            latitude: d.cordinates[0],
-                                                                            longitude: d.cordinates[1],
+                                                                        setBusinessDetails((prev) => {
+                                                                            console.log(`COORDINATES ${d.cordinates}`)
+                                                                            return {
+                                                                                ...prev,
+                                                                                bAdd: d.place,
+                                                                                latitude: d.cordinates[0],
+                                                                                longitude: d.cordinates[1],
 
-                                                                        }));
-                                                                        addRef.current.value=d.place
+                                                                            }
+                                                                        });
+                                                                        addRef.current.value = d.place
                                                                     }}
                                                                 >
                                                                     {d.place}
@@ -204,7 +211,7 @@ function Business() {
                                                 label=" e.g. johndoe@gmail.com"
                                                 variant="standard"
                                                 sx={{ width: '250px' }}
-                                                inputProps={{ style: { fontSize: 18} }}
+                                                inputProps={{ style: { fontSize: 18 } }}
                                                 InputLabelProps={{ style: { fontSize: 18, color: '#8D99AE' } }}
                                                 {...register("bemail")}
                                                 helperText={errors.bemail?.message}
@@ -269,20 +276,20 @@ function Business() {
                             </div>
                             <div className='mt-10  fixed'>
 
-                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                            { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : 
-                            <>
-                             Next
-                             <img src={nextNav} alt='navigate back' className='mr-2 w-9' /> 
-                            </>}    
-                            </button>
+                                <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                                    {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin' /> :
+                                        <>
+                                            Next
+                                            <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                                        </>}
+                                </button>
                             </div>
 
 
                         </ThemeProvider>
                         <div className={!msg ? 'animate-pulse font-medium font-maven mt-3 border-2 p-1 w-[535px] border-Green rounded-lg flex justify-center bg-Light_Green' : 'hidden'}>
-                        {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
-                    </div>
+                            {msg ? 'Account created Succefully !' : 'User already exist go back & Login !'}
+                        </div>
                     </form>
 
                 </FormControl>

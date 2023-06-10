@@ -36,8 +36,8 @@ export const  updateSellerDetails = async (bname,bAdd,longitude,latitude,bcontac
             "business_name": bname, 
             "business_address": {
                 "city": bcity,
-                "latitude":latitude,
-                "longitude":longitude,
+                "latitude":Number(latitude),
+                "longitude":Number(longitude),
                 "contact": Number(bcontact),
                 "email": bemail,
                 "residence": bAdd,

@@ -29,7 +29,7 @@ function Approved(data) {
         verified().then((response) => {
             console.log(response);
             setActiveStep(activeStep + 1)
-            navigate("/home/kyc/processing")
+            navigate("/home")
         }).catch(error => {
             console.log(error);
         }).finally(() => {

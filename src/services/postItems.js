@@ -26,8 +26,9 @@ export const createItem = async (
         },
         data: {
             "item_name": item_name,
-            "reciever":{"name":recieverName,
-                        "contact": recieverContact
+            "reciever":{
+                        "name":recieverName,
+                        "contact": Number(recieverContact)
                         },
             "delivery_address": delivery_address,
             "latitude": Number(latitude),

@@ -1,11 +1,11 @@
-export function calculateCharges(d, category) {
+export function calculateCharges(d, category, gen) {
     try {
         const lowerlim = [0, 11, 51, 101];
         const upperlim = [10, 50, 100, 200];
         const cats = {
-            3: [5, 1.2, 1.3, 0.4],
             1: [7, 1.5, 1.4, 0.6],
-            2: [14, 6, 5, 4]
+            2: [14, 6, 5, 4],
+            3: [5, 1.2, 1.3, 0.4]
         }
         var cat;
         if (category == 'small') {
@@ -26,6 +26,7 @@ export function calculateCharges(d, category) {
             } else {
                 c = r
             }
+
             p = p + c * cats[cat][i];
             if (rd < r)
                 break;
