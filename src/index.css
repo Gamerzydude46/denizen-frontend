@@ -37,7 +37,7 @@ code {
 }
 
 .rateButton{
-  @apply   text-White text-lg font-semibold bg-Primary_Red rounded-md  h-8 hover:bg-Primary_Grey !important;
+  @apply   text-White text-sm font-semibold bg-Primary_Red rounded-md  h-6 hover:bg-Primary_Grey !important;
 }
 
 .documentButton{

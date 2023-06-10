@@ -92,9 +92,9 @@ function Edit(props) {
 
   return (
     <div>
-      <div className="relative right-[120px] top-[115px] ">
+      <div className="relative right-[105px] top-[95px] ">
         <button
-          className="flex justify-center gap-1 flex-row text-oswald w-[140px] pt-2 p-4 accessButton align-items-flex-end"
+          className="flex justify-center gap-1 flex-row text-oswald w-[140px] pt-2 p-2 accessButton align-items-flex-end"
           onClick={handleOpenModal}>
           Edit
         </button>
@@ -126,64 +126,64 @@ function Card(props) {
   } = props;
 
   return (
-    <div className="z-10 relative flex items-start flex-shrink-0 w-[933px] h-[228px] top-[25px] left-[65px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-l-4 border-b-4">
+    <div className="z-10 relative flex items-start flex-shrink-0 w-[890px] h-[195px] top-[25px] left-[60px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-l-4 border-b-4">
       <img
-        className="absolute top-4 left-6 w-[193px] h-[193px] rounded-lg shadow-md"
+        className="absolute top-2 left-6 w-[160px] h-[160px] rounded-lg shadow-md"
         src={image}
         alt={item_title}/>
-      <div className="absolute top-4 left-[253px]">
+      <div className="absolute top-2 left-[215px]">
         <h2 className="text-2xl font-medium font-maven text-black]">{item_title}</h2>
         <div className="del-address">
-          <h3 className="absolute top-[37px] left-[29px] w-[200px] text-[17px] font-semibold font-maven text-Primary_Red ">
+          <h3 className="absolute top-[35px] left-[29px] w-[200px] text-[17px] font-semibold font-maven text-Primary_Red ">
             Delivery Address:
           </h3>
-          <img alt="loc" src={location} className="absolute top-[42px] left-[2px] w-5 h-5 mr-1" />
-          <p className="absolute top-[54px] left-[29px] w-[300px] font-normal text-[18px] text-left font-maven text-lg flex items-center mt-2 text-Primary_Grey">
+          <img alt="loc" src={location} className="absolute top-[40px] left-[2px] w-5 h-5 mr-1" />
+          <p className="absolute top-[52px] left-[29px] w-[300px] font-normal text-[17px] text-left font-maven flex items-center mt-2 text-Primary_Grey">
             {del_address}
           </p>
         </div>
         <div className="del-by">
-          <h3 className="absolute top-[146px] left-[30px] w-[200px] text-[17px] font-semibold font-maven text-Grad_Blue">
+          <h3 className="absolute top-[118px] left-[30px] w-[200px] text-[17px] font-semibold font-maven text-Grad_Blue">
             Delivery By:
           </h3>
-          <img alt="sch" src={schedule} className="absolute top-[150px] left-[2px] w-5 h-5 mr-1" />
-          <p className="absolute top-[162px] left-[30px] w-[300px] font-normal text-[16px] text-left font-maven text-lg flex items-center mt-2 text-Primary_Grey">
+          <img alt="sch" src={schedule} className="absolute top-[123px] left-[2px] w-5 h-5 mr-1" />
+          <p className="absolute top-[137px] left-[30px] w-[300px] font-normal text-[16px] text-left font-maven flex items-center mt-2 text-Primary_Grey">
             {deliver_date} @{deliver_time}
           </p>
         </div>
       </div>
-      <div className="absolute top-4 right-0 flex items-start">
+      <div className="absolute top-2 right-2 flex items-start">
         <div className="selling-cost">
           <h3 className="absolute top-[5px] left-[-100px] w-[200px] text-[19px] font-semibold font-maven text-Green ">
             Selling Cost:
           </h3>
           <img alt="prc" src={priceTag} className="absolute top-[6px] left-[-138px] w-7 h-7 mr-1" />
-          <p className="absolute top-[38px] left-[-100px]">Rs: {selling_cost}/-</p>
+          <p className="absolute top-[35px] left-[-100px]">Rs: {selling_cost}/-</p>
         </div>
         <div className="del-charges">
-          <h3 className="absolute top-[75px] left-[-100px] w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
+          <h3 className="absolute top-[68px] left-[-100px] w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
             Delivery Charges:
           </h3>
-          <img alt="trc"src={transaction} className="absolute top-[75px] left-[-138px] w-6 h-6 mr-2"/>
-          <p className="absolute top-[105px] left-[-100px]">Rs: {delivery_charges}/-</p>
+          <img alt="trc"src={transaction} className="absolute top-[68px] left-[-138px] w-6 h-6 mr-2"/>
+          <p className="absolute top-[96px] left-[-100px]">Rs: {delivery_charges}/-</p>
         </div>
         {status === 'accepted' ? (
-          <div className="relative right-[120px] top-[115px] ">
-            <button className="flex justify-center gap-1 flex-row font-bold text-oswald w-[140px] pt-2 p-4 accessButton align-items-flex-end">
+          <div className="relative right-[105px] top-[95px] ">
+            <button className="flex justify-center gap-1 flex-row font-bold text-oswald w-[140px] pt-2 p-2 accessButton align-items-flex-end">
               View
             </button>
           </div>
         ) : (
           <Edit del_address={del_address} deliver_date={deliver_date} deliver_time={deliver_time} />
         )}
-        <div className="absolute right-[-87px] top-[80px] transform -translate-y-1/2">
+        <div className="absolute right-[-81px] top-[70px] transform -translate-y-1/2">
           {status === 'pending' ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[224px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[195px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
               <img src={stopwatch} alt="stopwatch" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p>Pending</p>
             </div>
           ) : (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[224px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[195px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
               <img src={check} alt="check" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p className=''>Accepted</p>
             </div>

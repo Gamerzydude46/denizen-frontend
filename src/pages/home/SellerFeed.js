@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import girlinbox from '../../assets/images/girlinbox.png';
 import deadline from '../../assets/icons/deadline.svg';
 import Card from '../../components/home/Sel_Card';
 import Data from '../../components/home/Sel_Data';
+//import { getItems } from "../../services/seller";
 
 const cardData = Data.map((data) => {
     return (
@@ -22,6 +23,26 @@ const cardData = Data.map((data) => {
 });
 
 function SellerFeed(){
+     /*const [cardData, setCardData] = useState([]);
+
+    useEffect(() => {
+        getItems().then((data) => {
+            data.map((item) => {
+                cardData.push(<Card
+                    key={item.key}
+                    image={item.image}
+                    item_title={item.item_title}
+                    del_address={item.del_address}
+                    deliver_date={item.deliver_date}
+                    deliver_time={item.deliver_time}
+                    selling_cost={item.selling_cost}
+                    delivery_charges={item.delivery_charges}
+                    status={item.status}
+                    />)
+            })
+        })
+    }, [])*/
+
     return(
         
         <main className="h-full w-full pb-16 flex flex-row padding-right-10 padding-top-5 fixed">
@@ -30,14 +51,14 @@ function SellerFeed(){
           </div>   
           
           <div className="fixed z-100 bottom-0 right-0">
-                <div className="bg-White rounded-t-full h-[550px] w-[1000px] "> 
-                    <img src={girlinbox} alt="girl in box" className="h-[520px] w-[550px] bottom-[140px] left-[430px] relative" /> 
+                <div className="bg-White rounded-t-full h-[500px] w-[1000px] "> 
+                    <img src={girlinbox} alt="girl in box" className="h-[450px] w-[470px] bottom-[90px] left-[510px] relative" /> 
                 </div> 
                 <button type="button" className="fixed justify-center flex-center bottom-[45px] right-[160px]">
-                 <NavLink to="/post-orders" className='flex justify-center gap-3 font-semibold cursor-pointer flex-row text-oswald w-[250px] pt-3 p-12 accessButton' >
+                 <NavLink to="/post-orders" className='flex justify-center gap-3 font-semibold cursor-pointer flex-row text-oswald w-[220px] pt-2 p-6 accessButton' >
                         Post Orders
                         <span className='ml-0'>
-                            <img src={deadline} alt='deadline' className='w-7 mt-1' />
+                            <img src={deadline} alt='deadline' className='w-6 mt-1' />
                         </span>
                 </NavLink>
                 </button>
