@@ -24,7 +24,7 @@ export const insertSeller = async (ref_id,ref_email)=>{
 }
 
 
-export const  updateSellerDetails = async (bname,bAdd,bcontact,bemail,bdist,bcity)=>{
+export const  updateSellerDetails = async (bname,bAdd,longitude,latitude,bcontact,bemail,bdist,bcity)=>{
     var config = {
         method: 'put',
         maxBodyLength: Infinity,
@@ -36,6 +36,8 @@ export const  updateSellerDetails = async (bname,bAdd,bcontact,bemail,bdist,bcit
             "business_name": bname, 
             "business_address": {
                 "city": bcity,
+                "latitude":Number(latitude),
+                "longitude":Number(longitude),
                 "contact": Number(bcontact),
                 "email": bemail,
                 "residence": bAdd,

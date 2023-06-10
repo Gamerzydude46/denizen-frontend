@@ -6,12 +6,17 @@ import { insertSeller } from "../../services/seller";
 const Welcome = (data) =>{
     const register=(e)=>{
         e.preventDefault();
+        if(data.type==="seller"){
         insertSeller().then((response)=>{
             console.log(response);
             navigate("/home/kyc"); 
         }).catch(error => {
             console.log(error);
         })
+        }
+        else{
+            navigate("/home/kyc"); 
+        }
     };
     const navigate=useNavigate()
     return(
