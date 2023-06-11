@@ -17,7 +17,8 @@ export function calculateCharges(d, category, gen) {
         } else {
             //error
         }
-        var rd = d, c;
+        var rd = Math.round(d/1000);
+        var  c;
         var p = 0;
         for (var i = 0; i < upperlim.length; i++) {
             var r = upperlim[i] - lowerlim[i];
