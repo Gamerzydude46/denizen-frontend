@@ -3,17 +3,37 @@ import location from '../../assets/icons/location.svg';
 import priceTag from '../../assets/icons/priceTag.svg';
 import transaction from '../../assets/icons/transaction.svg';
 import schedule from '../../assets/icons/schedule.svg';
+import axios from "axios";
+import { sellerResident } from '../../services/seller';
 
 function Card(props) {
   const {
     image,
+    item_id,
     item_title,
     del_address,
     deliver_date,
     deliver_time,
     selling_cost,
     delivery_charges,
+    seller_email
   } = props;
+  
+  const [loading, setLoading] = React.useState(false);
+
+  const handleAccept = async (e) => {
+    e.preventDefault();
+    setLoading(true)
+    axios.put("http://localhost:8080/postItems/accepted", {
+      item_id: item_id,
+      seller_email: seller_email
+
+    }, { withCredentials: true }).then((res) => {
+      console.log(res)
+      alert(`${res.data.message}  with order_Id ${item_id}`);
+      setLoading(false)
+    }).catch(err => console.log(err))
+  }
 
   return (
     <div className="z-10 relative flex items-start flex-shrink-0 w-[760px] h-[175px] top-[20px] left-[60px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
@@ -62,9 +82,14 @@ function Card(props) {
           <p className="absolute top-[87px] left-[-100px]">Rs: {delivery_charges}/-</p>
         </div>
           <div className="relative right-[110px] top-[95px] ">
-            <button className="flex justify-center gap-1 flex-row text-oswald w-[125px] pt-1 p-4 mt-7 text-White text-l font-semibold bg-Primary_Red rounded-md h-8 hover:bg-Primary_Grey align-items-flex-end">
-              Accept
-            </button>
+          <button
+            type="button"
+            onClick={handleAccept}
+            className="flex justify-center gap-1 flex-row text-oswald w-[125px] pt-1 p-4 mt-7 text-White text-l font-semibold bg-Primary_Red rounded-md h-8 hover:bg-Primary_Grey align-items-flex-end"
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "Accept"}
+          </button>
           </div>
       </div>
       </div>

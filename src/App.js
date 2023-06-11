@@ -24,7 +24,6 @@ import AboutUs from "./pages/AboutUs";
 import TrackOrders from "./pages/home/TrackOrders";
 import MyOrders from "./pages/MyOrders";
 import MyOrder from "./components/MyOrder";
-import Direction from "./components/Direction";
 import PostOrders from "./pages/home/PostOrders";
 import UserFeed from "./pages/home/UserFeed";
 import Mapping from "./pages/Mapping";
@@ -84,7 +83,6 @@ function App() {
 
         <Route path="/my-orders" element={<MyOrders />}>
           <Route path="/my-orders" element={<MyOrder />} />
-          <Route path="/my-orders/direction" element={<Direction />} />
         </Route>
 
         <Route path="/" element={<Access />}>

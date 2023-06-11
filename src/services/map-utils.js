@@ -1,3 +1,5 @@
+import axios from 'axios'; 
+
 export const calculateRouteMetrics = async (start, end) => {
   console.log(`START`, start, `END`, end);
   const query = await fetch(
@@ -21,3 +23,5 @@ export const getGeoLocations = async (q) => {
     return { cordinates: d.center, place: d.place_name };
   });
 };
+
+

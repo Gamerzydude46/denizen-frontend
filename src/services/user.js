@@ -27,7 +27,7 @@ export const createUser = async (fname,lname,email,password,type)=>{
     };
 
     try{
-        const response = await axios.post(config.url,config.data,{credentials: true})
+        const response = await axios.post(config.url,config.data,{withCredentials: true})
         return (response);
     }
     catch(error){
@@ -45,11 +45,11 @@ export const  updateUserDetails = async (mname,dob,gen,pan,adhar)=>{
             'Content-Type': 'application/json'
         },
         data: {
-            "mname":  mname,
+            "mname": mname,
             "dob":dob,
             "gender":gen,
             "pan":pan,
-            "adhar":adhar
+            "adhar": Number(adhar)
         }
     };
 
@@ -64,7 +64,7 @@ export const  updateUserDetails = async (mname,dob,gen,pan,adhar)=>{
 }
 
 
-export const  updateUserAddDetails = async (rAdd, state, dist, city, contact,pincode)=>{
+export const  updateUserAddDetails = async (rAdd, state, city, contact,pincode)=>{
     var config = {
         method: 'put',
         maxBodyLength: Infinity,
@@ -75,8 +75,8 @@ export const  updateUserAddDetails = async (rAdd, state, dist, city, contact,pin
         data: {
             address: {
                 "city":city,
-                "contact":contact,
-                "pincode":pincode,
+                "contact": Number(contact),
+                "pincode": Number(pincode),
                 "residence":rAdd,
                 "state":state,
             }

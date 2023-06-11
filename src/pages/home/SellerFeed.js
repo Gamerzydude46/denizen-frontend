@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import girlinbox from '../../assets/images/girlinbox.png';
+import noOrder from '../../assets/images/feedOp.jpg'
 import deadline from '../../assets/icons/deadline.svg';
 import Card from '../../components/home/Sel_Card';
-import Data from '../../components/home/Sel_Data';
 import axios from "axios";
 
-const cardData = Data.map((data) => {
-    return (
-        <Card
-            key={data.key}
-            image={data.image}
-            item_title={data.item_title}
-            del_address={data.del_address}
-            deliver_date={data.deliver_date}
-            deliver_time={data.deliver_time}
-            selling_cost={data.selling_cost}
-            delivery_charges={data.delivery_charges}
-            status={data.status}
-        />
-    );
-});
 
 function SellerFeed() {
     const [orders, setOrders] = useState([]);
@@ -51,7 +36,15 @@ function SellerFeed() {
                             status={order.accepted}
                             image={`https://${order.imageURL.name}.ipfs.w3s.link/${order.imageURL.URL}`}
                         />
-                    }) : "No Orders Yet head to Post Order to post the items !"
+                    }) :<div className=" z-10 relative flex items-start flex-shrink-0 w-[575px] h-[250px] top-[28px] left-[37px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-4">
+
+                    <img src={noOrder} alt="loading sense" className="h-full" />
+                        <div className=" mt-16 flex flex-col justify-center items-center content-center">
+                            <h1 className="font-oswald text-3xl font-medium ml-3 ">Oops !</h1>
+                            <h1 className="mt-5 font-oswald text-2xl font-medium ml-3">You have'nt Posted any Orders Yet</h1>
+                        </div>
+
+                </div>
                 }
             </div>
 

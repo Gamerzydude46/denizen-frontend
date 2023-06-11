@@ -8,12 +8,33 @@ import city from '../assets/icons/city.svg';
 import user from '../assets/icons/userColor.svg';
 import call from '../assets/icons/whatsapp.svg';
 import check from '../assets/icons/check.svg';
-import { NavLink } from 'react-router-dom';
+import axios from "axios";
+import { TextField, Box } from "@mui/material";
+import num from "../assets/icons/pin.svg";
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import MapBox from "../components/MapBox";
 
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 1000,
+  height: '95%',
+  bgcolor: '#EDF2F4',
+  border: '4px solid #EF233C',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "10px"
+};
 
 function MyCard(props) {
   const {
     image,
+    order_id,
+    seller_email,
     item_title,
     del_address,
     deliver_date,
@@ -21,12 +42,55 @@ function MyCard(props) {
     selling_cost,
     delivery_charges,
     status,
-    sel_address,
-    sel_contact,
     rcvr_name,
     rcvr_contact,
-    business_name
+    latitude,
+    longitude
+
   } = props;
+  
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [loading, setLoading] = React.useState(false);
+  const [bname, setBname] = React.useState({
+    name: undefined,
+    address: undefined,
+    contact: undefined,
+    x: undefined,
+    y:undefined,
+  });
+
+  const getBname = async () => {
+    axios.put("http://localhost:8080/postItems/getBname",{ref_email:seller_email}, { withCredentials: true }).then((res) => {
+      setBname({
+        name: res.data.name,
+        address: res.data.address,
+        contact: res.data.contact,
+        x: res.data.latitude,
+        y: res.data.longitude
+      });
+    }).catch(err => console.log(err))
+  }
+
+  React.useEffect(() => {
+    getBname();
+  }, [])
+
+  const handleDelivered = async (e) => {
+    e.preventDefault();
+    setLoading(true)
+    axios.put("http://localhost:8080/postItems/delivered", {
+      item_id: order_id,
+      seller_email: seller_email
+
+    }, { withCredentials: true }).then((res) => {
+      console.log(res)
+      alert(`${res.data.message}  with order_Id ${order_id}`);
+      handleClose();
+      setLoading(false)
+    }).catch(err => console.log(err))
+  }
 
   return (
     <div className="z-10 relative flex items-start flex-shrink-0 w-[1400px] h-[228px] top-[25px] left-[65px] mb-8  rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
@@ -102,7 +166,7 @@ function MyCard(props) {
               <h3 className=" inline w-[200px] text-[18px] font-semibold font-maven ">
                 Request By:
               </h3>
-              <p className=" mt-[-2px] ml-8">{business_name}</p>
+              <p className=" mt-[-2px] ml-8">{bname.name}</p>
             </div>
             <div className="sel-address mt-2 ml-2">
               <img alt="loc" src={location} className="inline   w-5 h-5 mr-2" />
@@ -110,13 +174,13 @@ function MyCard(props) {
                 Seller Address:
               </h3>
               <p className=" ml-8 w-[320px] font-normal text-[18px] text-left font-maven text-lg   text-Primary_Grey">
-                {sel_address}
+                {bname.address}
               </p>
             </div>
           </div>
           <div className="absolute inline top-[-16px] right-[-2px]">
             <div className="">
-              {status === 'pending' ? (
+              {status === false ? (
                 <div className="flex justify-center gap-3 flex-row text-oswald  w-[340px] pt-2 p-11 orderstatusButton bg-gradient-to-t from-Orange  to-GradOrange ...  ">
                   <p className='mr-20'>Pending</p>
                   <img src={stopwatch} alt="stopwatch" className=" top-[5px] left-[2px] w-8 h-8 ml-2" />
@@ -133,14 +197,52 @@ function MyCard(props) {
               <h3 className=" inline w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
                 Seller Contact:
               </h3>
-              <p className=" mt-[-2px] ml-8">{sel_contact}</p>
+              <p className=" mt-[-2px] ml-8">{bname.contact}</p>
             </div>
             <div className="absolute  right-0 mt-20 ">
-              <NavLink to="/my-orders/direction">
-              <button className=" flex justify-center gap-1 flex-row font-bold text-oswald w-[180px] pt-2 p-4 direcButton align-items-flex-end">
+              {status ? "" : <button
+                type='button'
+                className=" flex justify-center gap-1 flex-row font-bold text-oswald w-[180px] pt-2 p-4 direcButton align-items-flex-end"
+                onClick={handleOpen}
+              >
                 Direction
               </button>
-              </NavLink>
+
+              }
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <div className='flex flex-row justify-between'>
+                      <div className='flex flex-row '>
+                        <h1 className="text-2xl font-medium font-maven text-black inline driver-title">Tracking Order:</h1>
+                        <p className=' text-3xl font-medium  font-maven text-black inline'>{item_title}</p>
+                      </div>
+
+                      <p>#{order_id}</p>
+                    </div>
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <div className="h-[750px] w-full">
+                      <MapBox
+                        //pass start and end cords here
+                        start={[bname.x, bname.y]}
+                        end={[latitude, longitude]}
+                      //stores distance and duration
+                      />
+                    </div>
+                    <div className='flex justify-end mt-6'>
+                      <button type="submit" className="pl-4 pr-4 font-oswald h-2 accessButton" onClick={handleDelivered}>
+                        {loading ? "Processing...." : "Confim Delivery"}
+                      </button>
+                    </div>
+                  </Typography>
+                </Box>
+              </Modal>
             </div>
           </div>
         </div>

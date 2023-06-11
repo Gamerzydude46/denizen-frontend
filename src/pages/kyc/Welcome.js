@@ -2,6 +2,7 @@ import React from "react";
 import manonphone from '../../assets/images/manonphone.png';
 import { useNavigate } from "react-router";
 import { insertSeller } from "../../services/seller";
+import { insertDelData } from "../../services/delData";
 
 const Welcome = (data) =>{
     const register=(e)=>{
@@ -15,7 +16,12 @@ const Welcome = (data) =>{
         })
         }
         else{
-            navigate("/home/kyc"); 
+            insertDelData().then((response)=>{
+                console.log(response);
+                navigate("/home/kyc"); 
+            }).catch(error => {
+                console.log(error);
+            })
         }
     };
     const navigate=useNavigate()
@@ -40,10 +46,10 @@ const Welcome = (data) =>{
                 </div>
             </div>
             <div className="fixed  z-10 bottom-0 right-0">
-                
+
                 <div className="bg-White rounded-t-full h-[430px] w-[900px] ">
                     <div>
-                       <img src={manonphone} alt="man on the bike" className="h-[560px] w-[350px] bottom-[150px] left-[320px] relative"/>
+                        <img src={manonphone} alt="man on the bike" className="h-[560px] w-[350px] bottom-[150px] left-[320px] relative" />
                     </div>
                 </div>
             </div>

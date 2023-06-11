@@ -381,7 +381,7 @@ function PostOrders() {
                                                     onChange={(e) =>
                                                         setDetails((prev) => ({
                                                             ...prev, distance: e.target.value,
-                                                           
+
                                                         }))
                                                     }
                                                 />

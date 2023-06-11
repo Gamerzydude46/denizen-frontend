@@ -54,8 +54,8 @@ function Address(data) {
     const onSubmit = (d) => {
         setLoading(true);
         
-        updateUserAddDetails(d.rAdd, d.state, d.dist, d.city, d.contact,d.pincode).then((response) => {
-            console.log(response);
+        updateUserAddDetails(addressDetails.rAdd, d.state, d.city, d.contact,d.pincode).then((response) => {
+            console.log(addressDetails);
             setMsg(true);
             window.alert("Address info successfull !")
             setActiveStep(activeStep + 1)
@@ -189,12 +189,12 @@ function Address(data) {
                         </div>
                         <div className='mt-[144px] pt-20 fixed'>
 
-                        <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
-                            { loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin'/> : 
-                            <>
-                             Next
-                             <img src={nextNav} alt='navigate back' className='mr-2 w-9' /> 
-                            </>}    
+                            <button type='submit' className=' flex justify-center gap-5 flex-row text-oswald -ml-1 w-[200px] p-2 accessButton align-items-flex-end ' >
+                                {loading ? <img src={load} alt='loading...' className='w-8 flex justify-center animate-spin' /> :
+                                    <>
+                                        Next
+                                        <img src={nextNav} alt='navigate back' className='mr-2 w-9' />
+                                    </>}
                             </button>
                         </div>
                     </ThemeProvider>
