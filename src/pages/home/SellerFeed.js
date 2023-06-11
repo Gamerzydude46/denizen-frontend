@@ -63,7 +63,7 @@ function SellerFeed() {
                     <NavLink to="/post-orders" className='flex justify-center gap-3 font-semibold cursor-pointer flex-row text-oswald w-[250px] pt-3 p-12 accessButton' >
                         Post Orders
                         <span className='ml-0'>
-                            <img src={deadline} alt='deadline' className='w-7 mt-1' />
+                            <img src={deadline} alt='deadline' className='w-6 mt-1' />
                         </span>
                     </NavLink>
                 </button>

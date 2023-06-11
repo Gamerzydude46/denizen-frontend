@@ -5,6 +5,7 @@ import deadline from '../../assets/icons/deadline.svg';
 import Card from '../../components/TrackCard';
 import Data from '../../components/TrackData';
 import Layout from "../../components/Layout";
+
 const cardData = Data.map((data) => {
     return (
         <Card
@@ -34,8 +35,8 @@ function TrackOrders(){
 
           
           <div className="fixed z-100 bottom-0 right-0">
-                <div className="bg-White rounded-t-full h-[550px] w-[1000px] "> 
-                    <img src={girlinbox} alt="girl in box" className="h-[520px] w-[550px] bottom-[130px] left-[430px] relative" /> 
+                <div className="bg-White rounded-t-full h-[450px] w-[900px] "> 
+                    <img src={girlinbox} alt="girl in box" className="h-[400px] w-[430px] bottom-[60px] left-[400px] relative" /> 
                 </div> 
             </div> 
         </main>
