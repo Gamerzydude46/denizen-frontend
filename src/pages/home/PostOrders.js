@@ -119,16 +119,18 @@ function PostOrders() {
 
     const submitHandler = async () => {
         // setDetails(details);
-        console.log(details);
 
         setLoading(true);
         const filePointer = getFiles('.itemImg');
         const fileName = getFileName('.itemImg');
         const imageURL = await uploadImage(filePointer);
         createItem(details.itemName, details.recieverName, details.contact, details.address, details.latitude, details.longitude, details.sellingCost, details.charges, details.distance, details.date, details.time, details.category, fileName, imageURL).then((response) => {
+            if (response.data.flag === true) {
+                window.alert("Post created Succefully !")
+            }else{
+                window.alert("Item is alredy uploaded !")
+            }
 
-            console.log(response);
-            window.alert("Post created Succefully !")
             // navigate("/");
 
         }).catch(error => {

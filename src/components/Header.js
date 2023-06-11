@@ -25,9 +25,22 @@ const Header = (data) => {
 
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(false);
+    const [pic, setPic] = React.useState([]);
+
+    const getOrders = async () => {
+        axios.get("http://localhost:8080/documents/getProfile", { withCredentials: true }).then((res) => {
+            setPic(res.data.docs)
+        }).catch(err => console.log(err))
+    }
+
+    React.useEffect(() => {
+        getOrders();
+    }, [])
+
     React.useEffect( () => {
         userType();
     })
+
     function userType() {
         if (data.type === 'delivery') {
     
@@ -93,7 +106,7 @@ const Header = (data) => {
                 <div className='flex flex-row'>
                     <div>
                         <img
-                            src={data.img}
+                            src={data.verified? `https://${pic.URL}.ipfs.w3s.link/${pic.name}` : data.img}
                             alt='logo'
                             className='h-12 w-12 rounded-full border-4 border-Primary_Red '
                         />
