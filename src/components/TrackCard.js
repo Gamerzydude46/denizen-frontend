@@ -57,13 +57,8 @@ function RateModal({ onSaveRating }) {
 function TrackCard(props) {
   const {
     order_id,
-    image,
     item_title,
-    name,
     rating,
-    address,
-    deliveries,
-    contact,
     deliver_date,
     deliver_time,
     status,
