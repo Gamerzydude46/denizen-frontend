@@ -142,6 +142,22 @@ function PostOrders() {
 
     };
 
+    // const [selData, setSelData] = React.useState(undefined);
+
+    // const getSelData = async () => {
+        
+    //     axios.get("http://localhost:8080/delData/getDeliveryUser", { withCredentials: true }).then((res) => {
+    //     setSelData(res.data.userSet);
+
+    
+    //     }).catch(err => console.log(err))
+    //   }
+    
+    //   React.useEffect(() => {
+    //     getSelData();
+    //   }, [])
+
+    
     return (
         <Layout>
             <main className="h-full flex flex-row pr-10 pl-10  padding-top-5">
