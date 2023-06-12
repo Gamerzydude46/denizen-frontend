@@ -33,7 +33,7 @@ function UserFeed() {
     return (
         <Layout>
             <main className="h-full w-full pb-16 flex flex-row padding-right-10 padding-top-5 fixed">
-                <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide  pr-[300px] w-fit h-full border-r-2 border-solid border-Base shadow-md">
+                <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide  pr-[140px] w-fit h-full border-r-2 border-solid border-Base shadow-md">
                 <div className='flex flex-row align-top'>
                         <h1 className='ml-10 mt-4 inline-block text-Primary_Red text-2xl font-oswald font-bold'>Delivery Request's</h1>
                 </div>
