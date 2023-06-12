@@ -12,6 +12,8 @@ import filledstar from "../../src/assets/images/filledstar.png";
 import "../pages/home/post-order.css";
 import axios from "axios";
 import { number } from 'yup';
+import { insertRating } from '../services/delData';
+
 
 function RateModal({ onSaveRating }) {
   const [rating, setRating] = useState(0);
@@ -19,10 +21,12 @@ function RateModal({ onSaveRating }) {
   const handleRatingChange = (value) => {
     setRating(value);
   };
+  
 
   const handleSaveRating = () => {
     onSaveRating(rating);
     setRating(0);
+    
   };
   return (
     <div className="fixed z-100 bottom-[300px] right-[10px] w-[700px] h-[800] flex items-center justify-center">
@@ -32,9 +36,8 @@ function RateModal({ onSaveRating }) {
           {[1, 2, 3, 4, 5].map((value) => (
             <button
               key={value}
-              className={`w-10 h-10 ${
-                value <= rating ? 'text-Orange' : 'text-Primary_Grey'
-              }`}
+              className={`w-10 h-10 ${value <= rating ? 'text-Orange' : 'text-Primary_Grey'
+                }`}
               onClick={() => handleRatingChange(value)}
             >
               ★
@@ -58,7 +61,6 @@ function TrackCard(props) {
   const {
     order_id,
     item_title,
-    rating,
     deliver_date,
     deliver_time,
     status,
@@ -68,13 +70,23 @@ function TrackCard(props) {
   const [showRateModal, setShowRateModal] = useState(false);
   const [delData, setDelData] = React.useState({
     no_del: undefined,
-    rating:undefined
+    rating: undefined
   });
   const handleRateClick = () => {
     setShowRateModal(true);
   };
+  const [loading, setLoading] = React.useState(false);
 
   const handleSaveRating = (rating) => {
+    setLoading(true);
+    axios.put("http://localhost:8080/delData//updateDelData", { user_email: user_email,ratings:rating }, { withCredentials: true }).then((res) => {
+      setLoading(true);
+      window.alert("rating is successfull !")
+      
+    }).catch(err => console.log(err)).finally(() => {
+      setLoading(false)
+  })
+
     // Save the rating to the backend
     // You can perform an API request here to save the rating
     console.log('Saving rating:', rating);
@@ -96,20 +108,20 @@ function TrackCard(props) {
   });
 
   const getDelData = async () => {
-    axios.put("http://localhost:8080/delData/getDeliveryData",{ user_email: user_email},{ withCredentials: true }).then((res) => {
+    axios.put("http://localhost:8080/delData/getDeliveryData", { user_email: user_email }, { withCredentials: true }).then((res) => {
       setDelData({
-      
-        no_del:res.data.del,
-        rating:res.data.rating
+
+        no_del: res.data.del,
+        rating: res.data.rating
       });
     }).catch(err => console.log(err))
 
-    axios.post("http://localhost:8080/documents/getUserProfile",{ user_email: user_email},{ withCredentials: true }).then((res) => {
-      setPic({ 
+    axios.post("http://localhost:8080/documents/getUserProfile", { user_email: user_email }, { withCredentials: true }).then((res) => {
+      setPic({
         URLink: res.data.docs.URL,
         name: res.data.docs.name
       });
-      console.log(pic)
+
     }).catch(err => console.log(err))
 
     axios.post("http://localhost:8080/user/delUserData", { user_email: user_email }, { withCredentials: true }).then((res) => {
@@ -119,7 +131,7 @@ function TrackCard(props) {
         residence: res.data.residence,
         contact: res.data.contact
       });
-      console.log(data)
+
     }).catch(err => console.log(err))
   }
 
@@ -127,10 +139,10 @@ function TrackCard(props) {
     getDelData();
   }, [])
 
-  
+
 
   return (
-    <div className="z-10 relative flex items-start flex-shrink-0 w-[850px] h-[175px] top-[20px] left-[70px] mb-8 rounded-lg border border-solid border-Primary_Red bg-White border-t-0 border-l-4 border-b-4">
+    <div className="z-10 relative flex items-start flex-shrink-0 w-[1000px] h-[175px] top-[20px] left-[70px] mb-8 rounded-lg border border-solid border-Primary_Red bg-White border-t-0 border-l-4 border-b-4">
       <div>
         <img
           className="absolute top-4 left-6 w-[145px] h-[145px] rounded-lg shadow-md"
@@ -152,8 +164,8 @@ function TrackCard(props) {
           <p className="text-l font-bold"> {delData.no_del} Deliveries</p>
         </div>
         <div className="mt-3" style={{ display: "flex" }}>
-          {[1,2,3,4,5].map((value) => {
-            return value <= rating ? <img src={filledstar} className='w-7' /> : <img src={star} className='w-7' />
+          {[1, 2, 3, 4, 5].map((value) => {
+            return value <= delData.rating ? <img src={filledstar} className='w-7' /> : <img src={star} className='w-7' />
           })}
         </div>
       </div>
@@ -182,32 +194,32 @@ function TrackCard(props) {
             <p className="left-[30px] w-[300px] font-normal inline text-[16px] text-left font-maven items-center text-Primary_Grey">
               {data.contact}
             </p>
-            {status === 'delivered' ? (
+            {status === true ? (
               <button className=" ml-3 top-[1px] text-oswald w-[85px] right-[20px] rateButton" onClick={handleRateClick}>
-                Rate
+                {loading ? "Loading" : "Rate"}    
               </button>
-    
+
+            ) : (
+              <div></div>
+            )}
+
+          </div>
+        </div>
+      </div>
+      <div className="absolute right-[-60px] top-[70px] transform -translate-y-1/2">
+        {status === false ? (
+          <div className="flex justify-center gap-3 flex-row text-oswald ml-8 w-[170px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
+            <img src={stopwatch} alt="stopwatch" className="relative top-[4px] right-[2px] w-7 h-7 mr-2" />
+            <p>Pending</p>
+          </div>
         ) : (
-            <div></div>
+          <div className="flex justify-center gap-3 flex-row text-oswald ml-8 w-[170px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-b from-Green via-Grad_Green to-Grad_Green -rotate-90">
+            <img src={check} alt="check" className="relative top-[4px] right-[2px] w-7 h-7 mr-2" />
+            <p>Delivered</p>
+          </div>
         )}
-        
-        </div>
-        </div>
-        </div>
-        <div className="absolute right-[-60px] top-[70px] transform -translate-y-1/2">
-          {status === false ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-8 w-[170px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
-              <img src={stopwatch} alt="stopwatch" className="relative top-[4px] right-[2px] w-7 h-7 mr-2" />
-              <p>Pending</p>
-            </div>
-          ) : (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-8 w-[170px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-b from-Green via-Grad_Green to-Grad_Green -rotate-90">
-              <img src={check} alt="check" className="relative top-[4px] right-[2px] w-7 h-7 mr-2" />
-              <p>Delivered</p>
-            </div>
-          )}
-        </div>
-        {showRateModal && <RateModal onSaveRating={handleSaveRating} />}
+      </div>
+      {showRateModal && <RateModal onSaveRating={handleSaveRating} />}
     </div>
   );
 }
