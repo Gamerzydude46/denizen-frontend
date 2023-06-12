@@ -181,7 +181,7 @@ function Card(props) {
           <p className="absolute top-[35px] left-[-100px]">Rs: {selling_cost}/-</p>
         </div>
         <div className="del-charges">
-          <h3 className="absolute top-[68px] left-[-100px] w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
+          <h3 className="absolute top-[66px] left-[-100px] w-[200px] text-[18px] font-semibold font-maven text-Dark_Green">
             Delivery Charges:
           </h3>
           <img alt="trc" src={transaction} className="absolute top-[75px] left-[-138px] w-6 h-6 mr-2" />
@@ -196,14 +196,14 @@ function Card(props) {
         ) : (
           <Edit order_id={order_id} selling_cost={selling_cost} deliver_date={deliver_date} deliver_time={deliver_time} />
         )}
-        <div className="absolute right-[-87px] top-[80px] transform -translate-y-1/2">
+        <div className="absolute right-[-80px] top-[73px] transform -translate-y-1/2">
           {status === false ? (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[224px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[194px] pt-2 p-11 statusButton align-items-flex-end bg-gradient-to-t from-GradOrange  to-Orange ... -rotate-90">
               <img src={stopwatch} alt="stopwatch" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p>Pending</p>
             </div>
           ) : (
-            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[195px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
+            <div className="flex justify-center gap-3 flex-row text-oswald ml-10 w-[194px] pt-2 p-11 statusButton align-items-flex-end -rotate-90  bg-gradient-to-t from-Grad_Green  to-Dark_Green ...  ">
               <img src={check} alt="check" className="relative top-[5px] right-[2px] w-8 h-8 mr-2" />
               <p className=''>Accepted</p>
             </div>
