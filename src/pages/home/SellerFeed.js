@@ -22,7 +22,7 @@ function SellerFeed() {
     return (
 
         <main className="h-full w-full pb-16 flex flex-row padding-right-10 padding-top-5 fixed">
-            <div className="z-10 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide h-full">
+            <div className="z-100 container pb-16 overflow-y-scroll overflow-x-hidden scrollbar-hide h-full">
                 {
                     orders.length > 0 ? orders.map((order) => {
                         return <Card key={order._id}

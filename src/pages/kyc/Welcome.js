@@ -5,22 +5,33 @@ import { insertSeller } from "../../services/seller";
 import { insertDelData } from "../../services/delData";
 
 const Welcome = (data) =>{
+    const [loading, setLoading] = React.useState(false);
+
     const register=(e)=>{
+        setLoading(true);
+
         e.preventDefault();
         if(data.type==="seller"){
         insertSeller().then((response)=>{
+            
             console.log(response);
             navigate("/home/kyc"); 
+            setLoading(false);
+
         }).catch(error => {
             console.log(error);
         })
         }
         else{
-            insertDelData().then((response)=>{
+
+            insertDelData(data.email).then((response)=>{
                 console.log(response);
                 navigate("/home/kyc"); 
+                setLoading(false);
+
             }).catch(error => {
                 console.log(error);
+
             })
         }
     };
@@ -41,7 +52,8 @@ const Welcome = (data) =>{
                 and aims to further strengthen this partnership.
                 </p>
                 <div className="flex flex-row mt-10 gap-x-10">
-                    <button className="bg-Primary_Red buttonWelcome" onClick={register}>Register</button>
+                    <button className="bg-Primary_Red buttonWelcome" onClick={register}>
+                        {loading?"Loading..":"Register"}</button>
                     <button className="bg-Primary_Grey buttonWelcome">Know More</button>
                 </div>
             </div>

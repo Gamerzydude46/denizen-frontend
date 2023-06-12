@@ -283,7 +283,7 @@ function MyCard(props) {
                     </div>
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <div className="h-[750px] w-full">
+                    <div className="h-[650px] w-full">
                       {bname.x && bname.y && latitude && longitude ? (
                         <MapBox
                           //pass start and end cords here

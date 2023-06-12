@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const insertDelData = async ()=>{
+export const insertDelData = async (email)=>{
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -8,11 +8,14 @@ export const insertDelData = async ()=>{
         headers: {
             'Content-Type': 'application/json'
         },
+        data:{
+           "user_email":email
+        }
     };
 
     try{
-        const response = await axios.post(config.url,{withCredentials: true})
-        return (response);
+        const response = await axios.post(config.url,config.data,{withCredentials:true})
+        return (response,email);
     }
     catch(error){
         console.log(error);
