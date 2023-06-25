@@ -30,6 +30,11 @@ const style = {
    };
 
 const Card = ({data}) => {
+       const {
+       name="",
+       deliveries=0,
+       contact="",
+       rating=0}=data
     const [open, setOpen] = React.useState(false);
 
        return (
@@ -42,20 +47,20 @@ const Card = ({data}) => {
                             <div className="pl-5 pr-5 md:flex-shrink-5">
                                    <div className="mt-3 flex items-center">
                                           <img className="h-6 w-6 mr-2 " src={user} alt="User" /> 
-                                          <p className="text-sm mr-2 font-maven-pro font-bold"> {data?.name}</p>
+                                          <p className="text-sm mr-2 font-maven-pro font-bold"> {name}</p>
                                           <img className="h-6 w-6 mr-2 font-maven-pro font-bold" src={check} alt="Check" />
                                    </div>
                                    <div className="mt-3 flex items-center">
                                                     <img className="h-6 w-6 mr-2" src={whatsapp} alt="contact" />
-                                                    <p className="text-sm font-maven-pro font-bold"> {data?.contact}</p>
+                                                    <p className="text-sm font-maven-pro font-bold"> {contact}</p>
                                              </div>
                                    <div className="mt-3 flex items-center">
                                           <img className="h-6 w-6 mr-2" src={foodDelivery} alt="FoodDelivery" /> 
-                                          <p className="text-sm font-maven-pro font-bold"> {data?.deliveries} Deliveries</p>                                          
+                                          <p className="text-sm font-maven-pro font-bold"> {deliveries} Deliveries</p>                                          
                                    </div>
                                    <div className="mt-3" style={{display:"flex"}}>
                                           {[1,2,3,4,5,].map((value)=>{
-                                                 return value <= data?.rating?<img src={filledstar} className='w-8' /> : <img src={star} className='w-8' />
+                                                 return value <= rating?<img src={filledstar} className='w-8' /> : <img src={star} className='w-8' />
                                           })}
                                    </div>
                             </div>
