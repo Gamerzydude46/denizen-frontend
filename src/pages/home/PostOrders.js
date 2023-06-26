@@ -142,22 +142,22 @@ function PostOrders() {
 
     };
 
-    // const [selData, setSelData] = React.useState(undefined);
+    const [selDatas, setSelDatas] = React.useState([]);
 
-    // const getSelData = async () => {
-        
-    //     axios.get("http://localhost:8080/delData/getDeliveryUser", { withCredentials: true }).then((res) => {
-    //     setSelData(res.data.userSet);
+    const getSelData = async () => {
+        axios.get("http://localhost:8080/delData/getDeliveryUser", { withCredentials: true }).then((res) => {
+            setSelDatas(res.data.userSet);
+            //console.log(res.data.userSet)
+        }).catch(err => console.log(err))
+    }
 
-    
-    //     }).catch(err => console.log(err))
-    //   }
-    
-    //   React.useEffect(() => {
-    //     getSelData();
-    //   }, [])
+    React.useEffect(() => {
+        getSelData();
+    }, [])
 
-    
+
+
+
     return (
         <Layout>
             <main className="h-full flex flex-row pr-10 pl-10  padding-top-5">
@@ -457,9 +457,18 @@ function PostOrders() {
                                 style={{ flexWrap: "no-wrap", overflowX: "scroll" }}
                             >
                                 <div className="flex p-1">
-                                    {drivers.map((data) => (
-                                        <Card data={data} />
-                                    ))}
+                                    {
+                                        selDatas.map((selData) => {
+                                            return <Card 
+                                                fname={selData.fname}
+                                                lname={selData.lname}
+                                                contact={12344567890}
+                                                rating={selData.ratings}
+                                                deliveries={selData.no_deliveries}
+                                                email={selData.ref_email}
+                                            />
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -515,13 +524,4 @@ function PostOrders() {
 }
 export default PostOrders;
 
-const drivers = [
-    { name: "Saish Naik", rating: 4, contact: "7283894973", deliveries: 52 },
-    { name: "Vassant Dhempo", rating: 3, contact: "9517893083", deliveries: 30 },
-    { name: "Aarush Sharma", rating: 5, contact: "864890234", deliveries: 43 },
-    { name: "Abhi Gaonkar", rating: 2, contact: "7389031245", deliveries: 53 },
-    { name: "Meera Pai", rating: 4, contact: "97618963", deliveries: 45 },
-    { name: "Nisha Kamat", rating: 5, contact: "896434590", deliveries: 53 },
-    { name: "Prachi Dessai", rating: 5, contact: "823456789", deliveries: 33 },
-    { name: "Niraj Lotlikar", rating: 3, contact: "223456789", deliveries: 30 },
-];
+
