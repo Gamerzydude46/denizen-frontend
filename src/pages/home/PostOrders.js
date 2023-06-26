@@ -462,7 +462,7 @@ function PostOrders() {
                                             return <Card 
                                                 fname={selData.fname}
                                                 lname={selData.lname}
-                                                contact={12344567890}
+                                                contact={selData.address.contact}
                                                 rating={selData.ratings}
                                                 deliveries={selData.no_deliveries}
                                                 email={selData.ref_email}
