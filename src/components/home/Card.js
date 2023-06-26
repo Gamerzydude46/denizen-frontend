@@ -13,7 +13,7 @@ import whatsapp from "../../assets/images/whatsapp.png"
 import star from "../../assets/images/star.png";
 import filledstar from "../../assets/images/filledstar.png";
 import request from '../../assets/images/request.png';
-
+import axios from "axios";
 
 const style = {
        position: 'absolute',
@@ -39,13 +39,27 @@ const Card = (props) => {
               email
        } = props
        const [open, setOpen] = React.useState(false);
+       const [pic, setPic] = React.useState([]);
+
+
+       const getImg = async () => {
+              axios.post("http://localhost:8080/documents/getUserProfile",{user_email: email},{ withCredentials: true }).then((res) => {
+                     setPic(res.data) 
+              }).catch(err => console.log(err))
+       }
+       
+       React.useEffect(() => {
+              getImg();
+       }, [])
+       
+
 
        return (
 
               <div className="max-w-md bg-white border-b-4 border-l-4 bg-Base border-radius: 0.25 border-solid  ml-5 rounded-x5 overflow-hidden " style={{ flex: "none", borderColor: "#B30000", borderRadius: "20px" }}>
                      <div className="md:flex">
                             <div className="md:flex-shrink-0">
-                                   <img className="h-40 rounded-lg w-100 object-cover md:w-44" src={dummyImg1} alt="Your pic" />
+                                   <img className="h-40 rounded-lg w-100 object-cover md:w-44" src={pic.flag? `https://${pic.docs.URL}.ipfs.w3s.link/${pic.docs.name}` : dummyImg1} alt="Your pic" />
                             </div>
                             <div className="pl-5 pr-5 md:flex-shrink-5">
                                    <div className="mt-3 flex items-center">
