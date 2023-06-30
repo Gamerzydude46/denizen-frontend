@@ -19,19 +19,18 @@ function SCard(props) {
     seller_email
   } = props;
 
-
   const [loading, setLoading] = React.useState(false);
   const [bname, setBname] = React.useState(undefined);
 
   const getBname = async () => {
-    axios.post("http://localhost:8080/postItems/getBname",{ ref_email: seller_email}, { withCredentials: true }).then((res) => {
+    axios.put("http://localhost:8080/postItems/getBname",{ ref_email: seller_email}, { withCredentials: true }).then((res) => {
       setBname(res.data.name)
     }).catch(err => console.log(err))
   }
 
   React.useEffect(() => {
     getBname();
-  }, [])
+  },)
 
   const handleAccept = async (e) => {
     e.preventDefault();
@@ -48,7 +47,7 @@ function SCard(props) {
   }
   
   return (
-    <div className="z-10 relative flex items-start flex-shrink-0 w-[575px] h-[250px] top-[28px] left-[37px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
+    <div className="z-10 relative flex items-start flex-shrink-0 w-[775px] h-[190px] top-[28px] left-[37px] mb-8 rounded-lg border border-solid border-Primary_Red bg-Base border-t-0 border-r-0 border-l-4 border-b-4">
       <img
         className="absolute top-2 left-6 w-[155px] h-[160px] rounded-lg shadow-md"
         src={image}
@@ -74,33 +73,33 @@ function SCard(props) {
           </p>
         </div>
       </div>
-      <div className="absolute top-[-45px] right-[45px] flex">
+      <div className="absolute top-[-45px] right-[75px] flex">
         <div className="selling-cost">
-          <h3 className="absolute top-[205px] left-[-127px] w-[200px] text-[16px] font-semibold font-maven text-Green ">
+          <h3 className="absolute top-[75px] left-[-127px] w-[200px] text-[16px] font-semibold font-maven text-Green ">
             Selling Cost:
           </h3>
-          <img alt="prc" src={priceTag} className="absolute top-[207px] left-[-153px] w-5 h-5 mr-1" />
-          <p className="absolute top-[230px] left-[-125px]">Rs: {selling_cost}/-</p>
+          <img alt="prc" src={priceTag} className="absolute top-[75px] left-[-153px] w-5 h-5 mr-1" />
+          <p className="absolute top-[105px] left-[-125px]">Rs: {selling_cost}/-</p>
         </div>
         <div className="del-charges">
-          <h3 className="absolute top-[205px] left-[20px] w-[200px] text-[16px] font-semibold font-maven text-Dark_Green">
+          <h3 className="absolute top-[75px] left-[20px] w-[200px] text-[16px] font-semibold font-maven text-Dark_Green">
             Delivery Charges:
           </h3>
           <img
             alt="trc"
             src={transaction}
-            className="absolute top-[207px] left-[-8px] w-5 h-5 mr-2"
+            className="absolute top-[75px] left-[-8px] w-5 h-5 mr-2"
           />
-          <p className="absolute top-[230px] left-[20px]">Rs: {delivery_charges}/-</p>
+          <p className="absolute top-[105px] left-[20px]">Rs: {delivery_charges}/-</p>
         </div>
         <div className="Request-by">
-          <img alt="trc" src={city} className="relative top-[255px] left-[-153px] inline w-5 h-5 mr-2" />
-          <h3 className="relative top-[255px] left-[-155px] inline w-[200px] text-[16px] font-semibold font-maven ">
+          <img alt="trc" src={city} className="relative top-[152px] left-[-153px] inline w-5 h-5 mr-2" />
+          <h3 className="relative top-[152px] left-[-155px] inline w-[200px] text-[16px] font-semibold font-maven ">
             Request By:
           </h3>
-          <p className="relative top-[230px] left-[-55px] ml-8">{bname.name}</p>
+          <p className="relative top-[155px] left-[-158px] ml-8">{bname}</p>
         </div>
-        <div className="absolute right-[350px] top-[200px] ">
+        <div className="absolute right-[-20px] top-[120px] ">
           <button
             type="button"
             onClick={handleAccept}

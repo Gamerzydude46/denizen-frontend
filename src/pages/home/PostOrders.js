@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import girlwithlaptop from "../../assets/images/girlwithaptop.png";
-
 import Chair from "../../assets/images/chair.png";
 import mail from "../../assets/icons/edit.svg";
 import loc from "../../assets/icons/map.svg";
@@ -12,12 +11,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import Card from "../../components/home/Card";
 import "./post-order.css";
-import { Schedule } from "@mui/icons-material";
 import transaction from "../../assets/icons/transaction.svg";
 import distance from "../../assets/icons/distance.svg";
 import deadline from "../../assets/icons/deadline.svg";
 import request from "../../assets/images/request.png";
-// import Info from '../../assets/icons/Info.svg';
 import { calculateCharges } from "../../services/priceAlgo";
 import { Modal } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -27,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { calculateRouteMetrics, getGeoLocations } from "../../services/map-utils";
-import { createItem } from "../../services/postItems"
+import { createItem , createSpecialItem} from "../../services/postItems"
 import { getFiles, getFileName, uploadImage } from "../../services/web3.storages";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
@@ -138,6 +135,28 @@ function PostOrders() {
         }).finally(() => {
             setOpen(true)
             setLoading(false)
+        })
+
+    };
+
+    const submitSpecial = async (email) => {
+        // setDetails(details);
+        const filePointer = getFiles('.itemImg');
+        const fileName = getFileName('.itemImg');
+        const imageURL = await uploadImage(filePointer);
+        createSpecialItem(email,details.itemName, details.recieverName, details.contact, details.address, details.latitude, details.longitude, details.sellingCost, details.charges, details.distance, details.date, details.time, details.category, fileName, imageURL).then((response) => {
+            if (response.data.flag === true) {
+                window.alert("Post created Succefully !")
+            }else{
+                window.alert("Item is alredy uploaded !")
+            }
+
+            // navigate("/");
+
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            return true;
         })
 
     };
@@ -460,6 +479,7 @@ function PostOrders() {
                                     {
                                         selDatas.map((selData) => {
                                             return <Card 
+                                                pFunction={submitSpecial}
                                                 fname={selData.fname}
                                                 lname={selData.lname}
                                                 contact={selData.address.contact}

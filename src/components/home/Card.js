@@ -31,6 +31,7 @@ const style = {
 
 const Card = (props) => {
        const {
+              pFunction,
               fname,
               lname,
               contact,
@@ -39,20 +40,31 @@ const Card = (props) => {
               email
        } = props
        const [open, setOpen] = React.useState(false);
+       const [loading, setLoading] = React.useState(false);
        const [pic, setPic] = React.useState([]);
-
 
        const getImg = async () => {
               axios.post("http://localhost:8080/documents/getUserProfile",{user_email: email},{ withCredentials: true }).then((res) => {
                      setPic(res.data) 
-              }).catch(err => console.log(err))
+              }).catch(err => console.log())
        }
        
        React.useEffect(() => {
               getImg();
        }, [])
        
-
+       const handleRequest = async () => {
+              setLoading(true);
+              const funFlag = await pFunction(email);
+              console.log(funFlag)
+              if(funFlag === true){
+                     setOpen(true);
+                     setLoading(false);
+              }else{
+                     setLoading(false);
+                     window.alert("Internal server error occured ! couldn't send email")
+              }
+       }
 
        return (
 
@@ -84,7 +96,7 @@ const Card = (props) => {
                      </div>
                      <div className="ml-2 mb-2 items-center float">
 
-                            <button className="accessButton  inline-flex items-center justify-center p-6 text-oswald font-bold " onClick={() => setOpen(true)} data-rounded="rounded-md" data-primary="red-600" data-primary-reset style={{ marginTop: 10 }}>SEND SPECIAL DELIVERY REQUEST</button>
+                            <button className="accessButton  inline-flex items-center justify-center p-6 text-oswald font-bold " onClick={handleRequest} data-rounded="rounded-md" data-primary="red-600" data-primary-reset style={{ marginTop: 10 }}>{loading? "Processing.......":"SEND SPECIAL DELIVERY REQUEST"}</button>
 
                      </div>
                      <Modal

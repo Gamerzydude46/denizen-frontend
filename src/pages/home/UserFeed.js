@@ -23,8 +23,7 @@ function UserFeed() {
             setSpecials(res.data.itemSet)
         }).catch(err => console.log(err))
     }
-
-
+   
     React.useEffect(() => {
         getItems();
         getSpecial();
@@ -46,7 +45,7 @@ function UserFeed() {
                             item_title={item.item_name}
                             del_address={item.delivery_address}
                             deliver_by={item.deliver_by}
-                            deliver_date={item.deliver_date}
+                            deliver_date={item.delivery_date}
                             deliver_time={item.delivery_by}
                             selling_cost={item.item_cost}
                             delivery_charges={item.delivery_cost}
@@ -60,8 +59,9 @@ function UserFeed() {
                     <div className='flex flex-row align-top'>
                         <h1 className='ml-10 mt-4 inline-block text-Primary_Red text-2xl font-oswald font-bold'>Special Request</h1>
                     </div>
+                    
                     <div className="container h-full pb-20 overflow-y-scroll overflow-x-hidden scrollbar-hide">
-                        {
+                        {   
                             specials.length > 0 ? specials.map((special) => {
                                 return <SCard
                                     key={special._id}
@@ -70,7 +70,7 @@ function UserFeed() {
                                     item_title={special.item_name}
                                     del_address={special.delivery_address}
                                     deliver_by={special.deliver_by}
-                                    deliver_date={special.deliver_date}
+                                    deliver_date={special.delivery_date}
                                     deliver_time={special.delivery_by}
                                     selling_cost={special.item_cost}
                                     delivery_charges={special.delivery_cost}
