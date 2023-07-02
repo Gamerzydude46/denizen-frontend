@@ -31,7 +31,7 @@ const Welcome = (data) =>{
 
             }).catch(error => {
                 console.log(error);
-
+                window.alert("Dependecy Collection <DeliveryData> Error occured !")
             })
         }
     };
