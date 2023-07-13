@@ -388,10 +388,9 @@ function PostOrders() {
                                                     onChange={(value) => {
                                                         setDetails((prev) => ({
                                                             ...prev,
-                                                            category: value.target.value,
                                                             charges: calculateCharges(
                                                                 details.distance,
-                                                                details.category)
+                                                                value.target.value)
                                                         }));
                                                     }}
                                                 >
