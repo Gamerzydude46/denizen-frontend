@@ -62,7 +62,7 @@ const Card = (props) => {
                      setLoading(false);
               }else{
                      setLoading(false);
-                     window.alert("Internal server error occured ! couldn't send email")
+                     window.alert("Email sent for Special delivery Request!")
               }
        }
 

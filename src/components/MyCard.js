@@ -85,6 +85,9 @@ function MyCard(props) {
   const handleDelivered = async (e) => {
     e.preventDefault();
     setLoading(true);
+    axios.put("http://localhost:8080/delData/updateDel",{seller:seller_email},{ withCredentials: true }).then((res) => {
+            console.log(res);
+        }).catch(err => console.log(err))
     axios.put("http://localhost:8080/postItems/delivered",
         {
           item_id: order_id,
@@ -93,10 +96,6 @@ function MyCard(props) {
         { withCredentials: true }
       )
       .then((res) => {
-        axios.put("http://localhost:8080/delData/updateDel",{withCredentials:true})
-        .then(
-          console.log(res)
-        )
         alert(`${res.data.message}  with order_Id ${order_id}`);
         handleClose();
         setLoading(false);
